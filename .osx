@@ -466,6 +466,11 @@ defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true
 
 ###############################################################################
+# Git                                                                         #
+###############################################################################
+git config --global core.excludesfile ~/.gitignore_global
+
+###############################################################################
 # SizeUp.app                                                                  #
 ###############################################################################
 
