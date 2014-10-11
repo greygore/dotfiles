@@ -1,12 +1,9 @@
 # Set the default editor
 if [ -f /usr/local/bin/subl ]; then
-    export EDITOR='subl -w';
-    export GIT_EDITOR='subl -n -w';
-elif [ -f /usr/local/bin/mate ]; then
-    export EDITOR='mate';
-    export GIT_EDITOR='mate -wl1';
+	export EDITOR='subl -w';
+	export GIT_EDITOR='subl -n -w';
 else
-export EDITOR="vim";
+	export EDITOR="vim";
 fi;
 
 # Don’t clear the screen after quitting a manual page
