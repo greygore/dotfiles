@@ -355,6 +355,16 @@ defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-
 #defaults write com.apple.dock wvous-bl-modifier -int 0
 
 ###############################################################################
+# Mac App Store #
+###############################################################################
+
+# Enable the WebKit Developer Tools in the Mac App Store
+defaults write com.apple.appstore WebKitDeveloperExtras -bool true
+
+# Enable Debug Menu in the Mac App Store
+defaults write com.apple.appstore ShowDebugMenu -bool true
+
+###############################################################################
 # Safari & WebKit                                                             #
 ###############################################################################
 
@@ -389,9 +399,6 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 
 # Add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-
-# Enable the WebKit Developer Tools in the Mac App Store
-defaults write com.apple.appstore WebKitDeveloperExtras -bool true
 
 ###############################################################################
 # Google Chrome & Google Chrome Canary #
