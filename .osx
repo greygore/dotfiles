@@ -489,16 +489,6 @@ defaults write com.apple.DiskUtility advanced-image-options -bool true
 git config --global core.excludesfile ~/.gitignore_global
 
 ###############################################################################
-# SizeUp.app                                                                  #
-###############################################################################
-
-# Start SizeUp at login
-defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true
-
-# Don’t show the preferences window on next start
-defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
-
-###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
