@@ -555,6 +555,9 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/*" "http://userscripts.org/*"
 defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://gist.githubusercontent.com/*" "http://userscripts.org/*"
 
+# Swipe navigation
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
 ###############################################################################
 # Mail                                                                        #
 ###############################################################################
