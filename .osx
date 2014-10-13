@@ -51,12 +51,14 @@ defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 # Save panel expansion
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
 # Save to disk (not to iCloud) 
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Print Panel expansion
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
 # Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
