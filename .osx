@@ -640,7 +640,7 @@ git config --global core.excludesfile ~/.gitignore_global
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "Dock" "Finder" "Mail" \
+for app in "Activity Monitor" "Address Book" "Calendar" "cfprefsd" "Contacts" "Dock" "Finder" "Mail" \
 	"Safari" "SystemUIServer" "Terminal" "iCal"; do
 	killall "$app" > /dev/null 2>&1
 done
