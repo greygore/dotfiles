@@ -235,6 +235,17 @@ defaults write com.apple.finder QuitMenuItem -bool true
 # Finder: Window animations and Get Info animations
 defaults write com.apple.finder DisableAllAnimations -bool false
 
+# Default location for new Finder windows
+# Computer 	PfCm		None
+# Volume 	PfVo		file:///
+# Home 	PfHm		file://${HOME}/
+# Desktop 	PfDe		file://${HOME}/Desktop/
+# Documents 	PfDo 		file://${HOME}/Documents/
+# All My Files 	PfAf		file:///System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch
+# Other path 	PfLo 		file:///full/path/here/
+defaults write com.apple.finder NewWindowTarget -string "PfDe"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
+
 # Desktop: Icons
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
