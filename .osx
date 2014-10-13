@@ -62,8 +62,8 @@ defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 # Automatic termination of inactive apps
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
-# Crash reporter - "none" to disable
-defaults write com.apple.CrashReporter DialogType -string "none"
+# Crash reporter - crashreport or none
+defaults write com.apple.CrashReporter DialogType none
 
 # Help Viewer to non-floating mode
 defaults write com.apple.helpviewer DevMode -bool true
