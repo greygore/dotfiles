@@ -413,6 +413,12 @@ defaults write com.apple.iTunes disablePing -bool true
 # Disable radio stations in iTunes
 defaults write com.apple.iTunes disableRadio -bool true
 
+# Disable the iTunes arrow links
+defaults write com.apple.iTunes show-store-arrow-links -bool false
+
+# Make iTunes arrows go to your library instead of the iTunes Store
+defaults write com.apple.iTunes invertStoreLinks -bool YES
+
 # Make ⌘ + F focus the search input in iTunes
 # To use these commands in another language, browse iTunes’s package contents,
 # open `Contents/Resources/your-language.lproj/Localizable.strings`, and look
