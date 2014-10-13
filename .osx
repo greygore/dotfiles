@@ -18,6 +18,9 @@ sudo scutil --set HostName "Colin"
 sudo scutil --set LocalHostName "Colin"
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "Colin"
 
+# Standby delay
+sudo pmset -a standbydelay 86400 # 1 day, default 1 hour
+
 # Menu bar: Transparency
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
