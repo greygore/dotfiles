@@ -31,6 +31,9 @@ defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreS
 # Scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
+# Highlight color
+#defaults write NSGlobalDomain AppleHighlightColor -string '0.764700 0.976500 0.568600'
+
 # Opening and closing window animations
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool true
 
