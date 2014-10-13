@@ -245,6 +245,12 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
+# Finder: Spring loading directories (dragging onto folder opens it)
+defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+
+# Finder: Spring loading directory delay
+defaults write NSGlobalDomain com.apple.springing.delay -float 0
+
 # Disable disk image verification
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
