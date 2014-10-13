@@ -323,6 +323,13 @@ sudo nvram boot-args="mbasd=1"
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
+# Expand the following File Info panes:
+# “General”, “Open with”, and “Sharing & Permissions”
+defaults write com.apple.finder FXInfoPanesExpanded -dict \
+ General -bool true \
+ OpenWith -bool true \
+ Privileges -bool true
+
 # Remove Dropbox’s green checkmark icons in Finder
 #file=/Applications/Dropbox.app/Contents/Resources/check.icns
 #[ -e "$file" ] && mv -f "$file" "$file.bak"
