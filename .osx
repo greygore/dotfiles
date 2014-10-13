@@ -309,11 +309,10 @@ defaults write com.apple.dock show-process-indicators -bool true
 # Opening window animations
 defaults write com.apple.dock launchanim -bool true
 
-# Speed up Mission Control animations
+# Mission Control: Animation speed
 defaults write com.apple.dock expose-animation-duration -float 0.1
 
-# Don’t group windows by application in Mission Control
-# (i.e. use the old Exposé behavior instead)
+# Mission Control: Group windows
 defaults write com.apple.dock expose-group-by-app -bool false
 
 # Don’t show Dashboard as a Space
@@ -416,9 +415,6 @@ defaults write com.apple.iTunes disableRadio -bool true
 # Disable the iTunes arrow links
 defaults write com.apple.iTunes show-store-arrow-links -bool false
 
-# Make iTunes arrows go to your library instead of the iTunes Store
-defaults write com.apple.iTunes invertStoreLinks -bool YES
-
 # Make ⌘ + F focus the search input in iTunes
 # To use these commands in another language, browse iTunes’s package contents,
 # open `Contents/Resources/your-language.lproj/Localizable.strings`, and look
@@ -476,9 +472,6 @@ defaults write com.apple.addressbook ABShowDebugMenu -bool true
 
 # Enable Dashboard dev mode (allows keeping widgets on the desktop)
 defaults write com.apple.dashboard devmode -bool true
-
-# Enable the debug menu in iCal (pre-10.8)
-defaults write com.apple.iCal IncludeDebugMenu -bool true
 
 # Use plain text mode for new TextEdit documents
 defaults write com.apple.TextEdit RichText -int 0
