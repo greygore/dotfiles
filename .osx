@@ -421,6 +421,9 @@ defaults write com.apple.dock showhidden -bool true
 # Make Dock more transparent
 defaults write com.apple.dock hide-mirror -bool true
 
+# Launchpad gesture (pinch with thumb and three fingers)
+defaults write com.apple.dock showLaunchpadGestureEnabled -bool true
+
 # Reset Launchpad, but keep the desktop wallpaper intact
 find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
 
@@ -579,8 +582,8 @@ defaults write com.apple.mail DisableInlineAttachmentViewing -bool false
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
 
-# Use a modified version of the Pro theme by default in Terminal.app
-TERM_PROFILE='GreyGore';
+# Use a modified version of the Solarized Dark theme by default in Terminal.app
+TERM_PROFILE='Solarized Dark xterm-256color';
 CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
 if [ "${CURRENT_PROFILE}" != "${TERM_PROFILE}" ]; then
 	open "${HOME}/init/${TERM_PROFILE}.terminal";
@@ -589,15 +592,13 @@ if [ "${CURRENT_PROFILE}" != "${TERM_PROFILE}" ]; then
 	defaults write com.apple.terminal 'Startup Window Settings' -string "${TERM_PROFILE}";
 fi;
 
-open "$HOME/init/GreyGore.terminal"
-sleep 1 # Wait a bit to make sure the theme is loaded
-defaults write com.apple.terminal "Default Window Settings" -string "Mathias"
-defaults write com.apple.terminal "Startup Window Settings" -string "Mathias"
-
 # Mouse focus for Terminal.app and all X11 apps
 # i.e. hover over a window and start typing in it with[out] clicking first
 defaults write com.apple.terminal FocusFollowsMouse -bool false
 defaults write org.x.X11 wm_ffm -bool false
+
+# Install the Solarized Dark theme for iTerm
+open "${HOME}/init/Solarized Dark.itermcolors"
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
