@@ -506,6 +506,9 @@ defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\\U21a9"
 # Inline attachments
 defaults write com.apple.mail DisableInlineAttachmentViewing -bool false
 
+# Spell checking
+#defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
+
 ###############################################################################
 # Terminal                                                                    #
 ###############################################################################
