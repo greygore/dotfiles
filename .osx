@@ -668,6 +668,10 @@ if [[ -d "${PREFS}" && ! -L "${PREFS}" ]]; then
 	rm -rf "${PREFS}";
 	ln -s ./settings/sublime/ "${PREFS}";
 fi
+
+# Link subl executable
+ln -s "/Applications/Sublime Text 3.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
