@@ -1,0 +1,22 @@
+{
+	"installed_packages":
+	[
+		"ASCII Decorator",
+		"Base64 Fold",
+		"cdnjs",
+		"Color Highlighter",
+		"Dotfiles Syntax Highlighting",
+		"Ember.js Snippets",
+		"Emmet",
+		"FileDiffs",
+		"Git",
+		"GitGutter",
+		"GoSublime",
+		"Handlebars",
+		"LESS",
+		"MarkdownEditing",
+		"SideBarEnhancements",
+		"Solarized Color Scheme",
+		"Solarized Toggle"
+	]
+}

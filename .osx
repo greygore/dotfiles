@@ -659,6 +659,16 @@ defaults write com.apple.DiskUtility advanced-image-options -bool true
 git config --global core.excludesfile ~/.gitignore_global
 
 ###############################################################################
+# Sublime Text #
+###############################################################################
+
+# Link Sublime Text settings
+PREFS="${HOME}/Library/Application Support/Sublime Text 3/Packages/User"
+if [[ -d "${PREFS}" && ! -L "${PREFS}" ]]; then
+	rm -rf "${PREFS}";
+	ln -s ./settings/sublime/ "${PREFS}";
+fi
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
