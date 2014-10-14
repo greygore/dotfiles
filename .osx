@@ -679,6 +679,9 @@ fi
 # Link subl executable
 ln -s "/Applications/Sublime Text 3.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
 
+# Use Sublime Text as default git editor
+git config --global core.editor "subl -n -w"
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
