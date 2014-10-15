@@ -25,6 +25,9 @@ git config --global user.name "${FULL_NAME}"
 git config --global user.email "${EMAIL_ADDRESS}"
 
 binaries=(
+	bash
+	coreutils
+	findutils
 	go
 	cheat
 	trash
