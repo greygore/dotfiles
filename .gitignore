@@ -15,3 +15,14 @@ Thumbs.db
 
 # Misc
 .extra
+
+# Git config is personalized
+config/.gitconfig
+
+# Ignore Sublime Text Package Control frequently changed files
+settings/sublime/Package Control.last-run
+settings/sublime/Package Control.ca-list
+settings/sublime/Package Control.ca-bundle
+settings/sublime/Package Control.system-ca-bundle
+settings/sublime/Package Control.cache/
+settings/sublime/Package Control.ca-certs/
