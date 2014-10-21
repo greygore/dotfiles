@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-# ~/.osx — https://mths.be/osx
+cd "$(dirname "$0")/.."
+DOTFILES_ROOT=$(pwd)
+source "$DOTFILES_ROOT/script/lib.sh"
 
 # Ask for the administrator password upfront
 sudo -v
@@ -13,12 +15,12 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-echo "What is your computer's name?"
-read COMPUTER_NAME
-sudo scutil --set ComputerName $COMPUTER_NAME
-sudo scutil --set HostName $COMPUTER_NAME
-sudo scutil --set LocalHostName $COMPUTER_NAME
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
+user " - (OSX) What is your computer's name?"
+read -e computer_name
+sudo scutil --set ComputerName $computer_name
+sudo scutil --set HostName $computer_name
+sudo scutil --set LocalHostName $computer_name
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $computer_name
 
 # Standby delay
 sudo pmset -a standbydelay 86400 # 1 day, default 1 hour
