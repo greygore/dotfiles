@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "$0")/.."
-DOTFILES_ROOT=$(pwd)
-source "$DOTFILES_ROOT/script/lib.sh"
+# ~/.osx — https://mths.be/osx
 
 # Ask for the administrator password upfront
 sudo -v
@@ -661,11 +659,6 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 # Enable the debug menu in Disk Utility
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true
-
-###############################################################################
-# Git                                                                         #
-###############################################################################
-git config --global core.excludesfile ~/.gitignore_global
 
 ###############################################################################
 # Sublime Text #
