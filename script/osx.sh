@@ -23,9 +23,6 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 # Standby delay
 sudo pmset -a standbydelay 86400 # 1 day, default 1 hour
 
-# Menu bar: Transparency
-defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
-
 # Menu bar: Icons
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
 	defaults write "${domain}" dontAutoLoad -array \
@@ -411,17 +408,11 @@ defaults write com.apple.Dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
 defaults write com.apple.dock autohide-time-modifier -float 0
 
-# 2D Dock
-defaults write com.apple.dock no-glass -bool false
-
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
-
-# Make Dock more transparent
-defaults write com.apple.dock hide-mirror -bool true
 
 # Launchpad gesture (pinch with thumb and three fingers)
 defaults write com.apple.dock showLaunchpadGestureEnabled -bool true
