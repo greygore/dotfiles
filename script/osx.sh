@@ -521,17 +521,6 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 ###############################################################################
-# Google Chrome & Google Chrome Canary #
-###############################################################################
-
-# Allow installing user scripts via GitHub Gist or Userscripts.org
-defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/*" "http://userscripts.org/*"
-defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://gist.githubusercontent.com/*" "http://userscripts.org/*"
-
-# Swipe navigation
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
-###############################################################################
 # Mail                                                                        #
 ###############################################################################
 
@@ -552,7 +541,7 @@ defaults write com.apple.mail DisableInlineAttachmentViewing -bool false
 #defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
 
 ###############################################################################
-# Terminal & iTerm 2                                                                   #
+# Terminal                                                                    #
 ###############################################################################
 
 # Only use UTF-8 in Terminal.app
@@ -572,12 +561,6 @@ fi;
 # i.e. hover over a window and start typing in it with[out] clicking first
 defaults write com.apple.terminal FocusFollowsMouse -bool false
 defaults write org.x.X11 wm_ffm -bool false
-
-# Install the Solarized Dark theme for iTerm
-open "${HOME}/init/Solarized Dark.itermcolors"
-
-# Don’t display the annoying prompt when quitting iTerm
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
 ###############################################################################
 # Time Machine                                                                #
@@ -625,23 +608,6 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 # Enable the debug menu in Disk Utility
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true
-
-###############################################################################
-# Sublime Text #
-###############################################################################
-
-# Link Sublime Text settings
-PREFS="${HOME}/Library/Application Support/Sublime Text 3/Packages/User"
-if [[ -d "${PREFS}" && ! -L "${PREFS}" ]]; then
-	rm -rf "${PREFS}";
-	ln -s ./settings/sublime/ "${PREFS}";
-fi
-
-# Link subl executable
-ln -s "/Applications/Sublime Text 3.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-
-# Use Sublime Text as default git editor
-git config --global core.editor "subl -n -w"
 
 ###############################################################################
 # Kill affected applications                                                  #
