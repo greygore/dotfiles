@@ -20,10 +20,10 @@ sudo scutil --set HostName $computer_name
 sudo scutil --set LocalHostName $computer_name
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $computer_name
 
-# Standby delay
-sudo pmset -a standbydelay 86400 # 1 day, default 1 hour
+# How long to sleep before powering down compeltely  (3600 seconds)
+sudo pmset -a standbydelay 86400
 
-# Menu bar: Icons
+# Menu bar: Icons (Displays, Time Machine, Bluetooth, Volume)
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
 	defaults write "${domain}" dontAutoLoad -array \
 		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
@@ -39,27 +39,27 @@ defaults write com.apple.systemuiserver menuExtras -array \
 # Scrollbars: WhenScrolling, Automatic or Always
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
-# Highlight color
-#defaults write NSGlobalDomain AppleHighlightColor -string '0.764700 0.976500 0.568600'
+# Highlight color (RGB)
+#defaults write NSGlobalDomain AppleHighlightColor -string '0.847059 0.847059 0.862745' # Graphite
 
-# Set sidebar icon size to medium
+# Finder Sidebar Icon Size (1 = Smaller, *2 = Medium, 3 = Larger)
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 
 # Window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001 #?
 
-# Save panel expansion
+# Save panel expansion (false, false)
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
-# Save to disk (not to iCloud) 
+# Save to to iCloud (true)
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false #?
 
-# Print Panel expansion
+# Print Panel expansion (false, false)
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
-# Automatically quit printer app once the print jobs complete
+# Automatically quit printer app once the print jobs complete (false)
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 # Remove duplicates in the “Open With” menu (also see `lscleanup` alias)
@@ -72,13 +72,13 @@ defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 # Resume: Keep windows
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false #?
 
-# Automatic termination of inactive apps
+# Automatic termination of inactive apps (false)
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
-# Crash reporter - crashreport or none
+# Crash reporter (*crashreport or none)
 defaults write com.apple.CrashReporter DialogType none
 
-# Help Viewer to non-floating mode
+# Help Viewer to non-floating mode (false)
 defaults write com.apple.helpviewer DevMode -bool true
 
 # Fix for the ancient UTF-8 bug in QuickLook (https://mths.be/bbo)
@@ -93,19 +93,19 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 # Restart automatically if the computer freezes
 sudo systemsetup -setrestartfreeze on
 
-# Never go into computer sleep mode
+# Sleep on Idle (# minutes or Off/Never)
 sudo systemsetup -setcomputersleep Off > /dev/null
 
-# Check for software updates daily, not just once per week
+# Check for software updates (7 days)
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Disable Notification Center and remove the menu bar icon
 #launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
-# Disable smart quotes as they’re annoying when typing code
+# Smart quotes (true)
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
-# Disable smart dashes as they’re annoying when typing code
+# Smart dashes (true)
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
@@ -121,7 +121,7 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # Disable local Time Machine snapshots
 sudo tmutil disablelocal
 
-# Disable hibernation (speeds up entering sleep mode)
+# Hibernation (0 = disable, *3 = safe sleep, 25 = no sleep, hibernate only)
 sudo pmset -a hibernatemode 0
 
 # Remove the sleep image file to save disk space
@@ -131,7 +131,7 @@ sudo touch /Private/var/vm/sleepimage
 # …and make sure it can’t be rewritten
 sudo chflags uchg /Private/var/vm/sleepimage
 
-# Disable the sudden motion sensor as it’s not useful for SSDs
+# Sudden motion sensor (0 to disable)
 sudo pmset -a sms 0
 
 ###############################################################################
@@ -149,7 +149,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
-# Enable “natural” (Lion-style) scrolling
+# Enable “natural” (iOS-style) scrolling (true)
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
 # Increase sound quality for Bluetooth headphones/headsets
@@ -165,13 +165,13 @@ defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
 # Follow the keyboard focus while zoomed in
 defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 
-# Press-and-hold for keys vs key repeat
+# Keyboard press and hold (*true = hold for diacritic, false = repeat)
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
-# Set a blazingly fast keyboard repeat rate
+# Keyboard repeat rate (value * 15ms)
 defaults write NSGlobalDomain KeyRepeat -int 0
 
-# Set language and text formats
+# Locale settings
 defaults write NSGlobalDomain AppleLanguages -array "en"
 defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Inches"
@@ -180,7 +180,7 @@ defaults write NSGlobalDomain AppleMetricUnits -bool false
 # Set the timezone; see `systemsetup -listtimezones` for other values
 sudo systemsetup -settimezone "America/New_York" > /dev/null
 
-# Disable auto-correct
+# Auto-correct (true)
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Stop iTunes from responding to the keyboard media keys
@@ -190,33 +190,33 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Screen                                                                      #
 ###############################################################################
 
-# Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
+# Password after screensaver/sleep (false, 5)
+defaults write com.apple.screensaver askForPassword -bool true
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-# Save screenshots to the desktop
+# Screenshot location
 defaults write com.apple.screencapture location -string "$HOME/Desktop"
 
-# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
+# Screenshots format (BMP, GIF, JPG, PDF, *PNG, TIFF)
 defaults write com.apple.screencapture type -string "png"
 
-# Disable shadow in screenshots
+# Screenshot shadows (false)
 defaults write com.apple.screencapture disable-shadow -bool true
 
-# Enable subpixel font rendering on non-Apple LCDs
+# Subpixel font rendering on non-Apple LCDs (1 = Light, 2 = Medium, 3 = Strong)
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
-# Enable HiDPI display modes (requires restart)
+# HiDPI display modes (requires restart)
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 ###############################################################################
 # Finder                                                                      #
 ###############################################################################
 
-# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
+# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons (false)
 defaults write com.apple.finder QuitMenuItem -bool true
 
-# Finder: Window animations and Get Info animations
+# Finder: Window animations and Get Info animations (false)
 defaults write com.apple.finder DisableAllAnimations -bool false
 
 # Default location for new Finder windows
@@ -225,7 +225,7 @@ defaults write com.apple.finder DisableAllAnimations -bool false
 # Home 	PfHm		file://${HOME}/
 # Desktop 	PfDe		file://${HOME}/Desktop/
 # Documents 	PfDo 		file://${HOME}/Documents/
-# All My Files 	PfAf		file:///System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch
+# *All My Files 	PfAf		file:///System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch
 # Other path 	PfLo 		file:///full/path/here/
 defaults write com.apple.finder NewWindowTarget -string "PfDe"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
@@ -236,28 +236,28 @@ defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
-# Finder: Show hidden files
+# Finder: Show hidden files (see show/hide aliases - false)
 defaults write com.apple.finder AppleShowAllFiles -bool true
 
-# Finder: Show filename extensions
+# Finder: Show filename extensions (false)
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
-# Finder: Show status bar
+# Finder: Show status bar (false)
 defaults write com.apple.finder ShowStatusBar -bool true
 
-# Finder: Show path bar
+# Finder: Show path bar (false)
 defaults write com.apple.finder ShowPathbar -bool true
 
 # Finder: Allow text selection in Quick Look
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
-# Finder: Display full POSIX path as window title
+# Finder: Display full POSIX path as window title (false)
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
-# When performing a search, search the current folder by default
+# Finder: Search Scope (*???? = This Mac, SCcf = Current Folder, ???? = Shared)
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
-# Disable the warning when changing a file extension
+# Warn when changing file extension (true)
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # Avoid creating .DS_Store files on network volumes
@@ -299,14 +299,13 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
 
-# Finder: View mode
-# Four-letter codes for the view modes: 'Nlsv', icnv', 'clmv', 'Flwv'
+# Finder: View mode (Nlsv = List, *icnv = Icon, clmv = Column, Flwv = Flow)
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
-# Disable the warning before emptying the Trash
+# Warn before emptying trash (true)
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
-# Empty Trash securely by default
+# Empty Trash securely (false)
 defaults write com.apple.finder EmptyTrashSecurely -bool true
 
 # Enable AirDrop over Ethernet and on unsupported Macs running Lion
@@ -334,22 +333,22 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Dock & hot corners                                                          #
 ###############################################################################
 
-# Enable highlight hover effect for the grid view of a stack (Dock)
+# Highlight hover the grid view of a stack (true)
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
-# Set the icon size of Dock items to 36 pixels
+# Icon size (64 pixels)
 defaults write com.apple.dock tilesize -int 36
 
-# Minimize/maximize window effect: genie, scale, suck
+# Minimize/maximize window effect (*genie, scale, suck)
 defaults write com.apple.dock mineffect -string "genie"
 
-# Minimize windows into their application’s icon
+# Minimize windows into their application’s icon (false)
 defaults write com.apple.dock minimize-to-application -bool false
 
-# Enable spring loading for all Dock items
+# Spring load all the things!
 defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
 
-# Show indicator lights for open applications in the Dock
+# Open application indicators (true)
 defaults write com.apple.dock show-process-indicators -bool true
 
 # Wipe all (default) app icons from the Dock
@@ -363,7 +362,7 @@ defaults write com.apple.dock launchanim -bool true
 # Mission Control: Animation speed
 defaults write com.apple.dock expose-animation-duration -float 0.1
 
-# Mission Control: Group windows
+# Mission Control: Group windows (true)
 defaults write com.apple.dock expose-group-by-app -bool false
 
 # Don’t show Dashboard as a Space
@@ -380,7 +379,7 @@ defaults write com.apple.Dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
 defaults write com.apple.dock autohide-time-modifier -float 0
 
-# Automatically hide and show the Dock
+# Autohide Dock (false)
 defaults write com.apple.dock autohide -bool true
 
 # Make Dock icons of hidden applications translucent
@@ -422,6 +421,9 @@ defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-
 # Bottom left screen corner
 #defaults write com.apple.dock wvous-bl-corner -int 5
 #defaults write com.apple.dock wvous-bl-modifier -int 0
+# Bottom right screen corner
+#defaults write com.apple.dock wvous-br-corner -int 10
+#defaults write com.apple.dock wvous-br-modifier -int 0
 
 ###############################################################################
 # Spotlight #
@@ -532,7 +534,7 @@ defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -boo
 # Mail                                                                        #
 ###############################################################################
 
-# Send and reply animations in Mail.app
+# Send and reply animations in Mail.app (true, true)
 defaults write com.apple.mail DisableReplyAnimations -bool false
 defaults write com.apple.mail DisableSendAnimations -bool false
 
@@ -542,7 +544,7 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false #?
 # Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app
 defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\\U21a9"
 
-# Inline attachments
+# Inline attachments (true)
 defaults write com.apple.mail DisableInlineAttachmentViewing -bool false
 
 # Spell checking
