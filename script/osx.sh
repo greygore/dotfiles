@@ -170,6 +170,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Keyboard repeat rate (value * 15ms)
 defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Locale settings
 defaults write NSGlobalDomain AppleLanguages -array "en"
