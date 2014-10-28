@@ -21,7 +21,7 @@ sudo scutil --set LocalHostName $computer_name
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $computer_name
 
 # How long to sleep before powering down compeltely  (3600 seconds)
-sudo pmset -a standbydelay 86400
+sudo pmset -a standbydelay 28800 # 8 hours
 
 # Menu bar: Icons (Displays, Time Machine, Bluetooth, Volume)
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
