@@ -138,22 +138,6 @@ sudo pmset -a sms 0
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
 
-# Unbind [Shift]-Command-Up and Down hotkeys that conflict with Sublime Text's block select mode
-#/usr/libexec/PlistBuddy -c "Modify :AppleSymbolicHotKeys:32:enabled bool NO" ~/Library/Preferences/com.apple.symbolichotkeys.plist
-#/usr/libexec/PlistBuddy -c "Modify :AppleSymbolicHotKeys:33:enabled bool NO" ~/Library/Preferences/com.apple.symbolichotkeys.plist
-#/usr/libexec/PlistBuddy -c "Modify :AppleSymbolicHotKeys:34:enabled bool NO" ~/Library/Preferences/com.apple.symbolichotkeys.plist
-#/usr/libexec/PlistBuddy -c "Modify :AppleSymbolicHotKeys:35:enabled bool NO" ~/Library/Preferences/com.apple.symbolichotkeys.plist
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 '{ enabled = 0; }'
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 33 '{ enabled = 0; }'
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 34 '{ enabled = 0; }'
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 35 '{ enabled = 0; }'
-# rebind 'Mission Controls' keyboard shortcut to F3
-#defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 '{ enabled = 1; value = { parameters = ( 65535, 99, 0 ); type = standard; }; }'
-#defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 34 '{ enabled = 1; value = { parameters = ( 65535, 99, 131072 ); type = standard; }; }'
-# rebind 'All application windows' keyboard shortcut to F4
-#defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 33 '{ enabled = 1; value = { parameters = (65535, 118, 0 ); type = standard; }; }'
-#defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 35 '{ enabled = 1; value = { parameters = (65535, 118, 131072 ); type = standard; }; }'
-
 # Trackpad: Tap to click (user and login)
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
