@@ -62,8 +62,6 @@ if [[ $confirm =~ ^[Yy]?$ ]]; then
 	success 'created .gitconfig'
 fi
 
-exit
-
 # Link up dotfiles
 user 'Would you like to symlink your dotfiles?'
 read -n 1 confirm
