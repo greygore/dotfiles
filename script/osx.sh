@@ -70,7 +70,7 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 
 # Resume: Keep windows
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false #?
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
 # Automatic termination of inactive apps (false)
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
