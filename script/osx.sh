@@ -40,7 +40,7 @@ defaults write com.apple.systemuiserver menuExtras -array \
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
 # Highlight color (RGB)
-#defaults write NSGlobalDomain AppleHighlightColor -string '0.847059 0.847059 0.862745' # Graphite
+defaults write NSGlobalDomain AppleHighlightColor -string '0.847059 0.847059 0.862745' # Graphite
 
 # Finder Sidebar Icon Size (1 = Smaller, *2 = Medium, 3 = Larger)
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
