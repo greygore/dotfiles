@@ -32,6 +32,7 @@ defaults write NSGlobalDomain AppleLanguages -array "en"
 defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Inches"
 defaults write NSGlobalDomain AppleMetricUnits -bool false
+defaults write -g AppleTextBreakLocale en_US_POSIX
 
 # Set the timezone; see `systemsetup -listtimezones` for other values
 sudo systemsetup -settimezone "America/New_York" > /dev/null
@@ -98,6 +99,9 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 # Window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001 #?
 
+# Opening and closing window animations (true)
+defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
+
 ###############################################################################
 # Desktop                                                                     #
 ###############################################################################
@@ -144,6 +148,10 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
 # Save to to iCloud (true)
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false #?
+
+# Show an iCloud window when opening TextEdit or Preview
+# if syncing documents and data is enabled (true)
+defaults write -g NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
 
 # Print Panel expansion (false, false)
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
@@ -211,6 +219,10 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
+# Caret blinking (Disable using extreme values)
+#defaults write -g NSTextInsertionPointBlinkPeriodOff -float 0
+#defaults write -g NSTextInsertionPointBlinkPeriodOn -float 999999999999
+
 ###############################################################################
 # Trackpad                                                                    #
 ###############################################################################
@@ -228,6 +240,9 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryCli
 
 # Enable “natural” (iOS-style) scrolling (true)
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
+
+# Smooth scrolling (true)
+#defaults write -g NSScrollAnimationEnabled -bool false
 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
 defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
@@ -333,6 +348,9 @@ defaults write com.apple.finder QuitMenuItem -bool true
 
 # Allow text selection in Quick Look
 defaults write com.apple.finder QLEnableTextSelection -bool true #?
+
+# Quick look window opening and closing animation duration
+#defaults write -g QLPanelAnimationDuration -float 0
 
 # Enable AirDrop over Ethernet and on unsupported Macs running Lion
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
