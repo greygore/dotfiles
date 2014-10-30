@@ -26,3 +26,6 @@ settings/sublime/Package Control.ca-bundle
 settings/sublime/Package Control.system-ca-bundle
 settings/sublime/Package Control.cache/
 settings/sublime/Package Control.ca-certs/
+
+# Ignore GoSublime logs
+settings/sublime/GoSublime/osx-x64/log.txt
