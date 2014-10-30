@@ -133,11 +133,11 @@ sudo tmutil disablelocal
 sudo pmset -a hibernatemode 25
 
 # Remove the sleep image file to save disk space
-sudo rm /Private/var/vm/sleepimage
+#sudo rm /Private/var/vm/sleepimage
 # Create a zero-byte file instead…
-sudo touch /Private/var/vm/sleepimage
+#sudo touch /Private/var/vm/sleepimage
 # …and make sure it can’t be rewritten
-sudo chflags uchg /Private/var/vm/sleepimage
+#sudo chflags uchg /Private/var/vm/sleepimage
 
 # Sudden motion sensor (0 to disable)
 sudo pmset -a sms 0
