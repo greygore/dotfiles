@@ -187,6 +187,9 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Stop iTunes from responding to the keyboard media keys
 #launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
+# Add default keybindings dictionary for Home/End & Page Up/Down keys
+cp -f "$DOTFILES_ROOT/init/DefaultKeyBinding.dict" "$HOME/Library/KeyBindings"
+
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
