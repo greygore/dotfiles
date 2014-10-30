@@ -73,7 +73,7 @@ defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
 # Automatic termination of inactive apps (false)
-defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+defaults write NSGlobalDomain NSDisableAutomaticTermination -bool false
 
 # Crash reporter (*crashreport or none)
 defaults write com.apple.CrashReporter DialogType none
@@ -81,7 +81,7 @@ defaults write com.apple.CrashReporter DialogType none
 # Help Viewer to non-floating mode (false)
 defaults write com.apple.helpviewer DevMode -bool true
 
-# Fix for the ancient UTF-8 bug in QuickLook (https://mths.be/bbo)
+# Fix for the ancient UTF-8 bug in QuickLook (s)
 # Commented out, as this is known to cause problems in various Adobe apps :(
 # See https://github.com/mathiasbynens/dotfiles/issues/237
 #echo "0x08000100:0" > ~/.CFUserTextEncoding
@@ -94,10 +94,10 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 sudo systemsetup -setrestartfreeze on
 
 # Sleep on Idle (# minutes or Off/Never)
-sudo systemsetup -setcomputersleep Off > /dev/null
+sudo systemsetup -setcomputersleep 180 > /dev/null # 3 hours
 
 # Check for software updates (7 days)
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1 # 1 day
 
 # Disable Notification Center and remove the menu bar icon
 #launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
@@ -122,7 +122,7 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 sudo tmutil disablelocal
 
 # Hibernation (0 = disable, *3 = safe sleep, 25 = no sleep, hibernate only)
-sudo pmset -a hibernatemode 0
+sudo pmset -a hibernatemode 25
 
 # Remove the sleep image file to save disk space
 sudo rm /Private/var/vm/sleepimage
@@ -238,7 +238,7 @@ defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Finder: Show hidden files (see show/hide aliases - false)
-defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write com.apple.finder AppleShowAllFiles -bool false
 
 # Finder: Show filename extensions (false)
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -307,7 +307,7 @@ defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Empty Trash securely (false)
-defaults write com.apple.finder EmptyTrashSecurely -bool true
+defaults write com.apple.finder EmptyTrashSecurely -bool false
 
 # Enable AirDrop over Ethernet and on unsupported Macs running Lion
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
@@ -364,7 +364,7 @@ defaults write com.apple.dock launchanim -bool true
 defaults write com.apple.dock expose-animation-duration -float 0.1
 
 # Mission Control: Group windows (true)
-defaults write com.apple.dock expose-group-by-app -bool false
+defaults write com.apple.dock expose-group-by-app -bool true
 
 # Don’t show Dashboard as a Space
 defaults write com.apple.dock dashboard-in-overlay -bool true #?
@@ -431,7 +431,7 @@ defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-
 ###############################################################################
 
 # Hide Spotlight tray-icon (and subsequent helper)
-sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+#sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 
 # Disable Spotlight indexing for any volume that gets mounted and has not yet
 # been indexed before.
@@ -446,20 +446,20 @@ defaults write com.apple.spotlight orderedItems -array \
  '{"enabled" = 1;"name" = "MENU_EXPRESSION";}' \
  '{"enabled" = 1;"name" = "MENU_DEFINITION";}' \
  '{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
+ '{"enabled" = 1;"name" = "DOCUMENTS";}' \
  '{"enabled" = 1;"name" = "DIRECTORIES";}' \
+ '{"enabled" = 1;"name" = "PRESENTATIONS";}' \
+ '{"enabled" = 1;"name" = "SPREADSHEETS";}' \
  '{"enabled" = 1;"name" = "PDF";}' \
+ '{"enabled" = 1;"name" = "MESSAGES";}' \
+ '{"enabled" = 1;"name" = "CONTACT";}' \
+ '{"enabled" = 1;"name" = "EVENT_TODO";}' \
+ '{"enabled" = 1;"name" = "IMAGES";}' \
+ '{"enabled" = 1;"name" = "BOOKMARKS";}' \
+ '{"enabled" = 1;"name" = "MUSIC";}' \
+ '{"enabled" = 1;"name" = "MOVIES";}' \
  '{"enabled" = 1;"name" = "FONTS";}' \
- '{"enabled" = 0;"name" = "DOCUMENTS";}' \
- '{"enabled" = 0;"name" = "MESSAGES";}' \
- '{"enabled" = 0;"name" = "CONTACT";}' \
- '{"enabled" = 0;"name" = "EVENT_TODO";}' \
- '{"enabled" = 0;"name" = "IMAGES";}' \
- '{"enabled" = 0;"name" = "BOOKMARKS";}' \
- '{"enabled" = 0;"name" = "MUSIC";}' \
- '{"enabled" = 0;"name" = "MOVIES";}' \
- '{"enabled" = 0;"name" = "PRESENTATIONS";}' \
- '{"enabled" = 0;"name" = "SPREADSHEETS";}' \
- '{"enabled" = 0;"name" = "SOURCE";}' \
+ '{"enabled" = 1;"name" = "SOURCE";}' \
  '{"enabled" = 1;"name" = "MENU_OTHER";}' \
  '{"enabled" = 0;"name" = "MENU_WEBSEARCH";}'
 
@@ -497,8 +497,8 @@ defaults write com.apple.Safari HomePage -string "about:blank"
 # Prevent Safari from opening ‘safe’ files automatically after downloading
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
-# Allow hitting the Backspace key to go to the previous page in history
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
+# Allow hitting the Backspace key to go to the previous page in history (false)
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool false
 
 # Bookmarks bar
 defaults write com.apple.Safari ShowFavoritesBar -bool false #?
