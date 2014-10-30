@@ -239,8 +239,8 @@ defaults write com.apple.finder DisableAllAnimations -bool false
 # Documents 	PfDo 		file://${HOME}/Documents/
 # *All My Files 	PfAf		file:///System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch
 # Other path 	PfLo 		file:///full/path/here/
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
+defaults write com.apple.finder NewWindowTarget -string "Home"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
 # Desktop: Icons
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
