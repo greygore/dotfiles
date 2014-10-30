@@ -2,6 +2,12 @@
 
 # ~/.osx — https://mths.be/osx
 
+cd "$(dirname "$0")/.."
+DOTFILES_ROOT=$(pwd)
+
+# Load helper functions
+source "$DOTFILES_ROOT/script/lib.sh"
+
 # Ask for the administrator password upfront
 sudo -v
 
