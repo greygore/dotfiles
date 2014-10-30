@@ -21,10 +21,12 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # Set computer name (as done via System Preferences → Sharing)
 user " - (OSX) What is your computer's name?"
 read -e computer_name
-sudo scutil --set ComputerName $computer_name
-sudo scutil --set HostName $computer_name
-sudo scutil --set LocalHostName $computer_name
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $computer_name
+if [[ $computer_name -ne '' ]]; then
+	sudo scutil --set ComputerName $computer_name
+	sudo scutil --set HostName $computer_name
+	sudo scutil --set LocalHostName $computer_name
+	sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $computer_name
+fi
 
 # How long to sleep before powering down compeltely  (3600 seconds)
 sudo pmset -a standbydelay 28800 # 8 hours
