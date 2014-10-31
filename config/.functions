@@ -283,3 +283,17 @@ tell application "Reminders"
 end tell
 EOF
 }
+
+# Get OS X Software Updates, and update Homebrew, npm, Ruby gems and Python packages
+function update() {
+	# Get OS X Software Updates
+	sudo softwareupdate -i -a
+	# Homebrew
+	brew update; brew upgrade; brew cleanup
+	# Node modules
+	npm install npm -g; npm update -g
+	# Ruby gems (todo check for rvm...)
+	gem update --system; gem update
+	# Python packages
+	pip freeze | sed -e 's/==.*//' | sed -e '/git-remote-helpers/ d' | xargs pip install -U
+}
