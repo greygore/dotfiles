@@ -37,6 +37,9 @@ defaults write -g AppleTextBreakLocale en_US_POSIX
 # Set the timezone; see `systemsetup -listtimezones` for other values
 sudo systemsetup -settimezone "America/New_York" > /dev/null
 
+# 12/24-Hour Time (true)
+defaults write NSGlobalDomain AppleICUForce12HourTime -bool true
+
 ###############################################################################
 # Power Management                                                            #
 ###############################################################################
@@ -101,6 +104,9 @@ defaults write NSGlobalDomain NSWindowResizeTime -float 0.001 #?
 
 # Opening and closing window animations (true)
 defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
+
+# Double-click a window's title bar to minimize
+defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
 
 ###############################################################################
 # Desktop                                                                     #
@@ -227,19 +233,60 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Trackpad                                                                    #
 ###############################################################################
 
-# Trackpad: Tap to click (user and login)
+# Enable “natural” (iOS-style) scrolling (true)
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
+
+# Tap to click (user and login)
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-# Trackpad: Right click
+# Right click
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
-# Enable “natural” (iOS-style) scrolling (true)
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
+# Three finger tap (Look up)
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 0
+
+# Three finger drag (Move)
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool false
+
+# Zoom in or out
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadPinch -bool true
+
+# Smart zoom, double-tap with two fingers
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerDoubleTapGesture -bool false
+
+# Rotate
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRotate -bool true
+
+# Notification Center (2 finger swipe from right edge)
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+
+# Swipe between pages with two fingers
+defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool false
+
+# Swipe between full-screen apps
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 2
+
+# Three/four finger swipe up/down (Mission Control/App Expose)
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerVertSwipeGesture -int 2
+
+# Four/five finger pinch (Launchpad)
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerPinchGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFiveFingerPinchGesture -int 2
+
+# Swipe between apps with four fingers
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerHorizSwipeGesture -int 2
+
+# General gesture support
+defaults write com.apple.dock showMissionControlGestureEnabled -bool true
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
+defaults write com.apple.dock showDesktopGestureEnabled -bool true
+defaults write com.apple.dock showLaunchpadGestureEnabled -bool true
 
 # Smooth scrolling (true)
 #defaults write -g NSScrollAnimationEnabled -bool false
@@ -280,7 +327,10 @@ defaults write com.apple.screencapture type -string "png"
 # Screenshot shadows (false)
 defaults write com.apple.screencapture disable-shadow -bool true
 
-# Subpixel font rendering on non-Apple LCDs (1 = Light, 2 = Medium, 3 = Strong)
+# Screen Saver: Flurry
+defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName -string "Flurry" path -string "/System/Library/Screen Savers/Flurry.saver" type -int 0
+
+# Subpixel font rendering on non-Apple LCDs (1 = Light, 2 = Medium, 3 = Strong, 4 = None)
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 # HiDPI display modes (requires restart)
@@ -563,27 +613,66 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 ###############################################################################
+# Activity Monitor                                                            #
+###############################################################################
+
+#  Show the main window when launching
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true #?
+
+# Visualize CPU usage in the dock icon
+defaults write com.apple.ActivityMonitor IconType -int 5
+
+# Update Frequency (Very Often = 1, Often - 2 sec, *Normally - 5 sec)
+defaults write com.apple.ActivityMonitor UpdatePeriod -int 2
+
+# Show all processes
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
+# Sort results by CPU usage
+defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage" #?
+defaults write com.apple.ActivityMonitor SortDirection -int 0 #?
+
+# Add the "% CPU" column to the Disk and Network tabs
+defaults write com.apple.ActivityMonitor "UserColumnsPerTab v4.0" -dict \
+	'0' '( Command, CPUUsage, CPUTime, Threads, IdleWakeUps, PID, UID )' \
+	'1' '( Command, anonymousMemory, Threads, Ports, PID, UID, ResidentSize )' \
+	'2' '( Command, PowerScore, 12HRPower, AppSleep, graphicCard, UID )' \
+	'3' '( Command, bytesWritten, bytesRead, Architecture, PID, UID, CPUUsage )' \
+	'4' '( Command, txBytes, rxBytes, txPackets, rxPackets, PID, UID, CPUUsage )'
+
+# Sort by CPU usage in Disk and Network tabs
+defaults write com.apple.ActivityMonitor UserColumnSortPerTab -dict \
+	'0' '{ direction = 0; sort = CPUUsage; }' \
+	'1' '{ direction = 0; sort = ResidentSize; }' \
+	'2' '{ direction = 0; sort = 12HRPower; }' \
+	'3' '{ direction = 0; sort = CPUUsage; }' \
+	'4' '{ direction = 0; sort = CPUUsage; }'
+
+# Show Data in the Disk graph (instead of IO)
+defaults write com.apple.ActivityMonitor DiskGraphType -int 1
+
+# Show Data in the Network graph (instead of packets)
+defaults write com.apple.ActivityMonitor NetworkGraphType -int 1
+
+###############################################################################
 # Other Utilities                                                             #
 ###############################################################################
 
-# Activity Monitor: Show the main window when launching
-defaults write com.apple.ActivityMonitor OpenMainWindow -bool true #?
+# Address Book: Address format
+defaults write com.apple.AddressBook ABDefaultAddressCountryCode -string "us"
 
-# Activity Monitor: Visualize CPU usage in the dock icon
-defaults write com.apple.ActivityMonitor IconType -int 5
+# Address Book: Display format ("First Last" = 0, "Last, First" = 1)
+defaults write com.apple.AddressBook ABNameDisplay -int 0
 
-# Activity Monitor: Show all processes
-defaults write com.apple.ActivityMonitor ShowCategory -int 0
-
-# Activity Monitor: Sort results by CPU usage
-defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage" #?
-defaults write com.apple.ActivityMonitor SortDirection -int 0 #?
+# Address Book: Sort by
+defaults write com.apple.AddressBook ABNameSortingFormat -string "sortingLastName sortingFirstName"
 
 # Address Book: Enable the debug menu
 defaults write com.apple.addressbook ABShowDebugMenu -bool true
 
 # TextEdit: Use plain text mode for new documents
 defaults write com.apple.TextEdit RichText -int 0
+
 # Open and save files as UTF-8 in TextEdit
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
