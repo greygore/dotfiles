@@ -22,7 +22,7 @@
 		"tmp/export_tree*",
 		"tmp/sass_compiler*"
 	],
-	"font_face": "M+",
+	"font_face": "M+ 1m",
 	"font_size": 12,
 	"highlight_line": true,
 	"ignored_packages":
