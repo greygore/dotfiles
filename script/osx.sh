@@ -77,6 +77,34 @@ sudo systemsetup -setrestartfreeze on
 defaults write com.apple.CrashReporter DialogType none
 
 ###############################################################################
+# Security                                                                    #
+###############################################################################
+
+# Enable Firewall. Possible values:
+# 0 = off
+# 1 = on for specific services
+# 2 = on for essential services
+#sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+# Enable Stealth mode.
+#sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
+# Enable Firewall logging.
+#sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -int 1
+
+# Reload Firewall
+#launchctl unload /System/Library/LaunchAgents/com.apple.alf.useragent.plist
+#sudo launchctl unload /System/Library/LaunchDaemons/com.apple.alf.agent.plist
+#sudo launchctl load /System/Library/LaunchDaemons/com.apple.alf.agent.plist
+#launchctl load /System/Library/LaunchAgents/com.apple.alf.useragent.plist
+
+# IR remote control
+#sudo defaults write /Library/Preferences/com.apple.driver.AppleIRController DeviceEnabled -bool false
+
+# Bluetooth
+#sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
+#sudo launchctl unload /System/Library/LaunchDaemons/com.apple.blued.plist
+#sudo launchctl load /System/Library/LaunchDaemons/com.apple.blued.plist
+
+###############################################################################
 # Window UI                                                                   #
 ###############################################################################
 
