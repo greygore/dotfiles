@@ -90,6 +90,19 @@ apps=(
 )
 brew cask install --appdir="/Applications" ${apps[@]} 2> /dev/null
 
+quicklooks=(
+	qlcolorcode
+	qlstephen
+	qlmarkdown
+	quicklook-json
+	qlprettypatch
+	quicklook-csv
+	betterzipql
+	webp-quicklook
+	suspicious-package
+)
+sudo brew cask install --qlplugindir="/Library/QuickLook" ${quicklooks[0]} 2> /dev/null
+
 brew cask alfred
 brew cleanup --force
 brew cask cleanup
