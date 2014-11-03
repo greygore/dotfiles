@@ -80,7 +80,14 @@
 
 	# Pretty log
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	
+
+	# `git remote prune origin`: remove remote-tracking branches that were deleted from the remote repo
+	# `git gc`: cleanup unnecessary files and optimize the local repository
+	# `git clean -df`: remove untracked files and directories from the working tree
+	# `git stash clear`: remove all stashed states
+	trim = !git remote prune origin && git gc
+	cleanup = !git clean -df && git stash clear
+
 [apply]
 	# Detect whitespace errors when applying a patch
 	whitespace = fix
