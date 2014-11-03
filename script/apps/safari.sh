@@ -48,3 +48,10 @@ defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
 # Privacy: don’t send search queries to Apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
+
+# Disable AutoFill in Safari.
+#defaults write com.apple.Safari AllowBypassOfAutocompleteOff -int 0
+#defaults write com.apple.Safari AutoFillFromAddressBook -int 0
+#defaults write com.apple.Safari AutoFillPasswords -int 0
+#defaults write com.apple.Safari AutoFillCreditCardData -int 0
+#defaults write com.apple.Safari AutoFillMiscellaneousForms -int 0
