@@ -51,3 +51,7 @@ Icon
 # SublimeText project files
 /*.sublime-project
 *.sublime-workspace
+
+# Misc #
+########
+*~
