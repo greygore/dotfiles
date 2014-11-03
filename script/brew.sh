@@ -46,6 +46,7 @@ binaries=(
 	jq
 	known_hosts
 	bash-completion
+	grc
 )
 brew install ${binaries[@]}
 
