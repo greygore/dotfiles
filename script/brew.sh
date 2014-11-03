@@ -45,6 +45,7 @@ binaries=(
 	html2text
 	jq
 	known_hosts
+	bash-completion
 )
 brew install ${binaries[@]}
 
