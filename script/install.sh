@@ -36,7 +36,7 @@ if [ -e .git ]; then
 		read -n 1 confirm
 		echo ''
 		if [[ $confirm =~ ^[^Yy]?$ ]]; then
-			exit
+			exitx
 		fi
 	fi
 fi
@@ -72,9 +72,9 @@ if [[ $confirm =~ ^[^Yy]?$ ]]; then
 		dst="$HOME/$(basename "${src}")"
 		link_file "$DOTFILES_ROOT/$src" "$dst"
 	done
-fi
 
-# Start new bash environment
-source ~/.bash_profile
+	# Start new bash environment
+	source ~/.bash_profile
+fi
 
 success 'Done!'
