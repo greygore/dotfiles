@@ -3,20 +3,51 @@
 # Library of useful bash functions
 
 info () {
-	printf " [ \033[00;34m..\033[0m ] $1"
+	printf "$(tput setaf 8) [   ] %s$(tput sgr0)\n" "$@"
 }
 
-user () {
-	printf "\r [ \033[0;33m?\033[0m ] $1 "
+question () {
+	printf "$(tput bold; tput setaf 7) [ ? ] %s$(tput sgr0) " "$@"
+	read answer
+}
+
+confirm () {
+	printf "$(tput bold; tput setaf 7) [ ? ] %s (y/n) $(tput sgr0)" "$@"
+	while read -r -n 1 -s confirm; do
+		if [[ $confirm = [YyNn] ]]; then
+			[[ $confirm = [Yy] ]] && retval=0
+			[[ $confirm = [Nn] ]] && retval=1
+		break
+		fi
+	done
+	echo
+	return $retval
+}
+
+pause () {
+	if [[ "$@" == "" ]]; then
+		printf "$(tput setaf 8) [   ] Press any key to continue $(tput sgr0)" "$@"
+	else
+		printf "$(tput setaf 8) [   ] %s $(tput sgr0)" "$@"
+	fi
+	read -n 1 -s -r anykey
+	echo
 }
 
 success () {
-	printf "\r\033[2K [ \033[00;32mOK\033[0m ] $1\n"
+	printf "$(tput bold; tput setaf 64) [ ✓ ] %s$(tput sgr0)\n" "$@"
+}
+
+error () {
+	printf "$(tput bold; tput setaf 1) [ x ] %s$(tput sgr0)\n" "$@"
+}
+
+warning () {
+	printf "$(tput bold; tput setaf 136) [ ! ] %s$(tput sgr0)\n" "$@"
 }
 
 fail () {
-	printf "\r\033[2K [\033[0;31mFAIL\033[0m] $1\n"
-	echo ''
+	printf "$(tput setaf 1) [ X ] %s$(tput sgr0)\n" "$@"
 	exit
 }
 
