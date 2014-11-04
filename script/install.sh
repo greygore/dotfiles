@@ -9,6 +9,7 @@ while [ -h "$SOURCE" ]; do
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
 done
 DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )"/.. && pwd )"
+cd $DOTFILES_ROOT
 
 source "$DOTFILES_ROOT/script/lib.sh"
 
@@ -52,16 +53,20 @@ else
 		question 'What is the github user for this dotfiles repository?'
 		DOTFILES_GIT_REMOTE="git@github.com:$answer/dotfiles.git"
 	fi
-	git init
-	git remote add origin ${DOTFILES_GIT_REMOTE}
-	git fetch origin master
-	git reset --hard FETCH_HEAD
-	git clean -fd
-	success 'Git repository created and synced with remote.'
+	git init \
+	&& git remote add origin ${DOTFILES_GIT_REMOTE} \
+	&& git fetch origin master \
+	&&  reset --hard FETCH_HEAD \
+	&& git clean -fd \
+	&& success 'Git repository created and synced with remote.' \
+	|| fail 'ERROR: Unable to create new git repository and sync with remote'
 fi
 
 # Set up git config
 if confim 'Would you like to configure git?'; then
+	cp -f "$DOTFILES_ROOT/config/.gitconfig_master" "$HOME/.gitconfig" \
+	|| fail "Unable to copy master .gitconfig file to home directory"
+	
 	question ' (Git) What is your full name?'
 	git_authorname=$answer
 	question ' (Git) What is your email?'
@@ -71,7 +76,6 @@ if confim 'Would you like to configure git?'; then
 	else
 		git_credential='cache'
 	fi
-	cp -f "$DOTFILES_ROOT/config/.gitconfig_master" "$HOME/.gitconfig"
 	git config --global user.name "$git_authorname"
 	git config --global user.email "$git_authoremail"
 	git config --global credential.helper $git_credential
