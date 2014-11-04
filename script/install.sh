@@ -32,7 +32,9 @@ fi
 # Clean up git repo
 if [ -e .git ]; then
 	if [ -n "$(git status --porcelain)" ]; then
-		if [[ ! confirm 'You have uncommited changes. Are you sure you want to continue?' ]]; then
+		if confirm 'You have uncommited changes. Are you sure you want to continue?'; then
+			info 'Remember to commit your changes later then.'
+		else
 			exit 1
 		fi
 	elif [ -n "$(git log origin/master..HEAD)" ]; then
