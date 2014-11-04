@@ -1,11 +1,3 @@
-# Move /usr/local/bin to front of path and then add ~/bin
-export PATH="$HOME/bin:/usr/local/bin:$PATH";
-
-if [ -e "/usr/local/opt/coreutils/libexec/gnubin" ]; then
-	export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH";
-	export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH";
-fi
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -29,15 +21,6 @@ shopt -s cdspell;
 for option in autocd globstar; do
 	shopt -s "$option" 2> /dev/null;
 done;
-
-# Prefer US English and use UTF-8
-export LC_ALL="en_US.UTF-8";
-export LANG="en_US";
-
-# Add extras to Git shell prompt goodies
-export GIT_PS1_SHOWDIRTYSTATE=true;
-export GIT_PS1_SHOWUNTRACKEDFILES=true;
-export GIT_PS1_SHOWSTASHSTATE=true;
 
 # Add tab completion for many Bash commands
 if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
