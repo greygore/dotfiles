@@ -26,40 +26,48 @@ if [ $? -eq 2 ]; then
 		fi
 	done
 	sleep 15
-	success 'Command line tools installed'
+	success 'Command line tools installed.'
 fi
 
 # Clean up git repo
 if [ -e .git ]; then
 	if [ -n "$(git status --porcelain)" ]; then
-		user 'You have uncommited changes. Are you sure you want to continue?'
-		read -n 1 confirm
-		echo ''
-		if [[ $confirm =~ ^[^Yy]?$ ]]; then
-			exit
+		if [[ ! confirm 'You have uncommited changes. Are you sure you want to continue?' ]]; then
+			exit 1
 		fi
 	elif [ -n "$(git log origin/master..HEAD)" ]; then
-		user 'You have local unpushed commits. Are you sure you want to continue?'
-		read -n 1 confirm
-		echo ''
-		if [[ $confirm =~ ^[^Yy]?$ ]]; then
-			exitx
+		if confirm 'You have local unpushed commits. Do you want to push them to master?'; then
+			git push master origin
+			success "Local changes pushed to remote."
 		fi
 	fi
+# If there is no repo, create one and sync it from origin
+else
+	info 'Creating new git repository and syncing with remote...'
+	if [ -z "$DOTFILES_USER" ]; then
+		DOTFILES_GIT_REMOTE="git@github.com:$DOTFILES_USER/dotfiles.git"
+	else
+		question 'What is the github user for this dotfiles repository?'
+		DOTFILES_GIT_REMOTE="git@github.com:$answer/dotfiles.git"
+	fi
+	git init
+	git remote add origin ${DOTFILES_GIT_REMOTE}
+	git fetch origin master
+	git reset --hard FETCH_HEAD
+	git clean -fd
+	success 'Git repository created and synced with remote.'
 fi
 
 # Set up git config
-user 'Would you like to configure git?'
-read -n 1 confirm
-echo ''
-if [[ $confirm =~ ^[Yy]?$ ]]; then
-	user ' - (Git) What is your full name?'
-	read -e git_authorname
-	user ' - (Git) What is your email?'
-	read -e git_authoremail
-	git_credential='cache'
+if confim 'Would you like to configure git?'; then
+	question ' (Git) What is your full name?'
+	git_authorname=$answer
+	question ' (Git) What is your email?'
+	git_authoremail=$answer
 	if [ "$(uname -s)" == "Darwin" ]; then
 		git_credential='osxkeychain'
+	else
+		git_credential='cache'
 	fi
 	cp -f "$DOTFILES_ROOT/config/.gitconfig_master" "$HOME/.gitconfig"
 	git config --global user.name "$git_authorname"
@@ -70,10 +78,10 @@ if [[ $confirm =~ ^[Yy]?$ ]]; then
 fi
 
 # Link up dotfiles
-user 'Would you like to symlink your dotfiles?'
-read -n 1 confirm
-if [[ $confirm =~ ^[^Yy]?$ ]]; then
-	overwriteAll=false backupAll=false skipAll=false
+if confirm 'Would you like to symlink your dotfiles?'; then
+	overwriteAll=false
+	backupAll=false
+	skipAll=false
 	for src in $(find config -maxdepth 1 -not -type d | grep -v _master$)
 	do
 		dst="$HOME/$(basename "${src}")"
