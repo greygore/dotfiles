@@ -7,7 +7,7 @@ while [ -h "$SOURCE" ]; do
   # If $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
 done
-DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )"../.. && pwd )"
 
 # Install the Solarized Dark theme for iTerm
 open "$DOTFILES_ROOT/init/Solarized Dark.itermcolors"

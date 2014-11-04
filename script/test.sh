@@ -1,5 +1,5 @@
 #/usr/bin/env bash
-source ~/dotfiles/script/lib.sh
+source ./lib.sh
 
 question 'What is your name?'
 pause

@@ -7,7 +7,7 @@ while [ -h "$SOURCE" ]; do
   # If $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
 done
-DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )"../.. && pwd )"
 
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
