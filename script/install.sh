@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "$0")/.."
-DOTFILES_ROOT=$(pwd)
+SOURCE="${BASH_SOURCE[0]}"
+# Resolve $SOURCE until the file is no longer a symlink
+while [ -h "$SOURCE" ]; do 
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  # If $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 source "$DOTFILES_ROOT/script/lib.sh"
 

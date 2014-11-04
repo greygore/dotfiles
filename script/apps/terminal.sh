@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
-
-###############################################################################
-# Terminal                                                                    #
-###############################################################################
+SOURCE="${BASH_SOURCE[0]}"
+# Resolve $SOURCE until the file is no longer a symlink
+while [ -h "$SOURCE" ]; do 
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  # If $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
@@ -11,7 +16,7 @@ defaults write com.apple.terminal StringEncodings -array 4
 TERM_PROFILE='Solarized Dark xterm-256color';
 CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
 if [ "$CURRENT_PROFILE" != "$TERM_PROFILE" ]; then
-	open "$HOME/init/$TERM_PROFILE.terminal";
+	open "$DOTFILES_ROOT/init/$TERM_PROFILE.terminal";
 	sleep 1; # Wait a bit to make sure the theme is loaded
 	defaults write com.apple.terminal 'Default Window Settings' -string "$TERM_PROFILE";
 	defaults write com.apple.terminal 'Startup Window Settings' -string "$TERM_PROFILE";
