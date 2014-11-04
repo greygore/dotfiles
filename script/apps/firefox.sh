@@ -11,6 +11,10 @@ DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 source "$DOTFILES_ROOT/script/lib.sh"
 
+# Set default browser
+open -a Firefox --args -setDefaultBrowser
+
+# Install addons
 wget https://lastpass.com/download/cdn/lp_mac.xpi # Last Pass
 wget https://update.adblockplus.org/latest/adblockplusfirefox.xpi # AdBlock Plug
 wget http://download.xmarks.com/download/binary/firefox # XMarks
