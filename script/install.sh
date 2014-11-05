@@ -30,6 +30,27 @@ if [ $? -eq 2 ]; then
 	success 'Command line tools installed.'
 fi
 
+# Set up git config
+if confirm 'Would you like to configure git?'; then
+	cp -f "$DOTFILES_ROOT/config/.gitconfig_master" "$HOME/.gitconfig" \
+	|| fail "Unable to copy master .gitconfig file to home directory"
+
+	question ' (Git) What is your full name?'
+	git_authorname=$answer
+	question ' (Git) What is your email?'
+	git_authoremail=$answer
+	if [ "$(uname -s)" == "Darwin" ]; then
+		git_credential='osxkeychain'
+	else
+		git_credential='cache'
+	fi
+	git config --global user.name "$git_authorname"
+	git config --global user.email "$git_authoremail"
+	git config --global credential.helper $git_credential
+	git config --global core.excludesfile ~/.gitignore_global
+	success 'Created .gitconfig.'
+fi
+
 # Clean up git repo
 if [ -e .git ]; then
 	if [ -n "$(git status --porcelain)" ]; then
@@ -53,34 +74,13 @@ else
 		question 'What is the github user for this dotfiles repository?'
 		DOTFILES_GIT_REMOTE="git@github.com:$answer/dotfiles.git"
 	fi
-	git init \
+	git init > /dev/null \
 	&& git remote add origin ${DOTFILES_GIT_REMOTE} \
 	&& git fetch origin master \
-	&&  reset --hard FETCH_HEAD \
+	&& git reset --hard FETCH_HEAD \
 	&& git clean -fd \
 	&& success 'Git repository created and synced with remote.' \
 	|| fail 'ERROR: Unable to create new git repository and sync with remote'
-fi
-
-# Set up git config
-if confim 'Would you like to configure git?'; then
-	cp -f "$DOTFILES_ROOT/config/.gitconfig_master" "$HOME/.gitconfig" \
-	|| fail "Unable to copy master .gitconfig file to home directory"
-	
-	question ' (Git) What is your full name?'
-	git_authorname=$answer
-	question ' (Git) What is your email?'
-	git_authoremail=$answer
-	if [ "$(uname -s)" == "Darwin" ]; then
-		git_credential='osxkeychain'
-	else
-		git_credential='cache'
-	fi
-	git config --global user.name "$git_authorname"
-	git config --global user.email "$git_authoremail"
-	git config --global credential.helper $git_credential
-	git config --global core.excludesfile ~/.gitignore_global
-	success 'created .gitconfig'
 fi
 
 # Link up dotfiles
