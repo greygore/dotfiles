@@ -6,6 +6,8 @@ Originally this was forked from [Mathias Bynens' dotfiles](https://github.com/ma
 
 ## Installation
 
+:exclamation: If you have customized your current environment, you should consider backing up your existing dotfiles.
+
 ### Requirements
 
  * [curl](http://curl.haxx.se/)
@@ -32,6 +34,43 @@ DOTFILES_USER="greygore" DOTFILES_DIRECTORY="$HOME/dotfiles" bash -c "$(curl -fs
 Although you should consider forking this repository and customizing it to your own needs, the installation script will attempt to prompt you for user specific information, rather than using hard-coded values.
 
 Currently, the exception to this is the OS X locale information. *Don't worry:* if you are not in the US (and the Eastern timezone), you'll be able to opt out of this. In the future I'll consider adding additional locale and timezone choices; if you want this, please [file an issue](https://github.com/greygore/dotfiles/issues).
+
+## Reset to defaults
+
+### Dotfiles
+
+Removing the symbolic links from your home directory will remove any dotfile customizations. Restore any backups that you surely made before running the install script to return to your original settings.
+
+### OS X
+
+The OS X default settings are heavily commented, with some available options commented out entirely. Additional options for each setting are documented where available, as is the default value if available. For settings using `defaults`, change `write` to `delete` to reset to the default system value. For example:
+
+```bash
+# Set scroll direction
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
+
+# Default scroll direction
+defaults delete NSGlobalDomain com.apple.swipescrolldirection
+```
+
+### Permanent changes
+
+#### OS X
+
+The command line tools are not easily removed, nor should it be necessary to remove them. Seriously, don't worry about it.
+
+Some OS X customizations not using `defaults` require additional commands to undo. Eventually there will be a `osx_reset.sh` script to undo all these settings, but until then you'll have to [Google](http://google.com/) the command to look for solutions.
+ 
+#### Homebrew & Cask installs
+
+If you chose to install packages, you'll have to remove them individually using the correct commands:
+
+```bash
+brew uninstall formula_name
+brew cask uninstall cask_name
+```
+
+Although you should be able to remove Homebrew and all installed packages by deleting the directory it was installed to (`/usr/local` by default), the Homebrew project recommends [this simple script](https://gist.github.com/mxcl/1173223) to remove everything.
 
 ## Features
 
@@ -100,6 +139,8 @@ Further details are in the `.bash_prompt` file.
  * Remove hard-coded locale and/or allow selection of alternatives.
  * Make non-interactive version.
  * Add [zsh](http://www.zsh.org/) shell with [oh-my-zsh](http://ohmyz.sh/)
+ * Backup dotfiles before creating symbolic links
+ * Create restore script to restore dotfile backups and revert OS X customizations
 
 ## Feedback
 
