@@ -29,9 +29,12 @@ brew upgrade >> "$DOTFILES_ROOT/brew.log" 2>&1
 brew install wget --with-iri
 
 binaries=(
-	bash
+	# Updated versions of old OS X versions
+	bash # Bash 4
 	coreutils
-	findutils
+	findutils #find, locate, updatedb, xargs
+	git
+
 	go
 	cheat
 	trash
