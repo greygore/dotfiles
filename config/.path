@@ -1,0 +1,11 @@
+# Move /usr/local/bin to front of path
+export PATH="/usr/local/bin:$PATH";
+
+# Add GNU coreutils to path
+if [ -e "/usr/local/opt/coreutils/libexec/gnubin" ]; then
+	export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH";
+	export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH";
+fi
+
+# Ensure ~/bin is at the front of the path
+export path="$HOME/bin:$PATH"

@@ -90,6 +90,7 @@ All config files are symlinked into the home directory:
     * `.bashrc` - Loads main config
     * `.exports` - Environmental variables
     * `.functions` - Bash functions
+    * `.path` - Additions to `$PATH`
  - Git configuration
     * `.gitattributes` - Path specific options
     * `.gitignore_global` - Git ignore file for all repos
