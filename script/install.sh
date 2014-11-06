@@ -30,6 +30,28 @@ if [ $? -eq 2 ]; then
 	success 'Command line tools installed.'
 fi
 
+# Set up public key
+if [ ! -f ~/.ssh/id_rsa.pub ]; then
+	info 'Generating new ssh key...'
+	question ' (SSH) What is your email?'
+	ssh_email=$answer
+	question ' (SSH) Enter a passphrase:' 'password'
+	ssh_passphrase=$answer
+	ssh-keygen -q -t rsa -C "$ssh_email" -f ~/.ssh/id_rsa -N "$ssh_passphrase" > /dev/null \
+	|| fail 'Unable to generate a new key'
+	eval "$(ssh-agent -s)" > /dev/null || fail 'Unable to start ssh agent'
+	ssh-add -A ~/.ssh/id_rsa > /dev/null 2>&1 || fail 'Unable to add new key to ssh'
+	ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts 2> /dev/null
+	if [ "$(uname -s)" == "Darwin" ]; then
+		pbcopy < ~/.ssh/id_rsa.pub
+		info 'Your public key has been copied to your clipboard.'
+	else
+		info "Your public key is: $(cat ~/.ssh/id_rsa.pub)"
+	fi
+	open https://www.github.com/settings/ssh
+	pause 'Enter your public key to your Github account, then press any key to continue.'
+fi
+
 # Set up git config
 if confirm 'Would you like to configure git?'; then
 	cp -f "$DOTFILES_ROOT/config/.gitconfig_master" "$HOME/.gitconfig" \
