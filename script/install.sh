@@ -97,10 +97,10 @@ else
 		DOTFILES_GIT_REMOTE="git@github.com:$DOTFILES_USER/dotfiles.git"
 	fi
 	git init > /dev/null \
-	&& git remote add origin ${DOTFILES_GIT_REMOTE} \
-	&& git fetch origin master \
-	&& git reset --hard FETCH_HEAD \
-	&& git clean -fd \
+	&& git remote add origin ${DOTFILES_GIT_REMOTE} > /dev/null 2>&1 \
+	&& git fetch origin master > /dev/null 2>&1 \
+	&& git reset --hard FETCH_HEAD > /dev/null \
+	&& git clean -fd > /dev/null \
 	&& success 'Git repository created and synced with remote.' \
 	|| fail 'ERROR: Unable to create new git repository and sync with remote'
 fi
