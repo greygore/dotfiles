@@ -74,7 +74,7 @@ if confirm 'Would you like to configure git?'; then
 fi
 
 # Clean up git repo
-if [ -e .git ]; then
+if [ -e "$DOTFILES_ROOT/.git" ]; then
 	if [ -n "$(git status --porcelain)" ]; then
 		if confirm 'You have uncommited changes. Are you sure you want to continue?'; then
 			info 'Remember to commit your changes later then.'
@@ -88,7 +88,7 @@ if [ -e .git ]; then
 		fi
 	fi
 # If there is no repo, create one and sync it from origin
-else
+elif confirm 'Would you like to create a git repository and sync it with the remote?'; then
 	info 'Creating new git repository and syncing with remote...'
 	if [ -z "$DOTFILES_USER" ]; then
 		question 'What is the github user for this dotfiles repository?'
