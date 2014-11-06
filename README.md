@@ -93,7 +93,7 @@ Further details are in the `.bash_prompt` file.
 
 #### Screenshot
 
-![](http://i.imgur.com/CiXGoha)
+![](http://i.imgur.com/CiXGoha.png)
 
 ## To Do
 
