@@ -26,9 +26,9 @@ confirm () {
 
 pause () {
 	if [[ "$@" == "" ]]; then
-		printf "$(tput setaf 8) [   ] Press any key to continue $(tput sgr0)" "$@"
+		printf "$(tput setaf 8) [ ◼ ] Press any key to continue $(tput sgr0)" "$@"
 	else
-		printf "$(tput setaf 8) [   ] %s $(tput sgr0)" "$@"
+		printf "$(tput setaf 8) [ ◼ ] %s $(tput sgr0)" "$@"
 	fi
 	read -n 1 -s -r anykey
 	echo
