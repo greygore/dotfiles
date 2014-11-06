@@ -15,14 +15,16 @@ A base installation of OS X Yosemite will include `curl`, while `git` will be in
 
 ### One Line Install
 
-```DOTFILES_USER="greygore" bash -c "$(curl -fsSL raw.github.com/$DOTFILES_USER/dotfiles/master/bootstrap.sh)"
+```bash
+DOTFILES_USER="greygore" bash -c "$(curl -fsSL raw.github.com/$DOTFILES_USER/dotfiles/master/bootstrap.sh)"
 ```
 
 :warning: If you fork, you must change `DOTFILES_USER` to your Github username.
 
 By default the script will install in the `~/.dotfiles` directory. An alternate location can be provided with the `DOTFILES_DIRECTORY` variable. For example:
 
-```DOTFILES_USER="greygore" DOTFILES_DIRECTORY="$HOME/dotfiles" bash -c "$(curl -fsSL raw.github.com/$GITHUB_USER/dotfiles/master/bootstrap.sh)"
+```bash
+DOTFILES_USER="greygore" DOTFILES_DIRECTORY="$HOME/dotfiles" bash -c "$(curl -fsSL raw.github.com/$GITHUB_USER/dotfiles/master/bootstrap.sh)"
 ```
 
 ## Customization
@@ -59,6 +61,7 @@ All config files are symlinked into the home directory:
     * `.wgetrc`
  - Miscellaneous
     * `.editorconfig` - Portable text editor config
+    * `.grc/` - Colorization options
     * `.hushlogin` - Stub file to skip copyright notice
     * `.inputrc` - Keybindings and readline behavior
 
@@ -73,31 +76,24 @@ All config files are symlinked into the home directory:
 
 The custom bash prompt is based on the [Solarized color palette](http://ethanschoonover.com/solarized). For best results be sure to use the included Terminal or [iTerm2](http://iterm2.com/) theme.
 
+#### Git branch/status
 When your current working directory is a Git repository, the prompt will
 display the checked-out branch's name (and failing that, the commit SHA that
 HEAD is pointing to). The state of the working tree is reflected in the
 following way:
 
-<table>
-    <tr>
-        <td><code>+</code></td>
-        <td>Uncommitted changes in the index</td>
-    </tr>
-    <tr>
-        <td><code>!</code></td>
-        <td>Unstaged changes</td>
-    </tr>
-    <tr>
-        <td><code>?</code></td>
-        <td>Untracked files</td>
-    </tr>
-    <tr>
-        <td><code>$</code></td>
-        <td>Stashed files</td>
-    </tr>
-</table>
+| Symbol | Meaning                          |
+| :----: | :------------------------------- |
+| `+`    | Uncommitted changes              |
+| `!`    | Unstaged changes                 |
+| `?`    | Untracked files                  |
+| `$`    | Stashed files                    |
 
 Further details are in the `.bash_prompt` file.
+
+#### Screenshot
+
+![](http://i.imgur.com/CiXGoha)
 
 ## To Do
 
@@ -115,4 +111,4 @@ Suggestions/improvements
  * [Roderik van der Veer](http://vanderveer.be/) for his [Mountain Lion setup post](http://vanderveer.be/setting-up-my-perfect-developer-environment-on-osx-10-8-mountain-lion-dp3-edition/) which pointed me to...
  * [Mathias Bynens](http://mathiasbynens.be/) for [his widely forked dotfiles](https://github.com/mathiasbynens/dotfiles)
  * [Nicolas Gallagher](http://nicolasgallagher.com/) whose [dotfiles I shamelessly stole from](https://github.com/necolas/dotfiles)
- * 
+
