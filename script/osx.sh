@@ -32,17 +32,19 @@ if [[ $computer_name -ne '' ]]; then
 	sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $computer_name
 fi
 
-info 'Setting locale/timezone to eastern US...'
-
 # Locale settings
-defaults write NSGlobalDomain AppleLanguages -array "en"
-defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
-defaults write NSGlobalDomain AppleMeasurementUnits -string "Inches"
-defaults write NSGlobalDomain AppleMetricUnits -bool false
-defaults write -g AppleTextBreakLocale en_US_POSIX
+if confirm 'Use US locale information?'; then
+	defaults write NSGlobalDomain AppleLanguages -array "en"
+	defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
+	defaults write NSGlobalDomain AppleMeasurementUnits -string "Inches"
+	defaults write NSGlobalDomain AppleMetricUnits -bool false
+	defaults write -g AppleTextBreakLocale en_US_POSIX
+fi
 
 # Set the timezone; see `systemsetup -listtimezones` for other values
-sudo systemsetup -settimezone "America/New_York" > /dev/null
+if confirm 'Use Eastern US timezone?'; then
+	sudo systemsetup -settimezone "America/New_York" > /dev/null
+fi
 
 # 12/24-Hour Time (true)
 defaults write NSGlobalDomain AppleICUForce12HourTime -bool true
