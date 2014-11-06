@@ -1,104 +1,118 @@
-# Greygore’s dotfiles
+# GreyGore’s dotfiles
 
-This is my personal fork of [Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles), which I discovered via [Roderick van der Veer's excellent Mountain Lion setup](http://vanderveer.be/blog/2012/04/21/setting-up-my-perfect-developer-environment-on-osx-10-dot-8-mountain-lion-dp3-edition/).
+This is my personal setup of a clean OS X Yosemite Mac. Eventually I'd like to use this to personalize my Linux shell(s) as well.
+
+Originally this was forked from [Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles), but it's since been added to and rewritten extensively.
 
 ## Installation
 
-### Using Git and the bootstrap script
+### Requirements
 
-You can clone the repository wherever you want. (I like to keep it in `~/Projects/dotfiles`, with `~/dotfiles` as a symlink.) The bootstrapper script will pull in the latest version and copy the files to your home folder.
+ * [curl](http://curl.haxx.se/)
+ * [git](http://git-scm.com/)
 
-```bash
-git clone https://github.com/greygore/dotfiles.git && cd dotfiles && ./bootstrap.sh
+A base installation of OS X Yosemite will include `curl`, while `git` will be installed automatically as part of the command line tools.
+
+### One Line Install
+
+```DOTFILES_USER="greygore" bash -c "$(curl -fsSL raw.github.com/$DOTFILES_USER/dotfiles/master/bootstrap.sh)"
 ```
 
-To update, `cd` into your local `dotfiles` repository and then:
+:warning: If you fork, you must change `DOTFILES_USER` to your Github username.
 
-```bash
-./bootstrap.sh
+By default the script will install in the `~/.dotfiles` directory. An alternate location can be provided with the `DOTFILES_DIRECTORY` variable. For example:
+
+```DOTFILES_USER="greygore" DOTFILES_DIRECTORY="$HOME/dotfiles" bash -c "$(curl -fsSL raw.github.com/$GITHUB_USER/dotfiles/master/bootstrap.sh)"
 ```
 
-Alternatively, to update while avoiding the confirmation prompt:
+## Customization
 
-```bash
-./bootstrap.sh -f
-```
+Although you should consider forking this repository and customizing it to your own needs, the installation script will attempt to prompt you for user specific information, rather than using hard-coded values.
 
-### Git-free install
+Currently, the exception to this is the OS X locale information. *Don't worry:* if you are not in the US (and the Eastern timezone), you'll be able to opt out of this. In the future I'll consider adding additional locale and timezone choices; if you want this, please [file an issue](https://github.com/greygore/dotfiles/issues).
 
-To install these dotfiles without Git:
+## Features
 
-```bash
-cd; curl -#L https://github.com/greygore/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,bootstrap.sh}
-```
+### General
 
-To update later on, just run that command again.
+ * Creates a public/private SSH key
+ * Configures Git (`.gitconfig`)
 
-### Specify the `$PATH`
+### Dotfiles
 
-If `~/.path` exists, it will be sourced along with the other files, before any feature testing (such as [detecting which version of `ls` is being used](https://github.com/greygore/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-26)) takes place.
+All config files are symlinked into the home directory:
 
-Here’s an example `~/.path` file that adds `~/utils` to the `$PATH`:
+ - Bash configuration
+    * `.aliases` - Aliases
+    * `.bash_profile` - Main config, includes completions
+    * `.bash_prompt` - Customized prompt
+    * `.bashrc` - Loads main config
+    * `.exports` - Environmental variables
+    * `.functions` - Bash functions
+ - Git configuration
+    * `.gitattributes` - Path specific options
+    * `.gitignore_global` - Git ignore file for all repos
+ - Program configuration
+    * `.curlrc`
+    * `.jshintrc`
+    * `.screenrc`
+    * `.wgetrc`
+ - Miscellaneous
+    * `.editorconfig` - Portable text editor config
+    * `.hushlogin` - Stub file to skip copyright notice
+    * `.inputrc` - Keybindings and readline behavior
 
-```bash
-export PATH="$HOME/utils:$PATH"
-```
+### OSX
 
-### Add custom commands without creating a new fork
+ * Installs command line tools
+ * Configures default OS settings
+ * Install programs via [Homebrew](http://brew.sh/)
+ * Install applications via [Cask](http://caskroom.io/)
 
-If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
+### Custom bash prompt
 
-My `~/.extra` looks something like this:
+The custom bash prompt is based on the [Solarized color palette](http://ethanschoonover.com/solarized). For best results be sure to use the included Terminal or [iTerm2](http://iterm2.com/) theme.
 
-```bash
-# PATH additions
-export PATH="~/bin:$PATH"
+When your current working directory is a Git repository, the prompt will
+display the checked-out branch's name (and failing that, the commit SHA that
+HEAD is pointing to). The state of the working tree is reflected in the
+following way:
 
-# Git credentials
-# Not in the repository, to prevent people from accidentally committing under my name
-GIT_AUTHOR_NAME="Gregory Wood"
-GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-git config --global user.name "$GIT_AUTHOR_NAME"
-GIT_AUTHOR_EMAIL="greg@wood.name"
-GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-git config --global user.email "$GIT_AUTHOR_EMAIL"
-```
+<table>
+    <tr>
+        <td><code>+</code></td>
+        <td>Uncommitted changes in the index</td>
+    </tr>
+    <tr>
+        <td><code>!</code></td>
+        <td>Unstaged changes</td>
+    </tr>
+    <tr>
+        <td><code>?</code></td>
+        <td>Untracked files</td>
+    </tr>
+    <tr>
+        <td><code>$</code></td>
+        <td>Stashed files</td>
+    </tr>
+</table>
 
-You could also use `~/.extra` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/greygore/dotfiles/fork_select) instead, though.
+Further details are in the `.bash_prompt` file.
 
-### Sensible OS X defaults
+## To Do
 
-When setting up a new Mac, you may want to set some sensible OS X defaults:
-
-```bash
-./.osx
-```
-
-### Install Homebrew formulae
-
-When setting up a new Mac, you may want to install some common Homebrew formulae (after installing Homebrew, of course):
-
-```bash
-./.brew
-```
+ * Remove hard-coded locale and/or allow selection of alternatives.
+ * Make non-interactive version.
+ * Add [zsh](http://www.zsh.org/) shell with [oh-my-zsh](http://ohmyz.sh/)
 
 ## Feedback
 
 Suggestions/improvements
-[welcome](https://github.com/mathiasbynens/dotfiles/issues)!
+[welcome](https://github.com/greygore/dotfiles/issues)!
 
 ## Thanks to…
 
-* [Mathias Bynens](http://mathiasbynens.be/) for [this gift of OSX configuration]([Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles)
-* [Roderick van der Veer](http://vanderveer.be/) for pointing me to this script from his [informative blog post](http://vanderveer.be/blog/2012/04/21/setting-up-my-perfect-developer-environment-on-osx-10-dot-8-mountain-lion-dp3-edition/)
-* [Gianni Chiappetta](http://gf3.ca/) for sharing his [amazing collection of dotfiles](https://github.com/gf3/dotfiles)
-* [Matijs Brinkhuis](http://hotfusion.nl/) and his [dotfiles repository](https://github.com/matijs/dotfiles)
-* [Jan Moesen](http://jan.moesen.nu/) and his [ancient `.bash_profile`](https://gist.github.com/1156154) + [shiny _tilde_ repository](https://github.com/janmoesen/tilde)
-* [Ben Alman](http://benalman.com/) and his [dotfiles repository](https://github.com/cowboy/dotfiles)
-* [Nicolas Gallagher](http://nicolasgallagher.com/) and his [dotfiles repository](https://github.com/necolas/dotfiles)
-* [Tom Ryder](http://blog.sanctum.geek.nz/) and his [dotfiles repository](https://github.com/tejr/dotfiles)
-* [Chris Gerke](http://www.randomsquared.com/) and his [tutorial on creating an OS X SOE master image](http://chris-gerke.blogspot.com/2012/04/mac-osx-soe-master-image-day-7.html) + [_Insta_ repository](https://github.com/cgerke/Insta)
-* @ptb and [his _OS X Lion Setup_ repository](https://github.com/ptb/Mac-OS-X-Lion-Setup)
-* [Lauri ‘Lri’ Ranta](http://lri.me/) for sharing [loads of hidden preferences](http://lri.me/hiddenpreferences.txt)
-* [Tim Esselens](http://devel.datif.be/)
-* anyone who [contributed a patch](https://github.com/mathiasbynens/dotfiles/contributors) or [made a helpful suggestion](https://github.com/mathiasbynens/dotfiles/issues)
+ * [Roderik van der Veer](http://vanderveer.be/) for his [Mountain Lion setup post](http://vanderveer.be/setting-up-my-perfect-developer-environment-on-osx-10-8-mountain-lion-dp3-edition/) which pointed me to...
+ * [Mathias Bynens](http://mathiasbynens.be/) for [his widely forked dotfiles](https://github.com/mathiasbynens/dotfiles)
+ * [Nicolas Gallagher](http://nicolasgallagher.com/) whose [dotfiles I shamelessly stole from](https://github.com/necolas/dotfiles)
+ * 
