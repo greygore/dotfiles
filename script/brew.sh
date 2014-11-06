@@ -24,6 +24,8 @@ read EMAIL ADDRESS
 git config --global user.name "${FULL_NAME}"
 git config --global user.email "${EMAIL_ADDRESS}"
 
+brew install wget --with-iri
+
 binaries=(
 	bash
 	coreutils
@@ -34,7 +36,6 @@ binaries=(
 	rename
 	tree
 	node
-	wget
 	tag
 	terminal-notifier
 	spark
