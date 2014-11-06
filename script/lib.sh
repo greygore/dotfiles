@@ -7,8 +7,13 @@ info () {
 }
 
 question () {
-	printf "$(tput bold; tput setaf 7) [ ? ] %s$(tput sgr0) " "$@"
-	read answer
+	printf "$(tput bold; tput setaf 7) [ ? ] %s$(tput sgr0) " "$1"
+	if [ $# -lt 2 ]; then
+		read answer
+	else
+		read -s answer
+		echo
+	fi
 }
 
 confirm () {
