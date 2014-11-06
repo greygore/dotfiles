@@ -91,10 +91,10 @@ if [ -e .git ]; then
 else
 	info 'Creating new git repository and syncing with remote...'
 	if [ -z "$DOTFILES_USER" ]; then
-		DOTFILES_GIT_REMOTE="git@github.com:$DOTFILES_USER/dotfiles.git"
-	else
 		question 'What is the github user for this dotfiles repository?'
 		DOTFILES_GIT_REMOTE="git@github.com:$answer/dotfiles.git"
+	else
+		DOTFILES_GIT_REMOTE="git@github.com:$DOTFILES_USER/dotfiles.git"
 	fi
 	git init > /dev/null \
 	&& git remote add origin ${DOTFILES_GIT_REMOTE} \
