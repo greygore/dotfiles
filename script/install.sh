@@ -14,20 +14,22 @@ cd $DOTFILES_ROOT
 source "$DOTFILES_ROOT/script/lib.sh"
 
 # Install command line tools
-xcode-select -p > /dev/null 2>&1
-if [ $? -eq 2 ]; then
-	info 'Installing command line tools...'
-	xcode-select --install  > /dev/null 2>&1
-	while true
-	do
-		sleep 1
-		xcode-select -p > /dev/null 2>&1
-		if [ $? -ne 2 ]; then
-			break
-		fi
-	done
-	sleep 15
-	success 'Command line tools installed.'
+if [ "$(uname -s)" == "Darwin" ]; then
+	xcode-select -p > /dev/null 2>&1
+	if [ $? -eq 2 ]; then
+		info 'Installing command line tools...'
+		xcode-select --install  > /dev/null 2>&1
+		while true
+		do
+			sleep 1
+			xcode-select -p > /dev/null 2>&1
+			if [ $? -ne 2 ]; then
+				break
+			fi
+		done
+		sleep 15
+		success 'Command line tools installed.'
+	fi
 fi
 
 # Set up public key
