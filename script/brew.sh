@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-# Install command line tools
-if test ! $(which gcc); then
-	echo "Installing command line tools..."
-	xcode-select --install
-fi
-
 # Install Homebrew
 if test ! $(which brew); then
 	echo "Installing homebrew..."
