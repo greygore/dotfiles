@@ -23,15 +23,6 @@ fi
 # Upgrade recipes
 brew update
 
-# Install git
-brew install git
-echo "What is your full name?"
-read FULL_NAME
-echo "What is your email address?"
-read EMAIL ADDRESS
-git config --global user.name "${FULL_NAME}"
-git config --global user.email "${EMAIL_ADDRESS}"
-
 brew install wget --with-iri
 
 binaries=(
