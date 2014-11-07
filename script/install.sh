@@ -120,6 +120,11 @@ if confirm 'Would you like to symlink your dotfiles?'; then
 
 	# Start new bash environment
 	source ~/.bash_profile
+
+	# Configure Terminal
+	if [ -e "/Applications/Utilities/Terminal.app" ] && confirm 'Would you like to configure Terminal settings and set the theme?'; then
+		source "$DOTFILES_ROOT/script/apps/terminal.sh"
+	fi
 fi
 
 success 'Done!'
