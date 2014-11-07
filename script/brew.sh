@@ -130,7 +130,7 @@ apps=(
 	steam
 	supersync
 )
-brew cask install --appdir="/Applications" ${apps[@]} 2> /dev/null
+brew cask install --appdir="/Applications" ${apps[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1
 
 quicklooks=(
 	qlcolorcode
@@ -143,7 +143,7 @@ quicklooks=(
 	webp-quicklook
 	suspicious-package
 )
-sudo brew cask install --qlplugindir="/Library/QuickLook" ${quicklooks[0]} 2> /dev/null
+sudo brew cask install --qlplugindir="/Library/QuickLook" ${quicklooks[0]}  >> "$DOTFILES_ROOT/brew.log" 2>&1
 
 brew cask alfred
 brew cleanup --force
