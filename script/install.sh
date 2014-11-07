@@ -112,10 +112,23 @@ if confirm 'Would you like to symlink your dotfiles?'; then
 	overwriteAll=false
 	backupAll=false
 	skipAll=false
+
+	# Link main files
 	for src in $(find config -maxdepth 1 -not -type d | grep -v _master$)
 	do
 		dst="$HOME/$(basename "${src}")"
 		link_file "$DOTFILES_ROOT/$src" "$dst"
+	done
+
+	# Link files in directories (only 1 deep)
+	for dir in $(find config -maxdepth 1 -type d | grep config/.)
+	do
+		mkdir "$HOME/$(basename "$dir")"
+		for src in $(find $dir -maxdepth 1 -not -type d | grep -v _master$)
+		do
+			dst="$HOME/$dir/$(basename "${src}")"
+			link_file "$DOTFILES_ROOT/$src" "$dst"
+		done
 	done
 
 	# Start new bash environment
