@@ -133,15 +133,15 @@ apps=(
 brew cask install --appdir="/Applications" ${apps[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1
 
 quicklooks=(
-	qlcolorcode
-	qlstephen
+	qlcolorcode # Code syntax
+	qlstephen # Extensionless text files
 	qlmarkdown
 	quicklook-json
-	qlprettypatch
+	qlprettypatch # Diff
 	quicklook-csv
-	betterzipql
+	betterzipql # Archives
 	webp-quicklook
-	suspicious-package
+	suspicious-package # OSX Installer Packages
 )
 sudo brew cask install --qlplugindir="/Library/QuickLook" ${quicklooks[0]}  >> "$DOTFILES_ROOT/brew.log" 2>&1
 
