@@ -95,6 +95,7 @@ All config files are symlinked into the home directory:
     * `.gitattributes` - Path specific options
     * `.gitignore_global` - Git ignore file for all repos
  - Program configuration
+    * `.ackrc`
     * `.curlrc`
     * `.jshintrc`
     * `.screenrc`
