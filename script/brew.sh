@@ -80,37 +80,54 @@ sudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1
 brew install caskroom/cask/brew-cask
 
 apps=(
+	# Basic tools
 	alfred
-	dropbox
 	iterm2
-	evernote
-	github
 	caskroom/homebrew-versions/sublime-text3
-	virtualbox
-	sourcetree
+
+	# Utilities
+	caffeine
+	the-unarchiver
+	flux
+	key-codes
+	daisydisk
+
+	# Menu
+	battery-time-remaining
+	istat-menus
+
+	# Browsers
 	firefox
 	google-chrome
-	skype
-	key-codes
-	libreoffice
-	spotify
-	the-unarchiver
-	cyberduck
-	istat-menus
-	komanda
-	daisydisk
-	caffeine
+
+	# Services
 	crashplan
-	flux
-	supersync
+	dropbox
+	evernote
+	github
+
+	# Dev tools
+	virtualbox
+	vagrant
+	sourcetree
+	pgadmin3
+	dash # API Docs
+	imageoptim
+	cyberduck # Remote files
+
+	# Communication
+	skype
+	komanda # IRC
+
+	# Apps	
+	libreoffice
 	ynab
 	gimp
-	pgadmin3
-	imageoptim
+
+	# Entertainment
+	spotify
 	steam
-	vagrant
-	battery-time-remaining
-	dash # API Docs
+	supersync
 )
 brew cask install --appdir="/Applications" ${apps[@]} 2> /dev/null
 
