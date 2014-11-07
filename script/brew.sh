@@ -84,9 +84,8 @@ apps=(
 	dropbox
 	iterm2
 	evernote
-	wunderlist
 	github
-	sublime-text
+	caskroom/homebrew-versions/sublime-text3
 	virtualbox
 	sourcetree
 	firefox
@@ -101,12 +100,10 @@ apps=(
 	komanda
 	daisydisk
 	caffeine
-	kindle
 	crashplan
 	flux
 	supersync
 	ynab
-	istat-menus
 	gimp
 	pgadmin3
 	imageoptim
@@ -139,6 +136,7 @@ unavailable=(
 	characters
 	pocket
 	trillian
+	wunderlist
 )
 echo "The following apps were not available in brew or cask form and need to be downloaded via the Mac App Store:"
 echo "${unavailable[@]}"
