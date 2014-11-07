@@ -140,4 +140,12 @@ if confirm 'Would you like to symlink your dotfiles?'; then
 	fi
 fi
 
+info 'Installing user binaries and scripts...'
+mkdir ~/bin
+for src in $(find bin -maxdepth 1 -not -type d)
+do
+	dst="$HOME/bin/$(basename "${src}")"
+	link_file "$DOTFILES_ROOT/$src" "$dst"
+done
+
 success 'Done! Some changes may require restarting your computer to take effect.'
