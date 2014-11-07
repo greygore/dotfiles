@@ -148,4 +148,11 @@ do
 	link_file "$DOTFILES_ROOT/$src" "$dst"
 done
 
+# OSX Settings
+if [ "$(uname -s)" == "Darwin" ] && confirm 'Would you like to customize your OS X environment?'; then
+	source "$DOTFILES_ROOT/script/osx.sh" && success 'OS X environment customized.'
+	source "$DOTFILES_ROOT/script/mail.sh" && success 'Mail.app configured.'
+	source "$DOTFILES_ROOT/script/safari.sh" && success 'Safari configured.'
+fi
+
 success 'Done! Some changes may require restarting your computer to take effect.'
