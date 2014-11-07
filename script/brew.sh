@@ -26,8 +26,6 @@ brew update >> "$DOTFILES_ROOT/brew.log" 2>&1
 # Upgrade installed formulas
 brew upgrade >> "$DOTFILES_ROOT/brew.log" 2>&1
 
-brew install wget --with-iri
-
 binaries=(
 	# Updated versions of old OS X versions
 	coreutils
@@ -46,6 +44,7 @@ binaries=(
 	tag
 
 	# Helper tools
+	wget --with-iri
 	ack # grep
 	nmap # network mapper
 	cheat # cheatsheets
