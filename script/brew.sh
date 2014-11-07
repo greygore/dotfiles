@@ -145,16 +145,26 @@ quicklooks=(
 )
 sudo brew cask install --qlplugindir="/Library/QuickLook" ${quicklooks[0]}  >> "$DOTFILES_ROOT/brew.log" 2>&1
 
+# Add casks to Alfred's path
 brew cask alfred
-brew cleanup --force
-brew cask cleanup
-rm -f -r /Library/Caches/Homebrew/*
 
-unavailable=(
-	characters
-	pocket
-	trillian
-	wunderlist
-)
-echo "The following apps were not available in brew or cask form and need to be downloaded via the Mac App Store:"
-echo "${unavailable[@]}"
+# Clean up brew working files
+brew cleanup
+brew cask cleanup
+
+# Mac App Store links
+# App IDs pulled from https://linkmaker.itunes.apple.com/us/
+pause 'Opening Mac App Store for Trillian. Press any key to continue.'
+open macappstore://itunes.apple.com/app/id412056820?mt=12
+pause 'Opening Mac App Store for Wunderlist. Press any key to continue.'
+open macappstore://itunes.apple.com/app/id410628904?mt=12
+pause 'Opening Mac App Store for Leaf. Press any key to continue.'
+open macappstore://itunes.apple.com/app/id576338668?mt=12
+pause 'Opening Mac App Store for Pocket. Press any key to continue.'
+open macappstore://itunes.apple.com/app/id568494494?mt=12
+pause 'Opening Mac App Store for Characters. Press any key to continue.'
+open macappstore://itunes.apple.com/app/id536511979?mt=12
+pause 'Opening Mac App Store for Kindle. Press any key to continue.'
+open macappstore://itunes.apple.com/app/id405399194?mt=12
+pause 'Opening Mac App Store for Lifespan Active +. Press any key to continue.'
+open macappstore://itunes.apple.com/app/id804738629?mt=12
