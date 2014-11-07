@@ -164,4 +164,9 @@ if test $(which brew) && confirm 'Would you like to install and configure Homebr
 	source "$DOTFILES_ROOT/script/apps/chrome.sh" && success 'Chrome configured.'
 fi
 
+# Node/NPM packages
+if test $(which npm) && confirm 'Would you like to install NPM packages?'; then
+	source "$DOTFILES_ROOT/script/npm.sh" && success 'NPM packages installed.'
+fi
+
 success 'Done! Some changes may require restarting your computer to take effect.'
