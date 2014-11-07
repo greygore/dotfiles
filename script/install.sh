@@ -140,4 +140,4 @@ if confirm 'Would you like to symlink your dotfiles?'; then
 	fi
 fi
 
-success 'Done!'
+success 'Done! Some changes may require restarting your computer to take effect.'
