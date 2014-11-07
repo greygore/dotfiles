@@ -30,31 +30,52 @@ brew install wget --with-iri
 
 binaries=(
 	# Updated versions of old OS X versions
-	bash # Bash 4
 	coreutils
-	findutils #find, locate, updatedb, xargs
-	git
+	findutils --default-names # find, locate, updatedb, xargs
+	gnu-sed --default-names # sed
+	git --with-gettext --with-pcre
 
-	go
-	cheat
-	trash
-	rename
-	tree
-	node
-	tag
-	terminal-notifier
-	spark
-	figlet
-	watchman
-	ffmpeg
-	hr
-	html2text
-	jq
-	known_hosts
+	# Bash 4
+	bash
 	bash-completion
+
+	# Cooler tools
+	tree # ls
+	trash # rm
+	rename # mv
+	tag
+
+	# Helper tools
+	ack # grep
+	nmap # network mapper
+	cheat # cheatsheets
+	terminal-notifier # cli notifications
+	watchman # file watcher
+	known_hosts # known_hosts manager
+	jq # json processor
+
+	# Conversion utilities
+	ffmpeg --with-tools --with-x265 # movies/audio
+	imagemagick --with-libtiff --with-webp # images
+	html2text
+	webkit2png
+
+	# Graphical CLI stuff
 	grc
+	pv
+	hr
+	figlet
+	spark
+
+	# Other
+	go --cross-compile-common # golang
+	node # node.js and npm
 )
-brew install ${binaries[@]}
+brew install ${binaries[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1
+
+# Add and set bash shell
+echo '/usr/local/bin/bash' | sudo tee -a /etc/shells > /dev/null
+sudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1
 
 brew install caskroom/cask/brew-cask
 
