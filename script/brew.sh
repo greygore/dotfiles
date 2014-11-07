@@ -81,6 +81,7 @@ brew install caskroom/cask/brew-cask
 
 apps=(
 	# Basic tools
+	onepassword
 	alfred
 	iterm2
 	caskroom/homebrew-versions/sublime-text3
