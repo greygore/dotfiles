@@ -31,6 +31,10 @@ export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 # Add a timestamp to history
 export HISTTIMEFORMAT=" %h/%d/%y-%H:%M:%S   "
 
+# Make new shells get the history lines from all previous
+# shells instead of the default "last window closed" history
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto";
 
