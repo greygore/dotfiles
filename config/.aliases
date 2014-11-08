@@ -56,7 +56,7 @@ alias path='echo -e ${PATH//:/\\n}'
 alias mkdir="mkdir -pv" # Add intermediate dirs
 alias df="df -H" # Human readable units
 alias du="du -ch" # Human readable with total
-
+alias disk="du -hd 1" # Human readable, 1 directory deep
 
 # Get week number
 alias week='date +%V'
@@ -76,6 +76,9 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 
 # Open gateway/router interface
 alias router="command -v route && open http://$(route -n get default | grep gateway | awk -F ': ' '{ print $2 }')"
+
+# Open hosts file for editing
+alias hosts='$EDITOR /etc/hosts'
 
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
