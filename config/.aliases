@@ -1,5 +1,7 @@
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
+# Retry last command, this time with sudo
+alias please='sudo $(history -p !!)'
 
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
