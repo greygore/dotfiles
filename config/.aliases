@@ -60,6 +60,9 @@ alias df="df -H" # Human readable units
 alias du="du -ch" # Human readable with total
 alias disk="du -hd 1" # Human readable, 1 directory deep
 
+# Actually clear the screen instead of adding newlines
+alias clear="echo -ne '\0033\0143'"
+
 # Get week number
 alias week='date +%V'
 
