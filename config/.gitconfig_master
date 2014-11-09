@@ -144,7 +144,7 @@
 
 [commit]
 	# custom commit message template
-	#template = ~/.gitmessage
+	template = ~/.gitmessage
 
 [diff]
 	# Detect copies as well as renames
