@@ -21,11 +21,14 @@
 	# Pull in remote changes for the current repository and all its submodules
 	p = !"git pull; git submodule foreach git pull origin master"
 
-	# Clone a repository including all submodules
-	c = clone --recursive
+	# Verbose commit shows diff inside commit message
+	c = commit -v
 
 	# Commit all changes
 	ca = !git add -A && git commit -av
+
+	# Clone a repository including all submodules
+	cl = clone --recursive
 
 	# Switch to a branch, creating it if necessary
 	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
