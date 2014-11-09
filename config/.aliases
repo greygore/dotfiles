@@ -171,3 +171,6 @@ alias reload="exec $SHELL -l"
 
 # Copy my public key to the clipboard
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key ready to paste.\n'"
+
+# Fun stuff
+alias starwars='telnet towel.blinkenlights.nl'
