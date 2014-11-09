@@ -232,6 +232,15 @@ defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 # See https://github.com/mathiasbynens/dotfiles/issues/237
 #echo "0x08000100:0" > ~/.CFUserTextEncoding
 
+# Alert sound
+defaults write com.apple.systemsound 'com.apple.sound.beep.sound' -string '/System/Library/Sounds/Pop.aiff'
+
+# User interface sound effects
+defaults write com.apple.systemsound 'com.apple.sound.uiaudio.enabled' -bool true
+
+# Remove "About Downloads.pdf" from ~/Downloads
+rm -rf ~/Downloads/About\ Downloads.lpdf
+
 ###############################################################################
 # Keyboard                                                                    #
 ###############################################################################
@@ -350,6 +359,9 @@ sudo pmset -a sms 0
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
+
+# Cmd-Opt-Ctrl-T hotkey to toggle Dark Mode
+sudo defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true
 
 # Password after screensaver/sleep (false, 5)
 defaults write com.apple.screensaver askForPassword -bool true
