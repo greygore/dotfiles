@@ -67,6 +67,7 @@ binaries=(
 	spark
 
 	# Other
+	todo-txt # http://todotxt.com/
 	go --cross-compile-common # golang
 	node # node.js and npm
 )
