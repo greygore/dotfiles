@@ -133,6 +133,9 @@ defaults write com.apple.systemuiserver menuExtras -array \
 # Disable Notification Center and remove the menu bar icon
 #launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
+# Notification display time (5 seconds)
+defaults write com.apple.notificationcenterui bannerTime 3
+
 # Scrollbars: WhenScrolling, Automatic or Always
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
