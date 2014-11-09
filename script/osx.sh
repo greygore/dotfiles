@@ -459,7 +459,9 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Wipe all (default) app icons from the Dock
 # This is only really useful when setting up a new Mac, or if you don’t use
 # the Dock to launch apps.
-#defaults write com.apple.dock persistent-apps -array ""
+if confirm 'Would you like to remove all icons from the Dock?'; then
+	defaults write com.apple.dock persistent-apps -array ""
+fi
 
 # Autohide Dock (false)
 defaults write com.apple.dock autohide -bool true
