@@ -11,3 +11,6 @@ defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -boo
 # Use the system-native print preview dialog
 defaults write com.google.Chrome DisablePrintPreview -bool true
 defaults write com.google.Chrome.canary DisablePrintPreview -bool true
+
+# Make Chrome the default browser
+#open -a "Google Chrome" --args --make-default-browser
