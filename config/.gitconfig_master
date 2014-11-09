@@ -94,6 +94,9 @@
 	# Undo last commit
 	undo = !git reset --soft HEAD^
 
+	# Show the diff of everything you haven't pushed yet
+	unpushed = !git diff origin/$(git rev-parse --abbrev-ref HEAD)..HEAD
+
 [apply]
 	# Detect whitespace errors when applying a patch
 	whitespace = fix
@@ -113,6 +116,8 @@
 [color]
 	# Use colors in Git commands that are capable of colored output when outputting to the terminal
 	ui = auto
+	interactive = auto
+	showbranch = auto
 
 [color "branch"]
 	current = yellow reverse
@@ -129,6 +134,17 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+
+[branch]
+	autosetupmerge = true
+	# configure git to always add '--rebase' to git pull, to maintain nicer history
+	# read more at http://gitready.com/advanced/2009/02/11/pull-with-rebase.html
+	# you can override this with '--no-rebase' switch
+	autosetuprebase = always
+
+[commit]
+	# custom commit message template
+	#template = ~/.gitmessage
 
 [diff]
 	# Detect copies as well as renames
