@@ -258,6 +258,10 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
+# Adjust keyboard brightness in low light
+defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool true
+defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Keyboard Dim Time" -int 300
+
 # Auto-correct (true)
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
@@ -381,6 +385,9 @@ defaults write com.apple.screencapture disable-shadow -bool true
 
 # Screen Saver: Flurry
 defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName -string "Flurry" path -string "/System/Library/Screen Savers/Flurry.saver" type -int 0
+
+# Automatically adjust brightness
+defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool true
 
 # Subpixel font rendering on non-Apple LCDs (1 = Light, 2 = Medium, 3 = Strong, 4 = None)
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
