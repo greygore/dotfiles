@@ -18,7 +18,7 @@ A base installation of OS X Yosemite will include `curl`, while `git` will be in
 ### One Line Install
 
 ```bash
-DOTFILES_USER="greygore" bash -c "$(curl -fsSL raw.github.com/$DOTFILES_USER/dotfiles/master/bootstrap.sh)"
+export DOTFILES_USER="greygore"; bash -c "$(curl -fsSL raw.github.com/$DOTFILES_USER/dotfiles/master/bootstrap.sh)"
 ```
 
 :warning: If you fork, you must change `DOTFILES_USER` to your Github username.
