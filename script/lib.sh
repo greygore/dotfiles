@@ -89,13 +89,15 @@ link_file () {
 		skip=${skip:-$skipAll}
 
 		if [ "$overwrite" == "true" ]; then
-			rm -rf "$dst"
-			success "removed $(basename "$dst")"
+			rm -rf "$dst" > /dev/null 2>&1 \
+			&& success "removed $(basename "$dst")" \
+			|| error "Unable to remove $(basename "$dst")"
 		fi
 
 		if [ "$backup" == "true" ]; then
-			mv "$dst" "${dst}.backup"
-			success "moved $(basename "$dst") to $(basename "$dst").backup"
+			mv "$dst" "${dst}.backup" > /dev/null 2>&1 \
+			&& success "moved $(basename "$dst") to $(basename "$dst").backup" \
+			|| success "Unable to move $(basename "$dst") to $(basename "$dst").backup"
 		fi
 
 		if [ "$skip" == "true" ]; then
@@ -103,9 +105,9 @@ link_file () {
 		fi
 	fi
 
-	if [ "$skip" != "true" ]  # "false" or empty
-		then
-		ln -s "$1" "$2"
-		success "linked $1 to $2"
+	if [ "$skip" != "true" ]; then
+		ln -s "$1" "$2" > /dev/null 2>&1 \
+		&& success "linked $1 to $2" \
+		|| error "Unable to link $1 to $2"
 	fi
 }

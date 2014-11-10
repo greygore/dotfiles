@@ -121,13 +121,13 @@ if confirm 'Would you like to symlink your dotfiles?'; then
 	done
 
 	# Link files in directories (only 1 deep)
-	for dir in $(find config -maxdepth 1 -type d | grep config/.)
+	for dir in $(find config -maxdepth 1 -type d | grep config/)
 	do
 		mkdir -p "$HOME/$(basename "$dir")"
 		for src in $(find $dir -maxdepth 1 -not -type d | grep -v _master$)
 		do
-			dst="$HOME/$dir/$(basename "${src}")"
-			link_file "$DOTFILES_ROOT/$dir/$src" "$dst"
+			dst="$HOME/$(basename "$dir")/$(basename "${src}")"
+			link_file "$DOTFILES_ROOT/$src" "$dst"
 		done
 	done
 
