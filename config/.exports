@@ -43,8 +43,13 @@ export GIT_PS1_SHOWDIRTYSTATE=true;
 export GIT_PS1_SHOWUNTRACKEDFILES=true;
 export GIT_PS1_SHOWSTASHSTATE=true;
 
-# Link Homebrew casks in `/Applications` rather than `~/Applications`
-export HOMEBREW_CASK_OPTS="--appdir=/Applications";
+# OSX only
+if [ "$(uname -s)" == "Darwin" ]; then
+	# Link Homebrew casks in `/Applications` rather than `~/Applications`
+	export HOMEBREW_CASK_OPTS="--appdir=/Applications";
 
-# Golang
-export GOPATH="$(brew --prefix)/lib/go"
+	# Golang
+	if which brew > /dev/null; then
+		export GOPATH="$(brew --prefix)/lib/go"
+	fi
+fi

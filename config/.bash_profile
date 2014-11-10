@@ -40,7 +40,7 @@ fi;
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
-[ -e "$HOME/.ssh/known_hosts" ] && complete -o "default" -o "nospace" -W "$(echo `$HOME/.ssh/known_hosts | sed 's/[, ].*//' | sort | uniq`;)" scp sftp ssh;
+[ -e "$HOME/.ssh/known_hosts" ] && complete -o "default" -o "nospace" -W "$(echo `cat $HOME/.ssh/known_hosts | sed 's/[, ].*//' | sort | uniq`)" scp sftp ssh;
 
 # Add tab completion for `defaults read|write NSGlobalDomain`
 # You could just use `-g` instead, but I like being explicit
@@ -50,5 +50,7 @@ complete -W "NSGlobalDomain" defaults;
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
 # Add color to shell commands
-source "`brew --prefix`/etc/grc.bashrc"
+if which brew > /dev/null && [ -f "$(brew --prefix)/etc/grc.bashrc" ]; then
+	source "$(brew --prefix)/etc/grc.bashrc"
+fi
 alias curl="colourify curl"
