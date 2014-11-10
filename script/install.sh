@@ -151,12 +151,12 @@ done
 # OSX Settings
 if [ "$(uname -s)" == "Darwin" ] && confirm 'Would you like to customize your OS X environment?'; then
 	source "$DOTFILES_ROOT/script/osx.sh" && success 'OS X environment customized.'
-	source "$DOTFILES_ROOT/script/mail.sh" && success 'Mail.app configured.'
-	source "$DOTFILES_ROOT/script/safari.sh" && success 'Safari configured.'
+	source "$DOTFILES_ROOT/script/apps/mail.sh" && success 'Mail.app configured.'
+	source "$DOTFILES_ROOT/script/apps/safari.sh" && success 'Safari configured.'
 fi
 
 # Homebrew installation and configuration
-if test $(which brew) && confirm 'Would you like to install and configure Homebrew formula/casks?'; then
+if confirm 'Would you like to install and configure Homebrew formula/casks?'; then
 	source "$DOTFILES_ROOT/script/brew.sh" && success 'Homebrew formulas and casks installed.'
 	source "$DOTFILES_ROOT/script/apps/iterm2.sh" && success 'iTerm2 configured and themed.'
 	source "$DOTFILES_ROOT/script/apps/sublime.sh" && success 'Sublime Text 3 configured and themed.'

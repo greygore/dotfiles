@@ -33,7 +33,7 @@ if [[ $computer_name -ne '' ]]; then
 fi
 
 # Locale settings
-if confirm 'Use US locale information?'; then
+if confirm ' (OSX) Use US locale information?'; then
 	defaults write NSGlobalDomain AppleLanguages -array "en"
 	defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
 	defaults write NSGlobalDomain AppleMeasurementUnits -string "Inches"
@@ -42,7 +42,7 @@ if confirm 'Use US locale information?'; then
 fi
 
 # Set the timezone; see `systemsetup -listtimezones` for other values
-if confirm 'Use Eastern US timezone?'; then
+if confirm ' (OSX) Use Eastern US timezone?'; then
 	sudo systemsetup -settimezone "America/New_York" > /dev/null
 fi
 
@@ -160,22 +160,18 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Show item info below icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
 
 # Enable snap-to-grid for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 # Increase grid spacing for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
 
 # Increase the size of icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
 
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
@@ -259,8 +255,8 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Adjust keyboard brightness in low light
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool true
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Keyboard Dim Time" -int 300
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool true
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Keyboard Dim Time" -int 300
 
 # Auto-correct (true)
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
@@ -387,7 +383,7 @@ defaults write com.apple.screencapture disable-shadow -bool true
 defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName -string "Flurry" path -string "/System/Library/Screen Savers/Flurry.saver" type -int 0
 
 # Automatically adjust brightness
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool true
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool true
 
 # Subpixel font rendering on non-Apple LCDs (1 = Light, 2 = Medium, 3 = Strong, 4 = None)
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
@@ -481,7 +477,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Wipe all (default) app icons from the Dock
 # This is only really useful when setting up a new Mac, or if you don’t use
 # the Dock to launch apps.
-if confirm 'Would you like to remove all icons from the Dock?'; then
+if confirm ' (OSX) Would you like to remove all icons from the Dock?'; then
 	defaults write com.apple.dock persistent-apps -array ""
 fi
 
@@ -750,4 +746,3 @@ for app in "Activity Monitor" "Address Book" "Calendar" "cfprefsd" "Contacts" "D
 	"Safari" "SystemUIServer"; do
 	killall "$app" > /dev/null 2>&1
 done
-echo "Done. Note that some of these changes require a logout/restart to take effect."
