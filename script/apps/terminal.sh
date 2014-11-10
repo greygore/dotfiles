@@ -17,9 +17,7 @@ TERM_PROFILE='Solarized Dark xterm-256color';
 CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
 if [ "$CURRENT_PROFILE" != "$TERM_PROFILE" ]; then
 	open "$DOTFILES_ROOT/init/$TERM_PROFILE.terminal";
-	sleep 1; # Wait a bit to make sure the theme is loaded
-	defaults write com.apple.terminal 'Default Window Settings' -string "$TERM_PROFILE";
-	defaults write com.apple.terminal 'Startup Window Settings' -string "$TERM_PROFILE";
+	(crontab -l | grep -v "terminal_setprofile.sh"; echo "@reboot ~/.dotfiles/script/apps/terminal_setprofile.sh") | crontab
 fi;
 
 # Mouse focus for Terminal.app and all X11 apps
