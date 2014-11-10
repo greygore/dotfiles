@@ -7,7 +7,7 @@ while [ -h "$SOURCE" ]; do
   # If $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
 done
-DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )"../.. && pwd )"
+DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )"/../.. && pwd )"
 
 # Link Sublime Text settings
 PREFS="$HOME/Library/Application Support/Sublime Text 3/Packages/User"
