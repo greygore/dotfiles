@@ -141,7 +141,7 @@ if confirm 'Would you like to symlink your dotfiles?'; then
 fi
 
 info 'Installing user binaries and scripts...'
-mkdir ~/bin
+mkdir -p ~/bin
 for src in $(find bin -maxdepth 1 -not -type d)
 do
 	dst="$HOME/bin/$(basename "${src}")"
