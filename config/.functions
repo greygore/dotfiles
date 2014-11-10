@@ -327,6 +327,10 @@ function shout() {
 		figlet "$1"
 	fi
 	if [ "$(uname -s)" == "Darwin" ]; then
+		local volume
+		volume=$(/usr/bin/osascript -e 'output volume of (get volume settings)')
+		/usr/bin/osascript -e 'set volume output volume 100'
 		say "$1"
+		/usr/bin/osascript -e "set volume output volume $volume"
 	fi
 }
