@@ -21,11 +21,11 @@ if test ! $(which brew); then
 	|| fail 'Unable to install Homebrew'
 fi
 
-# Upgrade Homebrew
-brew update >> "$DOTFILES_ROOT/brew.log" 2>&1
-
-# Upgrade installed formulas
-brew upgrade >> "$DOTFILES_ROOT/brew.log" 2>&1
+info 'Upgrading homebrew and existing formulas'
+brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+&& brew upgrade >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+&& success 'Homebrew and formulas upgraded.' \
+|| fail 'Unable to upgrade homebrew and formulas'
 
 binaries=(
 	# Updated versions of old OS X versions
@@ -72,13 +72,21 @@ binaries=(
 	go --cross-compile-common # golang
 	node # node.js and npm
 )
-brew install ${binaries[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1
+info 'Installing brew formulas, this will take a while...'
+brew install ${binaries[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+&& success 'Installed brewed formulas.' \
+|| fail 'Unable to install brewed formulas'
 
 # Add and set bash shell
 echo '/usr/local/bin/bash' | sudo tee -a /etc/shells > /dev/null
-sudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1
+sudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1 \
+&& success 'Updated bash to brew version.' \
+|| error 'Unable to update bash to brewed version'
 
-brew install caskroom/cask/brew-cask
+info 'Installing homebrew cask...'
+brew install caskroom/cask/brew-cask \
+&& success 'Installed homebrew cask' \
+|| fail 'Unable to install homebrew cask'
 
 apps=(
 	# Basic tools
@@ -131,7 +139,10 @@ apps=(
 	steam
 	supersync
 )
-brew cask install --appdir="/Applications" ${apps[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1
+info 'Installing brew casks, this will also take a while...'
+brew cask install --appdir="/Applications" ${apps[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+&& success 'Installed brewed casks.' \
+&& error 'Unable to install brew casks'
 
 quicklooks=(
 	qlcolorcode # Code syntax
@@ -144,14 +155,20 @@ quicklooks=(
 	webp-quicklook
 	suspicious-package # OSX Installer Packages
 )
-sudo brew cask install --qlplugindir="/Library/QuickLook" ${quicklooks[0]}  >> "$DOTFILES_ROOT/brew.log" 2>&1
+info 'Installing QuickLook plugins...'
+sudo brew cask install --qlplugindir="/Library/QuickLook" ${quicklooks[0]}  >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+&& success 'Installed QuickLook plugins.' \
+|| fail 'Unable to install QuickLook plugins'
 
 # Add casks to Alfred's path
-brew cask alfred
+brew cask alfred \
+&& success 'Added caskroom to Alfred scope.' \
+|| error 'Unable to add caskroom to Alfred scope'
 
 # Clean up brew working files
-brew cleanup
-brew cask cleanup
+brew cleanup && brew cask cleanup \
+&& success 'Cleaned up brew and cask.' \
+|| error 'Unable to clean up brew and cask'
 
 # Mac App Store links
 # App IDs pulled from https://linkmaker.itunes.apple.com/us/
