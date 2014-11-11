@@ -205,7 +205,7 @@ sudo brew cask install --qlplugindir="/Library/QuickLook" ${quicklooks[0]} >> "$
 || fail 'Unable to install QuickLook plugins'
 
 # Add casks to Alfred's path
-brew cask alfred >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+brew cask alfred link >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Added caskroom to Alfred scope.' \
 || error 'Unable to add caskroom to Alfred scope'
 
