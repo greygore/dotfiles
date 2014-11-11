@@ -13,6 +13,26 @@ cd $DOTFILES_ROOT
 
 source "$DOTFILES_ROOT/script/lib.sh"
 
+function brew_formulas() {
+	local formulas=$1
+	local description=$2
+
+	info "Installing $description..."
+	brew install ${formulas[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+	&& success "Installed $description." \
+	|| error "Unable to install $description"
+}
+
+function brew_casks() {
+	local casks=$1
+	local description=$2
+
+	info "Installing $description casks..."
+	brew cask install --appdir="/Applications" ${casks[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+	&& success "Installed $description casks." \
+	|| error "Unable to install $description casks"
+}
+
 # Ask for sudo up front and keep alive for entire script
 sudo -v && while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
@@ -30,24 +50,35 @@ brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Homebrew and formulas upgraded.' \
 || fail 'Unable to upgrade homebrew and formulas'
 
-binaries=(
-	# Updated versions of old OS X versions
+formulas=(
+	bash
+	bash-completion
+)
+brew_formulas $formulas 'more modern version of bash with completion'
+
+# Add and set bash shell
+echo '/usr/local/bin/bash' | sudo tee -a /etc/shells > /dev/null
+sudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1 \
+&& success 'Updated shell to brew version of bash.' \
+|| error 'Unable to update shell to brewed version of bash'
+
+formulas=(
 	coreutils
 	findutils --default-names # find, locate, updatedb, xargs
 	gnu-sed --default-names # sed
 	git --with-gettext --with-pcre
+)
+brew_formulas $formulas 'updated versions of existing binaries'
 
-	# Bash 4
-	bash
-	bash-completion
-
-	# Cooler tools
+formulas=(
 	tree # ls
 	trash # rm
 	rename # mv
 	tag
+)
+brew_formulas $formulas 'cooler versions of existing commands'
 
-	# Helper tools
+formulas=(
 	wget --with-iri
 	ack # grep
 	nmap # network mapper
@@ -56,70 +87,76 @@ binaries=(
 	watchman # file watcher
 	known_hosts # known_hosts manager
 	jq # json processor
+)
+brew_formulas $formulas 'cool new tools'
 
-	# Conversion utilities
+formulas=(
 	ffmpeg --with-tools --with-x265 # movies/audio
 	imagemagick --with-libtiff --with-webp # images
 	html2text
 	webkit2png
+)
+brew_formulas $formulas 'conversion tools'
 
-	# Graphical CLI stuff
+formulas=(
 	grc
 	pv
 	hr
 	figlet
 	spark
+)
+brew_formulas $formulas 'graphical command line utilities'
 
-	# Other
+formulas=(
 	todo-txt # http://todotxt.com/
 	go --cross-compile-common # golang
 	node # node.js and npm
 )
-info 'Installing brew formulas, this will take a while...'
-brew install ${binaries[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-&& success 'Installed brewed formulas.' \
-|| fail 'Unable to install brewed formulas'
-
-# Add and set bash shell
-echo '/usr/local/bin/bash' | sudo tee -a /etc/shells > /dev/null
-sudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1 \
-&& success 'Updated bash to brew version.' \
-|| error 'Unable to update bash to brewed version'
+brew_formulas $formulas 'miscellaneous formulas'
 
 info 'Installing homebrew cask...'
-brew install caskroom/cask/brew-cask \
+brew install caskroom/cask/brew-cask >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Installed homebrew cask' \
 || fail 'Unable to install homebrew cask'
 
-apps=(
-	# Basic tools
+casks=(
 	onepassword
 	alfred
 	iterm2
 	caskroom/homebrew-versions/sublime-text3
+)
+brew_casks $casks 'basic tools'
 
-	# Utilities
+casks=(
 	caffeine
 	the-unarchiver
 	flux
 	key-codes
 	daisydisk
+)
+brew_casks $casks 'utilities'
 
-	# Menu
+casks=(
 	battery-time-remaining
 	istat-menus
+)
+brew_casks $casks 'menu'
 
-	# Browsers
+casks=(
 	firefox
 	google-chrome
+)
+brew_casks $casks 'browser'
 
-	# Services
+casks=(
 	crashplan
 	dropbox
 	evernote
 	github
+)
+brew_casks $casks 'service'
 
-	# Dev tools
+casks=(
 	virtualbox
 	vagrant
 	sourcetree
@@ -127,25 +164,28 @@ apps=(
 	dash # API Docs
 	imageoptim
 	cyberduck # Remote files
+)
+brew_casks $casks 'dev tool'
 
-	# Communication
+casks=(
 	skype
 	komanda # IRC
+)
+brew_casks $casks 'communication'
 
-	# Apps	
+casks=(
 	libreoffice
 	ynab
 	gimp
+)
+brew_casks $casks 'app'
 
-	# Entertainment
+casks=(
 	spotify
 	steam
 	supersync
 )
-info 'Installing brew casks, this will also take a while...'
-brew cask install --appdir="/Applications" ${apps[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-&& success 'Installed brewed casks.' \
-&& error 'Unable to install brew casks'
+brew_casks $casks 'entertainment'
 
 quicklooks=(
 	qlcolorcode # Code syntax
