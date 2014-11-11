@@ -200,17 +200,18 @@ quicklooks=(
 	suspicious-package # OSX Installer Packages
 )
 info 'Installing QuickLook plugins...'
-sudo brew cask install --qlplugindir="/Library/QuickLook" ${quicklooks[0]}  >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+sudo brew cask install --qlplugindir="/Library/QuickLook" ${quicklooks[0]} >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Installed QuickLook plugins.' \
 || fail 'Unable to install QuickLook plugins'
 
 # Add casks to Alfred's path
-brew cask alfred \
+brew cask alfred >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Added caskroom to Alfred scope.' \
 || error 'Unable to add caskroom to Alfred scope'
 
 # Clean up brew working files
-brew cleanup && brew cask cleanup \
+brew cleanup >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+&& brew cask cleanup >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Cleaned up brew and cask.' \
 || error 'Unable to clean up brew and cask'
 
