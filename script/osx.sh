@@ -14,8 +14,7 @@ DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )"/.. && pwd )"
 source "$DOTFILES_ROOT/script/lib.sh"
 
 # Ask for sudo up front and keep alive for entire script
-sudo -v
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+sudo -v; while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 
 ###############################################################################
