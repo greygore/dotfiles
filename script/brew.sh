@@ -16,8 +16,9 @@ source "$DOTFILES_ROOT/script/lib.sh"
 # Install Homebrew
 if test ! $(which brew); then
 	info "Installing homebrew..."
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" \
-	&& success 'Homebrew installed.'
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+	&& success 'Homebrew installed.' \
+	|| fail 'Unable to install Homebrew'
 fi
 
 # Upgrade Homebrew
