@@ -13,6 +13,9 @@ cd $DOTFILES_ROOT
 
 source "$DOTFILES_ROOT/script/lib.sh"
 
+# Ask for sudo up front and keep alive for entire script
+sudo -v && while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 # Install Homebrew
 if test ! $(which brew); then
 	info "Installing homebrew..."
