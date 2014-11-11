@@ -53,4 +53,6 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 if which brew > /dev/null && [ -f "$(brew --prefix)/etc/grc.bashrc" ]; then
 	source "$(brew --prefix)/etc/grc.bashrc"
 fi
-alias curl="colourify curl"
+if alias colourify > /dev/null 2>&1; then
+	alias curl="colourify curl"
+fi
