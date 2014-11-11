@@ -58,6 +58,9 @@ brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Homebrew and formulas upgraded.' \
 || fail 'Unable to upgrade homebrew and formulas'
 
+# Patch homebrew to stop sudo timestamp invalidation
+sed -i '.backup' 's/^.*sudo.*\-k/#&/g' "$(brew --prefix)/Library/Homebrew/build.rb"
+
 info 'Installing homebrew cask...'
 brew install caskroom/cask/brew-cask >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Installed homebrew cask' \
@@ -182,6 +185,9 @@ brew cleanup >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && brew cask cleanup >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Cleaned up brew and cask.' \
 || error 'Unable to clean up brew and cask'
+
+# Remove sudo timestamp invalidation patch
+mv "$(brew --prefix)/Library/Homebrew/build.rb.backup" "$(brew --prefix)/Library/Homebrew/build.rb"
 
 # Mac App Store links
 # App IDs pulled from https://linkmaker.itunes.apple.com/us/
