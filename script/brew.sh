@@ -13,24 +13,32 @@ cd $DOTFILES_ROOT
 
 source "$DOTFILES_ROOT/script/lib.sh"
 
-function brew_formulas() {
-	local formulas=$1
-	local description=$2
+function brew_formula() {
+	local formula=$1
+	local args=$2
 
-	info "Installing $description..."
-	brew install ${formulas[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-	&& success "Installed $description." \
-	|| error "Unable to install $description"
+	info "Installing $formula formula..."
+	brew install $formula $args >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+	&& success "Installed $formula formula." \
+	|| error "Unable to install $formula formula"
 }
 
-function brew_casks() {
-	local casks=$1
-	local description=$2
+function brew_cask() {
+	local cask=$1
 
-	info "Installing $description casks..."
-	brew cask install --appdir="/Applications" ${casks[@]} >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-	&& success "Installed $description casks." \
-	|| error "Unable to install $description casks"
+	info "Installing $cask cask..."
+	brew cask install --appdir="/Applications" $cask >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+	&& success "Installed $cask cask." \
+	|| error "Unable to install $cask cask"
+}
+
+function brew_quicklook() {
+	local quicklook=$1
+
+	info "Installing $quicklook QuickLook plugin..."
+	sudo brew cask install --qlplugindir="/Library/QuickLook" $quicklook >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+	&& success "Installed $quicklook QuickLook plugin." \
+	|| fail "Unable to install $quicklook QuickLook plugin"
 }
 
 # Ask for sudo up front and keep alive for entire script
@@ -51,11 +59,9 @@ brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Homebrew and formulas upgraded.' \
 || fail 'Unable to upgrade homebrew and formulas'
 
-formulas=(
-	bash
-	bash-completion
-)
-brew_formulas $formulas 'more modern version of bash with completion'
+# Modern bash & completion
+brew_formula 'bash'
+brew_formula 'bash-completion'
 
 # Add and set bash shell
 echo '/usr/local/bin/bash' | sudo tee -a /etc/shells > /dev/null
@@ -63,146 +69,111 @@ sudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1 \
 && success 'Updated shell to brew version of bash.' \
 || error 'Unable to update shell to brewed version of bash'
 
-formulas=(
-	coreutils
-	findutils --default-names # find, locate, updatedb, xargs
-	gnu-sed --default-names # sed
-	git --with-gettext --with-pcre
-)
-brew_formulas $formulas 'updated versions of existing binaries'
+# Updated OSX binaries
+brew_formula 'coreutils'
+brew_formula 'findutils' '--default-names' # find, locate, updatedb, xargs
+brew_formula 'gnu-sed' '--default-names' # sed
+brew_formula 'git' '--with-gettext --with-pcre'
 
-formulas=(
-	tree # ls
-	trash # rm
-	rename # mv
-	tag
-)
-brew_formulas $formulas 'cooler versions of existing commands'
+# Cooler versions of existing commands
+brew_formula 'tree' # ls
+brew_formula 'trash' # rm
+brew_formula 'rename' # mv
+brew_formula 'tag'
 
-formulas=(
-	wget --with-iri
-	ack # grep
-	nmap # network mapper
-	cheat # cheatsheets
-	terminal-notifier # cli notifications
-	watchman # file watcher
-	known_hosts # known_hosts manager
-	jq # json processor
-)
-brew_formulas $formulas 'cool new tools'
+# Cool new tools
+brew_formula 'wget' '--with-iri'
+brew_formula 'ack' # grep
+brew_formula 'nmap' # network mapper
+brew_formula 'cheat' # cheatsheets
+brew_formula 'terminal-notifier' # cli notifications
+brew_formula 'watchman' # file watcher
+brew_formula 'known_hosts' # known_hosts manager
+brew_formula 'jq' # json processor
 
-formulas=(
-	ffmpeg --with-tools --with-x265 # movies/audio
-	imagemagick --with-libtiff --with-webp # images
-	html2text
-	webkit2png
-)
-brew_formulas $formulas 'conversion tools'
+# Conversion tools
+brew_formula 'ffmpeg' '--with-tools --with-x265' # movies/audio
+brew_formula 'imagemagick' '--with-libtiff --with-webp' # images
+brew_formula 'html2text'
+brew_formula 'webkit2png'
 
-formulas=(
-	grc
-	pv
-	hr
-	figlet
-	spark
-)
-brew_formulas $formulas 'graphical command line utilities'
+# Graphical command line utilities
+brew_formula 'grc'
+brew_formula 'pv'
+brew_formula 'hr'
+brew_formula 'figlet'
+brew_formula 'spark'
 
-formulas=(
-	todo-txt # http://todotxt.com/
-	go --cross-compile-common # golang
-	node # node.js and npm
-)
-brew_formulas $formulas 'miscellaneous formulas'
+# Miscellaneous
+brew_formula 'todo-txt' # http://todotxt.com/
+brew_formula 'go' '--cross-compile-common' # golang
+brew_formula 'node' # node.js and npm
 
 info 'Installing homebrew cask...'
 brew install caskroom/cask/brew-cask >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Installed homebrew cask' \
 || fail 'Unable to install homebrew cask'
 
-casks=(
-	onepassword
-	alfred
-	iterm2
-	caskroom/homebrew-versions/sublime-text3
-)
-brew_casks $casks 'basic tools'
+# Basic tools
+brew_cask 'onepassword'
+brew_cask 'alfred'
+brew_cask 'iterm2'
+brew_cask 'caskroom/homebrew-versions/sublime-text3'
 
-casks=(
-	caffeine
-	the-unarchiver
-	flux
-	key-codes
-	daisydisk
-)
-brew_casks $casks 'utilities'
+# Utilities
+brew_cask 'caffeine'
+brew_cask 'the-unarchiver'
+brew_cask 'flux'
+brew_cask 'key-codes'
+brew_cask 'daisydisk'
 
-casks=(
-	battery-time-remaining
-	istat-menus
-)
-brew_casks $casks 'menu'
+# Menu
+brew_cask 'battery-time-remaining'
+brew_cask 'istat-menus'
 
-casks=(
-	firefox
-	google-chrome
-)
-brew_casks $casks 'browser'
+# Browser
+brew_cask 'firefox'
+brew_cask 'google-chrome'
 
-casks=(
-	crashplan
-	dropbox
-	evernote
-	github
-)
-brew_casks $casks 'service'
+# Services
+brew_cask 'crashplan'
+brew_cask 'dropbox'
+brew_cask 'evernote'
+brew_cask 'github'
 
-casks=(
-	virtualbox
-	vagrant
-	sourcetree
-	pgadmin3
-	dash # API Docs
-	imageoptim
-	cyberduck # Remote files
-)
-brew_casks $casks 'dev tool'
+# Dev tools
+brew_cask 'virtualbox'
+brew_cask 'vagrant'
+brew_cask 'sourcetree'
+brew_cask 'pgadmin3'
+brew_cask 'dash' # API Docs
+brew_cask 'imageoptim'
+brew_cask 'cyberduck' # Remote files
 
-casks=(
-	skype
-	komanda # IRC
-)
-brew_casks $casks 'communication'
+# Communication
+brew_cask 'skype'
+brew_cask 'komanda' # IRC
 
-casks=(
-	libreoffice
-	ynab
-	gimp
-)
-brew_casks $casks 'app'
+# Apps
+brew_cask 'libreoffice'
+brew_cask 'ynab'
+brew_cask 'gimp'
 
-casks=(
-	spotify
-	steam
-	supersync
-)
-brew_casks $casks 'entertainment'
+# Entertainment
+brew_cask 'spotify'
+brew_cask 'steam'
+brew_cask 'supersync'
 
-quicklooks=(
-	qlcolorcode # Code syntax
-	qlstephen # Extensionless text files
-	qlmarkdown
-	quicklook-json
-	qlprettypatch # Diff
-	quicklook-csv
-	betterzipql # Archives
-	webp-quicklook
-	suspicious-package # OSX Installer Packages
-)
-info 'Installing QuickLook plugins...'
-sudo brew cask install --qlplugindir="/Library/QuickLook" ${quicklooks[0]} >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-&& success 'Installed QuickLook plugins.' \
-|| fail 'Unable to install QuickLook plugins'
+# QuickLook plugins
+brew_quicklook 'qlcolorcode' # Code syntax
+brew_quicklook 'qlstephen' # Extensionless text files
+brew_quicklook 'qlmarkdown'
+brew_quicklook 'quicklook-json'
+brew_quicklook 'qlprettypatch' # Diff
+brew_quicklook 'quicklook-csv'
+brew_quicklook 'betterzipql' # Archives
+brew_quicklook 'webp-quicklook'
+brew_quicklook 'suspicious-package' # OSX Installer Packages
 
 # Add casks to Alfred's path
 brew cask alfred link >> "$DOTFILES_ROOT/brew.log" 2>&1 \
