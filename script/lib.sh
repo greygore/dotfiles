@@ -2,11 +2,17 @@
 
 # Library of useful bash functions
 
+timestamp () {
+	printf "$(tput setaf 8)[$(date +'%H:%M:%S')] $(tput sgr0)"
+}
+
 info () {
+	timestamp
 	printf "$(tput setaf 8) [   ] %s$(tput sgr0)\n" "$@"
 }
 
 question () {
+	timestamp
 	printf "$(tput bold; tput setaf 7) [ ? ] %s$(tput sgr0) " "$1"
 	if [ $# -lt 2 ]; then
 		read answer
@@ -17,6 +23,7 @@ question () {
 }
 
 confirm () {
+	timestamp
 	printf "$(tput bold; tput setaf 7) [ ? ] %s (y/n) $(tput sgr0)" "$@"
 	while read -r -n 1 -s confirm; do
 		if [[ $confirm = [YyNn] ]]; then
@@ -30,6 +37,7 @@ confirm () {
 }
 
 pause () {
+	timestamp
 	if [[ "$@" == "" ]]; then
 		printf "$(tput setaf 8) [ ◼ ] Press any key to continue $(tput sgr0)" "$@"
 	else
@@ -40,18 +48,22 @@ pause () {
 }
 
 success () {
+	timestamp
 	printf "$(tput bold; tput setaf 64) [ ✓ ] %s$(tput sgr0)\n" "$@"
 }
 
 error () {
+	timestamp
 	printf "$(tput bold; tput setaf 1) [ x ] %s$(tput sgr0)\n" "$@"
 }
 
 warning () {
+	timestamp
 	printf "$(tput bold; tput setaf 136) [ ! ] %s$(tput sgr0)\n" "$@"
 }
 
 fail () {
+	timestamp
 	printf "$(tput setaf 1) [ X ] %s$(tput sgr0)\n" "$@"
 	exit
 }
