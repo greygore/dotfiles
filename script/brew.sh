@@ -53,21 +53,41 @@ if test ! $(which brew); then
 	|| fail 'Unable to install Homebrew'
 fi
 
+sudo -n true # Sudo keepalive hack
+
 info 'Upgrading homebrew and existing formulas'
 brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && brew upgrade >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Homebrew and formulas upgraded.' \
 || fail 'Unable to upgrade homebrew and formulas'
 
+sudo -n true # Sudo keepalive hack
+
+info 'Installing homebrew cask...'
+brew install caskroom/cask/brew-cask >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+&& success 'Installed homebrew cask' \
+|| fail 'Unable to install homebrew cask'
+
+sudo -n true # Sudo keepalive hack
+
+# QuickLook plugins
+brew_quicklook 'qlcolorcode' # Code syntax
+brew_quicklook 'qlstephen' # Extensionless text files
+brew_quicklook 'qlmarkdown'
+brew_quicklook 'quicklook-json'
+brew_quicklook 'qlprettypatch' # Diff
+brew_quicklook 'quicklook-csv'
+brew_quicklook 'betterzipql' # Archives
+brew_quicklook 'webp-quicklook'
+brew_quicklook 'suspicious-package' # OSX Installer Packages
+
 # Modern bash & completion
 brew_formula 'bash'
-brew_formula 'bash-completion'
-
-# Add and set bash shell
 echo '/usr/local/bin/bash' | sudo tee -a /etc/shells > /dev/null
 sudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1 \
 && success 'Updated shell to brew version of bash.' \
 || error 'Unable to update shell to brewed version of bash'
+brew_formula 'bash-completion'
 
 # Updated OSX binaries
 brew_formula 'coreutils'
@@ -108,11 +128,6 @@ brew_formula 'spark'
 brew_formula 'todo-txt' # http://todotxt.com/
 brew_formula 'go' '--cross-compile-common' # golang
 brew_formula 'node' # node.js and npm
-
-info 'Installing homebrew cask...'
-brew install caskroom/cask/brew-cask >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-&& success 'Installed homebrew cask' \
-|| fail 'Unable to install homebrew cask'
 
 # Basic tools
 brew_cask 'onepassword'
@@ -163,17 +178,6 @@ brew_cask 'gimp'
 brew_cask 'spotify'
 brew_cask 'steam'
 brew_cask 'supersync'
-
-# QuickLook plugins
-brew_quicklook 'qlcolorcode' # Code syntax
-brew_quicklook 'qlstephen' # Extensionless text files
-brew_quicklook 'qlmarkdown'
-brew_quicklook 'quicklook-json'
-brew_quicklook 'qlprettypatch' # Diff
-brew_quicklook 'quicklook-csv'
-brew_quicklook 'betterzipql' # Archives
-brew_quicklook 'webp-quicklook'
-brew_quicklook 'suspicious-package' # OSX Installer Packages
 
 # Add casks to Alfred's path
 brew cask alfred link >> "$DOTFILES_ROOT/brew.log" 2>&1 \
