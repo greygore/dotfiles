@@ -48,12 +48,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # Install Homebrew
 if test ! $(which brew); then
 	info "Installing homebrew..."
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | sed 's/^.*sudo.*\-k/#&/g')" < /dev/null >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 	&& success 'Homebrew installed.' \
 	|| fail 'Unable to install Homebrew'
 fi
-
-sudo -n true # Sudo keepalive hack
 
 info 'Upgrading homebrew and existing formulas'
 brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
@@ -61,25 +59,10 @@ brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Homebrew and formulas upgraded.' \
 || fail 'Unable to upgrade homebrew and formulas'
 
-sudo -n true # Sudo keepalive hack
-
 info 'Installing homebrew cask...'
 brew install caskroom/cask/brew-cask >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Installed homebrew cask' \
 || fail 'Unable to install homebrew cask'
-
-sudo -n true # Sudo keepalive hack
-
-# QuickLook plugins
-brew_quicklook 'qlcolorcode' # Code syntax
-brew_quicklook 'qlstephen' # Extensionless text files
-brew_quicklook 'qlmarkdown'
-brew_quicklook 'quicklook-json'
-brew_quicklook 'qlprettypatch' # Diff
-brew_quicklook 'quicklook-csv'
-brew_quicklook 'betterzipql' # Archives
-brew_quicklook 'webp-quicklook'
-brew_quicklook 'suspicious-package' # OSX Installer Packages
 
 # Modern bash & completion
 brew_formula 'bash'
@@ -178,6 +161,17 @@ brew_cask 'gimp'
 brew_cask 'spotify'
 brew_cask 'steam'
 brew_cask 'supersync'
+
+# QuickLook plugins
+brew_quicklook 'qlcolorcode' # Code syntax
+brew_quicklook 'qlstephen' # Extensionless text files
+brew_quicklook 'qlmarkdown'
+brew_quicklook 'quicklook-json'
+brew_quicklook 'qlprettypatch' # Diff
+brew_quicklook 'quicklook-csv'
+brew_quicklook 'betterzipql' # Archives
+brew_quicklook 'webp-quicklook'
+brew_quicklook 'suspicious-package' # OSX Installer Packages
 
 # Add casks to Alfred's path
 brew cask alfred link >> "$DOTFILES_ROOT/brew.log" 2>&1 \
