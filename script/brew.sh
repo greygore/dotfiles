@@ -59,7 +59,7 @@ brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 || fail 'Unable to upgrade homebrew and formulas'
 
 # Patch homebrew to stop sudo timestamp invalidation
-if grep '^[^#].*sudo.*\-k' "$(brew --prefix)/Library/Homebrew/build.rb"; then
+if grep '^[^#].*sudo.*\-k' "$(brew --prefix)/Library/Homebrew/build.rb" > /dev/null 2>&1; then
 	sed -i '.backup' 's/^.*sudo.*\-k/#&/g' "$(brew --prefix)/Library/Homebrew/build.rb" > /dev/null 2>&1
 fi
 
