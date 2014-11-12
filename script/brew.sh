@@ -60,7 +60,7 @@ brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 
 # Patch homebrew to stop sudo timestamp invalidation
 if grep '^[^#].*sudo.*\-k' "$(brew --prefix)/Library/Homebrew/build.rb"; then
-	sed -i '.backup' 's/^.*sudo.*\-k/#&/g' "$(brew --prefix)/Library/Homebrew/build.rb"
+	sed -i '.backup' 's/^.*sudo.*\-k/#&/g' "$(brew --prefix)/Library/Homebrew/build.rb" > /dev/null 2>&1
 fi
 
 info 'Installing homebrew cask...'
