@@ -9,6 +9,11 @@ while [ -h "$SOURCE" ]; do
 done
 DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )"/../.. && pwd )"
 
+# Install package control
+cd "$HOME/Library/Application Support/Sublime Text 3/Installed Packages/"
+curl -O https://sublime.wbond.net/Package%20Control.sublime-package
+cd -
+
 # Link Sublime Text settings
 PREFS="$HOME/Library/Application Support/Sublime Text 3/Packages/User"
 if [[ -d "$PREFS" && ! -L "$PREFS" ]]; then
