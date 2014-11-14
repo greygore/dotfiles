@@ -16,8 +16,8 @@ defaults write com.apple.terminal StringEncodings -array 4
 TERM_PROFILE='Solarized Dark xterm-256color';
 CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
 if [ "$CURRENT_PROFILE" != "$TERM_PROFILE" ]; then
-	open "$DOTFILES_ROOT/init/$TERM_PROFILE.terminal";
 	(crontab -l 2> /dev/null | grep -v "terminal_cron.sh"; echo "@reboot ~/.dotfiles/script/apps/terminal_cron.sh") | crontab -
+	open "$DOTFILES_ROOT/init/$TERM_PROFILE.terminal";
 fi;
 
 # Mouse focus for Terminal.app and all X11 apps
