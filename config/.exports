@@ -4,7 +4,7 @@ export LC_ALL="en_US.UTF-8";
 
 # Set the default editor
 if [ -f /usr/local/bin/subl ]; then
-	export EDITOR='subl -w';
+	export EDITOR="$HOME/bin/sublw";
 	export GIT_EDITOR='subl -n -w';
 else
 	export EDITOR="vim";
