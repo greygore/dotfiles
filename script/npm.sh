@@ -13,6 +13,10 @@ cd $DOTFILES_ROOT
 
 source "$DOTFILES_ROOT/script/lib.sh"
 
-npm install -g tldr  >> "$DOTFILES_ROOT/npm.log" 2>&1
+if ! which tldr > /dev/null; then
+	npm install -g tldr  >> "$DOTFILES_ROOT/npm.log" 2>&1
+fi
 
-npm install -g ember-cli >> "$DOTFILES_ROOT/npm.log" 2>&1
+if ! which ember > /dev/null; then
+	npm install -g ember-cli >> "$DOTFILES_ROOT/npm.log" 2>&1
+fi
