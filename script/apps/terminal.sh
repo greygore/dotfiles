@@ -17,6 +17,7 @@ TERM_PROFILE='Solarized Dark xterm-256color';
 CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
 if [ "$CURRENT_PROFILE" != "$TERM_PROFILE" ]; then
 	(crontab -l 2> /dev/null | grep -v "terminal_cron.sh"; echo "@reboot ~/.dotfiles/script/apps/terminal_cron.sh") | crontab -
+	sleep 5
 	(crontab -l 2> /dev/null | grep -v "terminal_cron.sh"; echo "@reboot ~/.dotfiles/script/apps/terminal_cron.sh") | crontab -
 	open "$DOTFILES_ROOT/init/$TERM_PROFILE.terminal";
 fi;
