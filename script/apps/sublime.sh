@@ -12,8 +12,8 @@ DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )"/../.. && pwd )"
 # Install package control
 open -a "Sublime Text" && killall "Sublime Text" # Create support directories
 cd "$HOME/Library/Application Support/Sublime Text 3/Installed Packages/"
-curl -O https://sublime.wbond.net/Package%20Control.sublime-package > /dev/null 2>&1
-cd -
+curl -o "Package Control.sublime-package" https://sublime.wbond.net/Package%20Control.sublime-package > /dev/null 2>&1
+cd - > /dev/null 2>&1
 
 # Link Sublime Text settings
 PREFS="$HOME/Library/Application Support/Sublime Text 3/Packages/User"
