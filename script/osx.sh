@@ -24,7 +24,7 @@ sudo -v; while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/de
 # Set computer name (as done via System Preferences → Sharing)
 question " (OSX) What is your computer's name?"
 computer_name=$answer
-if [[ $computer_name -ne '' ]]; then
+if [ $computer_name ]; then
 	sudo scutil --set ComputerName $computer_name
 	sudo scutil --set HostName $computer_name
 	sudo scutil --set LocalHostName $computer_name
