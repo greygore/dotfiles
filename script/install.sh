@@ -173,4 +173,4 @@ fi
 
 success 'Done! Some changes may require restarting your computer to take effect.'
 pause 'Press any key to close the terminal window so that the profile can be initialized on restart.'
-killall Terminal
+killall Terminal > /dev/null 2>&1
