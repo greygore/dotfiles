@@ -111,11 +111,10 @@ elif confirm 'Would you like to create a git repository and sync it with the rem
 fi
 
 # Link up dotfiles
+overwriteAll=false
+backupAll=false
+skipAll=false
 if confirm 'Would you like to symlink your dotfiles?'; then
-	overwriteAll=false
-	backupAll=false
-	skipAll=false
-
 	# Link main files
 	for src in $(find config -maxdepth 1 -not -type d | grep -v _master$)
 	do
