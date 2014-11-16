@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
-SOURCE="${BASH_SOURCE[0]}"
-# Resolve $SOURCE until the file is no longer a symlink
-while [ -h "$SOURCE" ]; do 
-  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-  SOURCE="$(readlink "$SOURCE")"
-  # If $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
-  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
-done
-DOTFILES_ROOT="$( cd -P "$( dirname "$SOURCE" )"/../.. && pwd )"
+[ -z "$DOTFILES_ROOT" ] &&  { echo "ERROR: DOTFILES_ROOT needs to be set"; exit 1; }
 
 # Install package control
 /usr/local/bin/subl -b && killall "Sublime Text" # Create support directories

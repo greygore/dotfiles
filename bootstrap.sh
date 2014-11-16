@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
-
-if [ -z "$DOTFILES_USER" ]; then
-	echo "ERROR: You need to set DOTFILES_USER"
-	exit 1
-fi
+[ -z "$DOTFILES_USER" ] { echo "ERROR: DOTFILES_USER needs to be set"; exit 1; }
 
 DOTFILES_DEFAULT_DIRECTORY="$HOME/.dotfiles"
-DOTFILES_DIRECTORY=${DOTFILES_DIRECTORY-$DOTFILES_DEFAULT_DIRECTORY}
+export DOTFILES_ROOT=${DOTFILES_ROOT-$DOTFILES_DEFAULT_DIRECTORY}
 DOTFILES_TARBALL_PATH="https://github.com/$DOTFILES_USER/dotfiles/tarball/master"
 
 # Set the terminal background color on OSX
@@ -15,13 +11,13 @@ if [ "$(uname -s)" == "Darwin" ]; then
 fi
 
 # If missing, download and extract the dotfiles repository
-if [[ ! -d $DOTFILES_DIRECTORY ]]; then
+if [[ ! -d $DOTFILES_ROOT ]]; then
 	printf "$(tput bold; tput setaf 7)       Downloading dotfiles...$(tput sgr0)\n"
-	mkdir $DOTFILES_DIRECTORY
+	mkdir $DOTFILES_ROOT
 
 	# Download and extract project tarball
 	curl -fsSLo $HOME/dotfiles.tar.gz $DOTFILES_TARBALL_PATH
-	tar -zxf $HOME/dotfiles.tar.gz --strip-components 1 -C $DOTFILES_DIRECTORY
+	tar -zxf $HOME/dotfiles.tar.gz --strip-components 1 -C $DOTFILES_ROOT
 	rm -rf $HOME/dotfiles.tar.gz
 fi
 
