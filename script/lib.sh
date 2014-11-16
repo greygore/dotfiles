@@ -23,6 +23,9 @@ question () {
 }
 
 confirm () {
+	if [ ! -z "$2" ]; then
+		return 0
+	fi
 	timestamp
 	printf "$(tput bold; tput setaf 7) [ ? ] %s (y/n) $(tput sgr0)" "$@"
 	while read -r -n 1 -s confirm; do
