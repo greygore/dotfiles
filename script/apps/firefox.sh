@@ -16,7 +16,7 @@ open -a Firefox --args -setDefaultBrowser
 pause 'Setting Firefox to your default browser. Press any key to continue installing addons.'
 
 # Install addons
-wget https://lastpass.com/download/cdn/lp_mac.xpi > /dev/null 2>&1 # Last Pass
+wget http://cdn.agilebits.com/dist/1P/ext/1Password-4.2.5.xpi # 1Password
 wget https://update.adblockplus.org/latest/adblockplusfirefox.xpi > /dev/null 2>&1 # AdBlock Plus
 wget http://download.xmarks.com/download/binary/firefox > /dev/null 2>&1 # XMarks
 wget https://addons.mozilla.org/firefox/downloads/latest/7661/addon-7661-latest.xpi > /dev/null 2>&1 # Pocket
