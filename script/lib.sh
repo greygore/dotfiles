@@ -40,10 +40,14 @@ password () {
 
 confirm () {
 	if [ ! -z "$2" ]; then
-		if [ ! -z "$3" ]; then
-			info "$3"
+		if [[ $2 = [Yy] ]]; then
+			if [ ! -z "$3" ]; then
+				info "$3"
+			fi
+			return 0
+		else
+			return 1
 		fi
-		return 0
 	fi
 	timestamp
 	printf "$(tput bold; tput setaf 7) [ ? ] %s (y/n) $(tput sgr0)" "$@"
