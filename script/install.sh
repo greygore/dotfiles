@@ -6,7 +6,7 @@ source "$DOTFILES_ROOT/script/lib.sh"
 sudo -v; while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Install command line tools
-if [ "$(uname -s)" == "Darwin" ]; then
+if is_osx; then
 	xcode-select -p > /dev/null 2>&1
 	if [ $? -eq 2 ]; then
 		info 'Installing command line tools...'
@@ -36,7 +36,7 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
 	eval "$(ssh-agent -s)" > /dev/null || fail 'Unable to start ssh agent'
 	ssh-add -A ~/.ssh/id_rsa > /dev/null 2>&1 || fail 'Unable to add new key to ssh'
 	ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts 2> /dev/null
-	if [ "$(uname -s)" == "Darwin" ]; then
+	if is_osx; then
 		pbcopy < ~/.ssh/id_rsa.pub
 		info 'Your public key has been copied to your clipboard.'
 	else
@@ -55,7 +55,7 @@ if confirm 'Would you like to configure git?'; then
 	git_authorname=$answer
 	question ' (Git) What is your email?'
 	git_authoremail=$answer
-	if [ "$(uname -s)" == "Darwin" ]; then
+	if is_osx; then
 		git_credential='osxkeychain'
 	else
 		git_credential='cache'
@@ -140,14 +140,14 @@ do
 done
 
 # OSX Settings
-if [ "$(uname -s)" == "Darwin" ] && confirm 'Would you like to customize your OS X environment?'; then
+if is_osx && confirm 'Would you like to customize your OS X environment?'; then
 	source "$DOTFILES_ROOT/script/osx.sh" && success 'OS X environment customized.'
 	source "$DOTFILES_ROOT/script/apps/mail.sh" && success 'Mail.app configured.'
 	source "$DOTFILES_ROOT/script/apps/safari.sh" && success 'Safari configured.'
 fi
 
 # Homebrew installation and configuration
-if confirm 'Would you like to install and configure Homebrew formula/casks?'; then
+if is_osx && confirm 'Would you like to install and configure Homebrew formula/casks?'; then
 	source "$DOTFILES_ROOT/script/brew.sh" && success 'Homebrew formulas and casks installed.'
 	source "$DOTFILES_ROOT/script/apps/iterm2.sh" && success 'iTerm2 configured and themed.'
 	source "$DOTFILES_ROOT/script/apps/sublime.sh" && success 'Sublime Text 3 configured and themed.'

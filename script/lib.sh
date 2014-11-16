@@ -123,3 +123,10 @@ link_file () {
 		|| error "Unable to link $1 to $2"
 	fi
 }
+
+is_osx () {
+	if [ "$(uname -s)" == "Darwin" ]; then
+		return 0
+	fi
+	return 1
+}
