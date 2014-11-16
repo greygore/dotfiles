@@ -14,6 +14,9 @@ info () {
 question () {
 	if [ ! -z "$2" ]; then
 		answer=$2
+		if [ ! -z "$3" ]; then
+			info "$3"
+		fi
 		return 0
 	fi
 	timestamp
@@ -22,6 +25,13 @@ question () {
 }
 
 password () {
+	if [ ! -z "$2" ]; then
+		answer=$2
+		if [ ! -z "$3" ]; then
+			info "$3"
+		fi
+		return 0
+	fi
 	timestamp
 	printf "$(tput bold; tput setaf 7) [ ? ] %s$(tput sgr0) " "$1"
 	read -s answer
@@ -30,6 +40,9 @@ password () {
 
 confirm () {
 	if [ ! -z "$2" ]; then
+		if [ ! -z "$3" ]; then
+			info "$3"
+		fi
 		return 0
 	fi
 	timestamp

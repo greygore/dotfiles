@@ -13,12 +13,10 @@ else
 fi
 password 'This is a password request:'
 defaultval='BLUE'
-question 'This question should not be seen' $defaultval
-info "The default value is $defaultval"
+question 'This question should not be seen' $defaultval "The default value is $defaultval"
 testvar=true
-if confirm 'This confirm should not be seen' $testvar; then
-	success 'testvar is set'
-fi
+confirm 'This confirm should not be seen' "$testvar"
+confirm 'This confirm should also not be seen' $testvar 'Testvar set'
 confirm 'You should see this confirm' $othertestvar
 pause "Press any key to initiate a fatal error"
 fail "Fatal error"
