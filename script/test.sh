@@ -11,11 +11,15 @@ else
 	info "Your name is not $answer"
 	error "Your name is still unknown"
 fi
+password 'This is a password request:'
+defaultval='BLUE'
+question 'This question should not be seen' $defaultval
+info "The default value is $defaultval"
 testvar=true
-if confirm 'This question should not be seen' $testvar; then
+if confirm 'This confirm should not be seen' $testvar; then
 	success 'testvar is set'
 fi
-confirm 'You should see this question' $othertestvar
+confirm 'You should see this confirm' $othertestvar
 pause "Press any key to initiate a fatal error"
 fail "Fatal error"
 info 'This should not appear'

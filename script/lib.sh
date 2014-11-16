@@ -12,14 +12,20 @@ info () {
 }
 
 question () {
+	if [ ! -z "$2" ]; then
+		answer=$2
+		return 0
+	fi
 	timestamp
 	printf "$(tput bold; tput setaf 7) [ ? ] %s$(tput sgr0) " "$1"
-	if [ $# -lt 2 ]; then
-		read answer
-	else
-		read -s answer
-		echo
-	fi
+	read answer
+}
+
+password () {
+	timestamp
+	printf "$(tput bold; tput setaf 7) [ ? ] %s$(tput sgr0) " "$1"
+	read -s answer
+	echo
 }
 
 confirm () {

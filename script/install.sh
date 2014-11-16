@@ -29,7 +29,7 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
 	info 'Generating new ssh key...'
 	question ' (SSH) What is your email?'
 	ssh_email=$answer
-	question ' (SSH) Enter a passphrase:' 'password'
+	password ' (SSH) Enter a passphrase:'
 	ssh_passphrase=$answer
 	ssh-keygen -q -t rsa -C "$ssh_email" -f ~/.ssh/id_rsa -N "$ssh_passphrase" > /dev/null \
 	|| fail 'Unable to generate a new key'
