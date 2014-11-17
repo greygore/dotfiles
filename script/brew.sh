@@ -1,34 +1,7 @@
 #!/usr/bin/env bash
 [ -z "$DOTFILES_ROOT" ] &&  { echo "ERROR: DOTFILES_ROOT needs to be set"; exit 1; }
 source "$DOTFILES_ROOT/script/lib.sh"
-
-function brew_formula() {
-	local formula=$1
-	local args=$2
-
-	info "Installing $formula formula..."
-	brew install $formula $args >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-	&& success "Installed $formula formula." \
-	|| error "Unable to install $formula formula"
-}
-
-function brew_cask() {
-	local cask=$1
-
-	info "Installing $cask cask..."
-	brew cask install --appdir="/Applications" $cask >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-	&& success "Installed $cask cask." \
-	|| error "Unable to install $cask cask"
-}
-
-function brew_quicklook() {
-	local quicklook=$1
-
-	info "Installing $quicklook QuickLook plugin..."
-	sudo brew cask install --qlplugindir="/Library/QuickLook" $quicklook >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-	&& success "Installed $quicklook QuickLook plugin." \
-	|| fail "Unable to install $quicklook QuickLook plugin"
-}
+source "$DOTFILES_ROOT/script/brew/lib.sh"
 
 # Ask for sudo up front and keep alive for entire script
 sudo -v; while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
