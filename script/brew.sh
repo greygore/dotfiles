@@ -78,9 +78,6 @@ brew_formula 'todo-txt' # http://todotxt.com/
 brew_formula 'go' '--cross-compile-common' # golang
 brew_formula 'node' # node.js and npm
 
-# Java
-brew_cask 'java'
-
 # Basic tools
 brew_cask 'onepassword'
 brew_cask 'alfred'
