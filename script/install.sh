@@ -5,6 +5,17 @@ source "$DOTFILES_ROOT/script/lib.sh"
 # Ask for sudo up front and keep alive for entire script
 sudo -v; while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+if [ -f "$HOME/.dotrc" ]; then
+	source "$HOME/.dotrc"
+elif confirm 'Do full install?' $DOTFILES_DO_FULL_INSTALL; then
+	DOTFILES_DO_GIT_CONFIG='y'
+	DOTFILES_DO_GIT_SYNC='y'
+	DOTFILES_DO_SYMLINK='y'
+	DOTFILES_DO_OSX='y'
+	DOTFILES_DO_BREW='y'
+	DOTFILES_DO_NPM='y'
+fi
+
 # Install command line tools
 if is_osx; then
 	xcode-select -p > /dev/null 2>&1
@@ -27,9 +38,9 @@ fi
 # Set up public key
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
 	info 'Generating new ssh key...'
-	question ' (SSH) What is your email?'
+	question ' (SSH) What is your email?' $DOTFILES_SSH_EMAIL " (SSH) Using supplied email: $DOTFILES_SSH_EMAIL"
 	ssh_email=$answer
-	password ' (SSH) Enter a passphrase:'
+	password ' (SSH) Enter a passphrase:' $DOTFILES_SSH_PASSPHRASE " (SSH) Using supplied passphrase"
 	ssh_passphrase=$answer
 	ssh-keygen -q -t rsa -C "$ssh_email" -f ~/.ssh/id_rsa -N "$ssh_passphrase" > /dev/null \
 	|| fail 'Unable to generate a new key'
@@ -47,13 +58,13 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
 fi
 
 # Set up git config
-if confirm 'Would you like to configure git?'; then
+if confirm 'Would you like to configure git?' $DOTFILES_DO_GIT_CONFIG 'Configuring git...'; then
 	cp -f "$DOTFILES_ROOT/config/.gitconfig_master" "$HOME/.gitconfig" \
 	|| fail "Unable to copy master .gitconfig file to home directory"
 
-	question ' (Git) What is your full name?'
+	question ' (Git) What is your full name?' $DOTFILES_GIT_NAME " (Git) Using supplied name: $DOTFILES_GIT_NAME"
 	git_authorname=$answer
-	question ' (Git) What is your email?'
+	question ' (Git) What is your email?' $DOTFILES_GIT_EMAIL " (Git) Using supplied email: $DOTFILES_GIT_EMAIL"
 	git_authoremail=$answer
 	if is_osx; then
 		git_credential='osxkeychain'
@@ -70,19 +81,19 @@ fi
 # Clean up git repo
 if [ -e "$DOTFILES_ROOT/.git" ]; then
 	if [ -n "$(git status --porcelain)" ]; then
-		if confirm 'You have uncommited changes. Are you sure you want to continue?'; then
-			info 'Remember to commit your changes later then.'
+		if confirm 'You have uncommited changes. Are you sure you want to continue?' $DOTFILES_IGNORE_UNCOMMITED; then
+			warning 'Remember to commit your changes later then.'
 		else
 			exit 1
 		fi
 	elif [ -n "$(git log origin/master..HEAD)" ]; then
-		if confirm 'You have local unpushed commits. Do you want to push them to master?'; then
-			git push master origin
+		if confirm 'You have local unpushed commits. Do you want to push them to master?' $DOTFILES_PUSH_COMMITS; then
+			git push origin master
 			success "Local changes pushed to remote."
 		fi
 	fi
 # If there is no repo, create one and sync it from origin
-elif confirm 'Would you like to create a git repository and sync it with the remote?'; then
+elif confirm 'Would you like to create a git repository and sync it with the remote?' $DOTFILES_DO_GIT_SYNC; then
 	info 'Creating new git repository and syncing with remote...'
 	if [ -z "$DOTFILES_USER" ]; then
 		question 'What is the github user for this dotfiles repository?'
@@ -103,7 +114,7 @@ fi
 overwriteAll=false
 backupAll=false
 skipAll=false
-if confirm 'Would you like to symlink your dotfiles?'; then
+if confirm 'Would you like to symlink your dotfiles?' $DOTFILES_DO_SYMLINK; then
 	# Link main files
 	for src in $(find config -maxdepth 1 -not -type d | grep -v _master$)
 	do
@@ -135,7 +146,7 @@ do
 done
 
 # OSX Settings
-if is_osx && confirm 'Would you like to customize your OS X environment?'; then
+if is_osx && confirm 'Would you like to customize your OS X environment?' $DOTFILES_DO_OSX; then
 	source "$DOTFILES_ROOT/script/osx.sh" && success 'OS X environment customized.'
 	source "$DOTFILES_ROOT/script/apps/terminal.sh" && success 'Terminal configured and themed.'
 	source "$DOTFILES_ROOT/script/apps/mail.sh" && success 'Mail.app configured.'
@@ -143,7 +154,7 @@ if is_osx && confirm 'Would you like to customize your OS X environment?'; then
 fi
 
 # Homebrew installation and configuration
-if is_osx && confirm 'Would you like to install and configure Homebrew formula/casks?'; then
+if is_osx && confirm 'Would you like to install and configure Homebrew formula/casks?' $DOTFILES_DO_BREW; then
 	source "$DOTFILES_ROOT/script/brew.sh" && success 'Homebrew formulas and casks installed.'
 	source "$DOTFILES_ROOT/script/apps/iterm2.sh" && success 'iTerm2 configured and themed.'
 	source "$DOTFILES_ROOT/script/apps/sublime.sh" && success 'Sublime Text 3 configured and themed.'
@@ -152,7 +163,7 @@ if is_osx && confirm 'Would you like to install and configure Homebrew formula/c
 fi
 
 # Node/NPM packages
-if test $(which npm) && confirm 'Would you like to install NPM packages?'; then
+if test $(which npm) && confirm 'Would you like to install NPM packages?' $DOTFILES_DO_NPM; then
 	source "$DOTFILES_ROOT/script/npm.sh" && success 'NPM packages installed.'
 fi
 
