@@ -12,6 +12,7 @@ elif confirm 'Do full install?' $DOTFILES_DO_FULL_INSTALL; then
 	DOTFILES_DO_GIT_SYNC='y'
 	DOTFILES_DO_SYMLINK='y'
 	DOTFILES_DO_OSX='y'
+	DOTFILES_DO_APP_STORE='y'
 	DOTFILES_DO_BREW='y'
 	DOTFILES_DO_NPM='y'
 fi
@@ -151,6 +152,11 @@ if is_osx && confirm 'Would you like to customize your OS X environment?' $DOTFI
 	source "$DOTFILES_ROOT/script/apps/terminal.sh" && success 'Terminal configured and themed.'
 	source "$DOTFILES_ROOT/script/apps/mail.sh" && success 'Mail.app configured.'
 	source "$DOTFILES_ROOT/script/apps/safari.sh" && success 'Safari configured.'
+fi
+
+# Mac App Store
+if is_osx && confirm 'Would you like to install apps from the Mac App Store?' $DOTFILES_DO_APP_STORE; then
+	source "$DOTFILES_ROOT/script/app_store.sh"
 fi
 
 # Homebrew installation and configuration
