@@ -124,11 +124,6 @@ if confirm 'Would you like to symlink your dotfiles?'; then
 
 	# Start new bash environment
 	source ~/.bash_profile
-
-	# Configure Terminal
-	if [ -e "/Applications/Utilities/Terminal.app" ] && confirm 'Would you like to configure Terminal settings and set the theme?'; then
-		source "$DOTFILES_ROOT/script/apps/terminal.sh" && success 'Terminal configured and themed.'
-	fi
 fi
 
 info 'Installing user binaries and scripts...'
@@ -142,6 +137,7 @@ done
 # OSX Settings
 if is_osx && confirm 'Would you like to customize your OS X environment?'; then
 	source "$DOTFILES_ROOT/script/osx.sh" && success 'OS X environment customized.'
+	source "$DOTFILES_ROOT/script/apps/terminal.sh" && success 'Terminal configured and themed.'
 	source "$DOTFILES_ROOT/script/apps/mail.sh" && success 'Mail.app configured.'
 	source "$DOTFILES_ROOT/script/apps/safari.sh" && success 'Safari configured.'
 fi
