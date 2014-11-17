@@ -139,10 +139,9 @@ Further details are in the `.bash_prompt` file.
 ## To Do
 
  * Remove hard-coded locale and/or allow selection of alternatives.
- * Make non-interactive version.
  * Add [zsh](http://www.zsh.org/) shell with [oh-my-zsh](http://ohmyz.sh/)
- * Backup dotfiles before creating symbolic links
  * Create restore script to restore dotfile backups and revert OS X customizations
+ * Research [duti](https://github.com/moretension/duti) for setting default applications for file types and URIs. [More](https://github.com/mathiasbynens/dotfiles/issues/54).
 
 ## Feedback
 
