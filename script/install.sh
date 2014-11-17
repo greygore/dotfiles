@@ -11,6 +11,7 @@ elif confirm 'Do full install?' $DOTFILES_DO_FULL_INSTALL; then
 	DOTFILES_DO_GIT_CONFIG='y'
 	DOTFILES_DO_GIT_SYNC='y'
 	DOTFILES_DO_SYMLINK='y'
+	DOTFILES_DO_HOSTS='y'
 	DOTFILES_DO_OSX='y'
 	DOTFILES_DO_APP_STORE='y'
 	DOTFILES_DO_BREW='y'
@@ -145,6 +146,11 @@ do
 	dst="$HOME/bin/$(basename "${src}")"
 	link_file "$DOTFILES_ROOT/$src" "$dst"
 done
+
+if confirm 'Would you like to install a third party hosts file?' $DOTFILES_DO_HOSTS; then
+	curl -fsLo "$HOME/hosts" http://someonewhocares.org/hosts/ipv6/hosts
+	sudo mv "$HOME/hosts" /etc/hosts
+fi
 
 # OSX Settings
 if is_osx && confirm 'Would you like to customize your OS X environment?' $DOTFILES_DO_OSX; then
