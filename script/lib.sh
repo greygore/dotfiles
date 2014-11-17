@@ -108,9 +108,8 @@ link_file () {
 			if [ "$currentSrc" == "$src" ]; then
 				skip=true;
 			else
-				user "File already exists: $(basename "$src"), what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
-				read -n 1 action
-				case "$action" in
+				question "File already exists: $(basename "$src"), what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+				case "$answer" in
 					o ) overwrite=true;;
 					O ) overwrite_all=true;;
 					b ) backup=true;;
