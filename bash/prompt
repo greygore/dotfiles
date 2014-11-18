@@ -53,39 +53,42 @@ prompt_git() {
 	fi;
 }
 
-if [ -x /usr/bin/tput ] && tput setaf 1 &> /dev/null; then
-	tput sgr0; # reset colors
-	bold=$(tput bold);
-	reset=$(tput sgr0);
-	# Solarized colors, taken from http://git.io/solarized-colors.
-	black=$(tput setaf 0);
-	blue=$(tput setaf 33);
-	cyan=$(tput setaf 37);
-	green=$(tput setaf 64);
-	orange=$(tput setaf 166);
-	purple=$(tput setaf 125);
-	red=$(tput setaf 124);
-	violet=$(tput setaf 61);
-	white=$(tput setaf 15);
-	yellow=$(tput setaf 136);
-else
-	bold='';
-	reset="\e[0m";
-	black="\e[1;30m";
-	blue="\e[1;34m";
-	cyan="\e[1;36m";
-	green="\e[1;32m";
-	orange="\e[1;33m";
-	purple="\e[1;35m";
-	red="\e[1;31m";
-	violet="\e[1;35m";
-	white="\e[1;37m";
-	yellow="\e[1;33m";
-fi;
+prompt_battery () {
+	if [ "$(uname -s)" == "Darwin" ]; then
+		local battery=$(ioreg -n AppleSmartBattery -r | awk '$1~/Capacity/{c[$1]=$3} END{OFMT="%.2f%%"; max=c["\"MaxCapacity\""]; print (max>0? 100*c["\"CurrentCapacity\""]/max: "?")}')
+		local charging=$(ioreg -n AppleSmartBattery -r | awk '$1~/ExternalConnected/{gsub("Yes", "+");gsub("No", " "); print substr($0, length, 2)}')
+		# ⚡🔋
+		echo "$charging $base2$battery"
+	fi
+	return
+}
+
+tput sgr0 # reset colors
+bold=$(tput bold)
+reset=$(tput sgr0)
+black=$(tput setaf 0)
+white=$(tput setaf 15)
+# Solarized colors, taken from http://git.io/solarized-colors
+base03=$(tput setaf 234)
+base02=$(tput setaf 235)
+base01=$(tput setaf 240)
+base00=$(tput setaf 241)
+base0=$(tput setaf 244)
+base1=$(tput setaf 245)
+base2=$(tput setaf 254)
+base3=$(tput setaf 230)
+yellow=$(tput setaf 136)
+orange=$(tput setaf 166)
+red=$(tput setaf 160)
+magenta=$(tput setaf 125)
+violet=$(tput setaf 61)
+blue=$(tput setaf 33)
+cyan=$(tput setaf 37)
+green=$(tput setaf 64)
 
 # Highlight the user name when logged in as root.
 if [[ "${USER}" == "root" ]]; then
-	userStyle="\[${red}\]";
+	userStyle="\[${bold}${red}\]";
 else
 	userStyle="\[${orange}\]";
 fi;
@@ -101,14 +104,15 @@ fi;
 PS1="\[\033]0;\w\007\]";
 PS1+="\[${bold}\]\n"; # newline
 PS1+="\[${userStyle}\]\u"; # username
-PS1+="\[${white}\]@";
+PS1+="\[${base01}\]@";
 PS1+="\[${hostStyle}\]\h"; # host
-PS1+="\[${white}\]: ";
+PS1+="\[${base01}\]: ";
 PS1+="\[${green}\]\w"; # working directory
-PS1+="\$(prompt_git \"${white} - ${violet}\")"; # Git repository details
-PS1+="\[${white}\] ";
-PS1+="\[${cyan}\]\T" # time
+PS1+="\$(prompt_git \"${violet} - \")"; # Git repository details
+#PS1+="\[${base01}\] ";
+#PS1+="\$(prompt_battery)"; # Battery
 PS1+="\n";
+PS1+="\[${base01}\][\T] " # time
 PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
 export PS1;
 

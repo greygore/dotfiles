@@ -134,7 +134,7 @@ Further details are in the `.bash_prompt` file.
 
 #### Screenshot
 
-![](http://i.imgur.com/CiXGoha.png)
+![](http://imgur.com/fRzEhBX)
 
 ## To Do
 
