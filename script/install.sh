@@ -117,22 +117,11 @@ overwriteAll=false
 backupAll=false
 skipAll=false
 if confirm 'Would you like to symlink your dotfiles?' $DOTFILES_DO_SYMLINK; then
-	# Link main files
-	for src in $(find config -maxdepth 1 -not -type d | grep -v _master$)
-	do
+	# Grab all config files that start with "." and don't end in .master
+	for src in $(find config -iregex '^config/[a-z0-9]*/\.[a-z0-9._-]*' -maxdepth 3 | grep -v .master$); do
+		[ -d $src ] && src="$src/"
 		dst="$HOME/$(basename "${src}")"
 		link_file "$DOTFILES_ROOT/$src" "$dst"
-	done
-
-	# Link files in directories (only 1 deep)
-	for dir in $(find config -maxdepth 1 -type d | grep config/)
-	do
-		mkdir -p "$HOME/$(basename "$dir")"
-		for src in $(find $dir -maxdepth 1 -not -type d | grep -v _master$)
-		do
-			dst="$HOME/$(basename "$dir")/$(basename "${src}")"
-			link_file "$DOTFILES_ROOT/$src" "$dst"
-		done
 	done
 
 	# Start new bash environment
@@ -140,12 +129,7 @@ if confirm 'Would you like to symlink your dotfiles?' $DOTFILES_DO_SYMLINK; then
 fi
 
 info 'Installing user binaries and scripts...'
-mkdir -p ~/bin
-for src in $(find bin -maxdepth 1 -not -type d)
-do
-	dst="$HOME/bin/$(basename "${src}")"
-	link_file "$DOTFILES_ROOT/$src" "$dst"
-done
+link_file "$DOTFILES_ROOT/bin" "$HOME/bin"
 
 if confirm 'Would you like to install a third party hosts file?' $DOTFILES_DO_HOSTS; then
 	curl -fsLo "$HOME/hosts" http://someonewhocares.org/hosts/ipv6/hosts
