@@ -25,4 +25,4 @@ if [[ ! -d $DOTFILES_ROOT ]]; then
 	rm -rf $HOME/dotfiles.tar.gz
 fi
 
-source $DOTFILES_DIRECTORY/script/install.sh
+source $DOTFILES_ROOT/script/install.sh
