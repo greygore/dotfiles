@@ -1,5 +1,6 @@
 #/usr/bin/env bash
-source ./lib.sh
+[ -z "$DOTFILES_ROOT" ] && ( echo "ERROR: DOTFILES_ROOT needs to be set"; exit 1 )
+source $DOTFILES_ROOT/lib.sh
 
 question 'What is your name?'
 pause

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-[ -z "$DOTFILES_ROOT" ] &&  { echo "ERROR: DOTFILES_ROOT needs to be set"; exit 1; }
+[ -z "$DOTFILES_ROOT" ] && ( echo "ERROR: DOTFILES_ROOT needs to be set"; exit 1 )
 
 # Install package control
 /usr/local/bin/subl -b && killall "Sublime Text" # Create support directories

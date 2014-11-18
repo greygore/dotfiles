@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-[ -z "$DOTFILES_USER" ] { echo "ERROR: DOTFILES_USER needs to be set"; exit 1; }
+[ -z "$DOTFILES_USER" ] && (echo "ERROR: DOTFILES_USER needs to be set"; exit 1 )
 
 DOTFILES_DEFAULT_DIRECTORY="$HOME/.dotfiles"
 export DOTFILES_ROOT=${DOTFILES_ROOT-$DOTFILES_DEFAULT_DIRECTORY}

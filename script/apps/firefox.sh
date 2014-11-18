@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-[ -z "$DOTFILES_ROOT" ] &&  { echo "ERROR: DOTFILES_ROOT needs to be set"; exit 1; }
+[ -z "$DOTFILES_ROOT" ] && ( echo "ERROR: DOTFILES_ROOT needs to be set"; exit 1 )
 source "$DOTFILES_ROOT/script/lib.sh"
 
 # Set default browser
