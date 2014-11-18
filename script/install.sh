@@ -40,9 +40,9 @@ fi
 # Set up public key
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
 	info 'Generating new ssh key...'
-	question ' (SSH) What is your email?' $DOTFILES_SSH_EMAIL " (SSH) Using supplied email: $DOTFILES_SSH_EMAIL"
+	question ' (SSH) What is your email?' "$DOTFILES_SSH_EMAIL" " (SSH) Using supplied email: $DOTFILES_SSH_EMAIL"
 	ssh_email=$answer
-	password ' (SSH) Enter a passphrase:' $DOTFILES_SSH_PASSPHRASE " (SSH) Using supplied passphrase"
+	password ' (SSH) Enter a passphrase:' "$DOTFILES_SSH_PASSPHRASE" " (SSH) Using supplied passphrase"
 	ssh_passphrase=$answer
 	ssh-keygen -q -t rsa -C "$ssh_email" -f ~/.ssh/id_rsa -N "$ssh_passphrase" > /dev/null \
 	|| fail 'Unable to generate a new key'
@@ -64,9 +64,9 @@ if confirm 'Would you like to configure git?' $DOTFILES_DO_GIT_CONFIG 'Configuri
 	cp -f "$DOTFILES_ROOT/config/.gitconfig_master" "$HOME/.gitconfig" \
 	|| fail "Unable to copy master .gitconfig file to home directory"
 
-	question ' (Git) What is your full name?' $DOTFILES_GIT_NAME " (Git) Using supplied name: $DOTFILES_GIT_NAME"
+	question ' (Git) What is your full name?' "$DOTFILES_GIT_NAME" " (Git) Using supplied name: $DOTFILES_GIT_NAME"
 	git_authorname=$answer
-	question ' (Git) What is your email?' $DOTFILES_GIT_EMAIL " (Git) Using supplied email: $DOTFILES_GIT_EMAIL"
+	question ' (Git) What is your email?' "$DOTFILES_GIT_EMAIL" " (Git) Using supplied email: $DOTFILES_GIT_EMAIL"
 	git_authoremail=$answer
 	if is_osx; then
 		git_credential='osxkeychain'
