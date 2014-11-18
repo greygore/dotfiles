@@ -61,7 +61,7 @@ fi
 
 # Set up git config
 if confirm 'Would you like to configure git?' $DOTFILES_DO_GIT_CONFIG 'Configuring git...'; then
-	cp -f "$DOTFILES_ROOT/config/.gitconfig_master" "$HOME/.gitconfig" \
+	cp -f "$DOTFILES_ROOT/config/git/.gitconfig.master" "$HOME/.gitconfig" \
 	|| fail "Unable to copy master .gitconfig file to home directory"
 
 	question ' (Git) What is your full name?' "$DOTFILES_GIT_NAME" " (Git) Using supplied name: $DOTFILES_GIT_NAME"
@@ -76,7 +76,7 @@ if confirm 'Would you like to configure git?' $DOTFILES_DO_GIT_CONFIG 'Configuri
 	git config --global user.name "$git_authorname"
 	git config --global user.email "$git_authoremail"
 	git config --global credential.helper $git_credential
-	git config --global core.excludesfile ~/.gitignore_global
+	git config --global core.excludesfile ~/.gitignore.global
 	success 'Created .gitconfig.'
 fi
 
