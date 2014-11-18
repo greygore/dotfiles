@@ -103,6 +103,7 @@ elif confirm 'Would you like to create a git repository and sync it with the rem
 	else
 		DOTFILES_GIT_REMOTE="git@github.com:$DOTFILES_USER/dotfiles.git"
 	fi
+	cd $DOTFILES_ROOT
 	git init > /dev/null \
 	&& git remote add origin ${DOTFILES_GIT_REMOTE} > /dev/null 2>&1 \
 	&& git fetch origin master > /dev/null 2>&1 \
