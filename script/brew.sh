@@ -30,23 +30,23 @@ brew install caskroom/cask/brew-cask >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Installed homebrew cask' \
 || fail 'Unable to install homebrew cask'
 
-if confirm 'Install brewed version of bash?' $DOTFILES_DO_BREW_BASH 'Installing brewed bash...'; then
+if confirm 'Install brewed version of bash?' "$DOTFILES_DO_BREW_BASH" 'Installing brewed bash...'; then
 	source "$DOTFILES_ROOT/script/brew/bash.sh"
 fi
 
-if confirm 'Install updated versions of built in tools?' $DOTFILES_DO_BREW_TOOLS 'Installing updated tools...'; then
+if confirm 'Install updated versions of built in tools?' "$DOTFILES_DO_BREW_TOOLS" 'Installing updated tools...'; then
 	source "$DOTFILES_ROOT/script/brew/updated.sh"
 fi
 
-if confirm 'Install other brew formulas?' $DOTFILES_DO_BREW_OTHER; then
+if confirm 'Install other brew formulas?' "$DOTFILES_DO_BREW_OTHER"; then
 	source "$DOTFILES_ROOT/script/brew/formulas.sh"
 fi
 
-if confirm 'Install brew casks?' $DOTFILES_DO_BREW_CASK; then
+if confirm 'Install brew casks?' "$DOTFILES_DO_BREW_CASK"; then
 	source "$DOTFILES_ROOT/script/brew/casks.sh"
 fi
 
-if confirm 'Install quicklook plugins?' $DOTFILES_DO_BREW_QUICKLOOK; then
+if confirm 'Install quicklook plugins?' "$DOTFILES_DO_BREW_QUICKLOOK"; then
 	source "$DOTFILES_ROOT/script/brew/quicklook.sh"
 fi
 
