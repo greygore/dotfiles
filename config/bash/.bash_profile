@@ -10,7 +10,7 @@ if [ ! -z "$DOTFILES_ROOT" ]; then
 		exit 1
 	fi
 else
-	if [ -d "$HOME/.dotfiles"]; then
+	if [ -d "$HOME/.dotfiles" ]; then
 		export DOTFILES_ROOT="$HOME/.dotfiles"
 	else
 		echo 'ERROR: Can not find dotfiles directory'
