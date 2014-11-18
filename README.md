@@ -26,8 +26,10 @@ export DOTFILES_USER="greygore"; bash -c "$(curl -fsSL raw.github.com/$DOTFILES_
 By default the script will install in the `~/.dotfiles` directory. An alternate location can be provided with the `DOTFILES_DIRECTORY` variable. For example:
 
 ```bash
-DOTFILES_USER="greygore" DOTFILES_DIRECTORY="$HOME/dotfiles" bash -c "$(curl -fsSL raw.github.com/$GITHUB_USER/dotfiles/master/bootstrap.sh)"
+export DOTFILES_USER="greygore"; export DOTFILES_DIRECTORY="$HOME/dotfiles" bash -c "$(curl -fsSL raw.github.com/$GITHUB_USER/dotfiles/master/bootstrap.sh)"
 ```
+
+:warning: If you install in an alternate location, you must add a `.dotrc` file containting a `DOTFILES_ROOT` variable.
 
 ## Customization
 
@@ -84,17 +86,20 @@ Although you should be able to remove Homebrew and all installed packages by del
 All config files are symlinked into the home directory:
 
  - Bash configuration
-    * `.aliases` - Aliases
-    * `.bash_profile` - Main config, includes completions
-    * `.bash_prompt` - Customized prompt
+    * `.bash_profile` - Main config, loads the following files from `bash/`
+        + `aliases` - Aliases
+        + `completions` - Additions to tab complet
+        + `exports` - Environmental variables
+        + `functions` - Bash functions
+        + `options` - Bash options
+        + `path` - Additions to `$PATH`
+        + `prompt` - Customized prompt
     * `.bashrc` - Loads main config
-    * `.exports` - Environmental variables
-    * `.functions` - Bash functions
-    * `.path` - Additions to `$PATH`
  - Git configuration
     * `.gitattributes` - Path specific options
     * `.gitignore_global` - Git ignore file for all repos
- - Program configuration
+    * `.gitmessage` - Default commit message template
+ - Run command (rc) configurations
     * `.ackrc`
     * `.curlrc`
     * `.jshintrc`
@@ -112,6 +117,7 @@ All config files are symlinked into the home directory:
  * Configures default OS settings
  * Install programs via [Homebrew](http://brew.sh/)
  * Install applications via [Cask](http://caskroom.io/)
+ * Install Quicklook plugins via [Cask](http://caskroom.io/)
 
 ### Custom bash prompt
 
@@ -139,9 +145,10 @@ Further details are in the `.bash_prompt` file.
 ## To Do
 
  * Remove hard-coded locale and/or allow selection of alternatives.
- * Add [zsh](http://www.zsh.org/) shell with [oh-my-zsh](http://ohmyz.sh/)
+ * Add [zsh](http://www.zsh.org/) shell with [oh-my-zsh](http://ohmyz.sh/)/[Prezto](https://github.com/sorin-ionescu/prezto)
  * Create restore script to restore dotfile backups and revert OS X customizations
  * Research [duti](https://github.com/moretension/duti) for setting default applications for file types and URIs. [More](https://github.com/mathiasbynens/dotfiles/issues/54).
+ * Add to `cheat` and `tldr`
 
 ## Feedback
 
@@ -153,4 +160,4 @@ Suggestions/improvements
  * [Roderik van der Veer](http://vanderveer.be/) for his [Mountain Lion setup post](http://vanderveer.be/setting-up-my-perfect-developer-environment-on-osx-10-8-mountain-lion-dp3-edition/) which pointed me to...
  * [Mathias Bynens](http://mathiasbynens.be/) for [his widely forked dotfiles](https://github.com/mathiasbynens/dotfiles)
  * [Nicolas Gallagher](http://nicolasgallagher.com/) whose [dotfiles I shamelessly stole from](https://github.com/necolas/dotfiles)
-
+ * [Newton](http://www.chrisopedia.com/) whose [dotfiles provided a few ideas from a different perspective](https://github.com/chrisopedia/dotfiles)
