@@ -11,7 +11,7 @@ sudo -v; while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/de
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-question " (OSX) What is your computer's name?"
+question " (OSX) What is your computer's name?" "$DOTFILES_OSX_COMPUTER_NAME" "Setting computer name to $DOTFILES_OSX_COMPUTER_NAME..."
 computer_name=$answer
 if [ $computer_name ]; then
 	sudo scutil --set ComputerName $computer_name
@@ -21,7 +21,7 @@ if [ $computer_name ]; then
 fi
 
 # Locale settings
-if confirm ' (OSX) Use US locale information?'; then
+if confirm ' (OSX) Use US locale information?' "$DOTFILES_OSX_LOCALE_US" "Setting locale to US..."; then
 	defaults write NSGlobalDomain AppleLanguages -array "en"
 	defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
 	defaults write NSGlobalDomain AppleMeasurementUnits -string "Inches"
@@ -30,7 +30,7 @@ if confirm ' (OSX) Use US locale information?'; then
 fi
 
 # Set the timezone; see `systemsetup -listtimezones` for other values
-if confirm ' (OSX) Use Eastern US timezone?'; then
+if confirm ' (OSX) Use Eastern US timezone?' "$DOTFILES_OSX_TIMEZONE_EST" "Setting timezone to Eastern US"...; then
 	sudo systemsetup -settimezone "America/New_York" > /dev/null
 fi
 
@@ -465,7 +465,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Wipe all (default) app icons from the Dock
 # This is only really useful when setting up a new Mac, or if you don’t use
 # the Dock to launch apps.
-if confirm ' (OSX) Would you like to remove all icons from the Dock?'; then
+if confirm ' (OSX) Would you like to remove all icons from the Dock?' "$DOTFILES_OSX_DOCK_CLEAR" "Clearing icons from the Dock..."; then
 	defaults write com.apple.dock persistent-apps -array ""
 fi
 
