@@ -99,6 +99,7 @@ link_file () {
 
 	local overwrite= backup= skip=
 	local action=
+	local dstType=
 
 	if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
 
@@ -108,7 +109,12 @@ link_file () {
 			if [ "$currentSrc" == "$src" ]; then
 				skip=true;
 			else
-				question "File already exists: $(basename "$src"), what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+				if [ -d "$dst" ]; then
+					dstType='Directory'
+				else
+					dstType='File'
+				fi
+				question "$dstType already exists: $(basename "$src"), what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
 				case "$answer" in
 					o ) overwrite=true;;
 					O ) overwrite_all=true;;
