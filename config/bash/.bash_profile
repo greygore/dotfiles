@@ -4,7 +4,7 @@
 [ -r '.dotrc' ] && source '.dotrc'
 
 # Check that DOTFILES_ROOT is set and a valid directory
-if [ -v $DOTFILES_ROOT ]; then
+if [ ! -z "$DOTFILES_ROOT" ]; then
 	if [ ! -d $DOTFILES_ROOT ]; then
 		echo "No dotfiles directory found at $DOTFILES_ROOT"
 		exit 1
