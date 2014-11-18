@@ -2,7 +2,7 @@
 [ -z "$DOTFILES_USER" ] && (echo "ERROR: DOTFILES_USER needs to be set"; exit 1 )
 
 DOTFILES_DEFAULT_DIRECTORY="$HOME/.dotfiles"
-export DOTFILES_ROOT=${DOTFILES_ROOT-$DOTFILES_DEFAULT_DIRECTORY}
+DOTFILES_ROOT=${DOTFILES_ROOT-$DOTFILES_DEFAULT_DIRECTORY}
 DOTFILES_TARBALL_PATH="https://github.com/$DOTFILES_USER/dotfiles/tarball/master"
 
 # Set the terminal background color on OSX
