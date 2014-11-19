@@ -5,11 +5,11 @@ source "$DOTFILES_ROOT/script/brew/lib.sh"
 
 # Alfred
 if [ -d "/Applications/Alfred 2.app" ]; then
-	alfred_installed=true
+	alfred_installed="Installed"
 fi
 brew_cask 'alfred'
 # If not previously installed, open to allow linking later
-if [ ! -v $alfred_installed ]; then
+if [ -z $alfred_installed ]; then
 	open -a "Alfred 2"
 fi
 
