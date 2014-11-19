@@ -170,7 +170,7 @@ if is_osx && confirm 'Would you like to install and configure Homebrew formula/c
 fi
 
 # Node/NPM packages
-if test $(which npm) && confirm 'Would you like to install NPM packages?' $DOTFILES_DO_NPM; then
+if test $(which npm) && confirm 'Would you like to install NPM packages?' "$DOTFILES_DO_NPM" 'Installing NPM packages...'; then
 	source "$DOTFILES_ROOT/script/npm.sh" && success 'NPM packages installed.'
 fi
 
