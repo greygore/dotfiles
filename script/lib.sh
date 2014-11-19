@@ -50,7 +50,7 @@ confirm () {
 		fi
 	fi
 	timestamp
-	printf "$(tput bold; tput setaf 7) [ ? ] %s (y/n) $(tput sgr0)" "$@"
+	printf "$(tput bold; tput setaf 7) [ ? ] %s (y/n) $(tput sgr0)" "$1"
 	while read -r -n 1 -s confirm; do
 		if [[ $confirm = [YyNn] ]]; then
 			[[ $confirm = [Yy] ]] && retval=0
