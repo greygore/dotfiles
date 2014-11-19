@@ -114,7 +114,7 @@ link_file () {
 				else
 					dstType='File'
 				fi
-				question "$dstType already exists: $(basename "$src"), what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+				question "$dstType '$(basename $src)'already exists, what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
 				case "$answer" in
 					o ) overwrite=true;;
 					O ) overwrite_all=true;;
