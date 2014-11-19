@@ -8,4 +8,4 @@ if [ -e "/usr/local/opt/coreutils/libexec/gnubin" ]; then
 fi
 
 # Ensure ~/bin is at the front of the path
-export path="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
