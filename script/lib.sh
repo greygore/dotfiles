@@ -90,7 +90,7 @@ warning () {
 
 fail () {
 	timestamp
-	printf "$(tput setaf 1) [ X ] %s$(tput sgr0)\n" "$@"
+	printf "$(tput bold; tput setaf 1) [ X ] %s$(tput sgr0)\n" "$@"
 	exit
 }
 
