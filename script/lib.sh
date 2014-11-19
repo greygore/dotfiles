@@ -3,12 +3,12 @@
 # Library of useful bash functions
 
 timestamp () {
-	printf "$(tput setaf 8)[$(date +'%H:%M:%S')] $(tput sgr0)"
+	printf "$(tput setaf 240)[$(date +'%H:%M:%S')] $(tput sgr0)"
 }
 
 info () {
 	timestamp
-	printf "$(tput setaf 8) [   ] %s$(tput sgr0)\n" "$@"
+	printf "$(tput setaf 240) [   ] %s$(tput sgr0)\n" "$@"
 }
 
 question () {
