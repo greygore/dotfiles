@@ -21,7 +21,7 @@ fi
 # Load bash dotfiles modules
 files=( options exports aliases functions prompt path completions )
 for file in ${files[@]}; do
-	[ -r "$DOTFILES_ROOT/bash/$file" ] && source "$DOTFILES_ROOT/bash/$file"
+	[ -r "$DOTFILES_ROOT/config/bash/$file" ] && source "$DOTFILES_ROOT/config/bash/$file"
 done
 unset files
 
