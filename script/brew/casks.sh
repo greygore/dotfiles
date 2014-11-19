@@ -9,7 +9,7 @@ if [ -d "/Applications/Alfred 2.app" ]; then
 fi
 brew_cask 'alfred'
 # If not previously installed, open to allow linking later
-if [ -z $alfred_installed ]; then
+if [ -z "$alfred_installed" ]; then
 	open -a "Alfred 2"
 fi
 
