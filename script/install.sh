@@ -23,6 +23,11 @@ elif confirm 'Do full install?' $DOTFILES_DO_FULL_INSTALL; then
 	DOTFILES_DO_NPM='y'
 fi
 
+# Create basic config file if it doesn't already exist
+if [ ! -f "$HOME/.dotrc" ]; then
+	echo "DOTFILES_ROOT=$DOTFILES_ROOT" > "$HOME/.dotrc"
+fi
+
 # Install command line tools
 if is_osx; then
 	xcode-select -p > /dev/null 2>&1

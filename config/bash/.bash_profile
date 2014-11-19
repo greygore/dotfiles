@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Load dotfiles run command
-[ -r '.dotrc' ] && source '.dotrc'
+[ -r '.dotrc' ] && source "$HOME/.dotrc"
 
 # Check that DOTFILES_ROOT is set and a valid directory
 if [ ! -z "$DOTFILES_ROOT" ]; then
