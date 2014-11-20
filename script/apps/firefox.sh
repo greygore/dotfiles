@@ -13,6 +13,7 @@ wget http://download.xmarks.com/download/binary/firefox > /dev/null 2>&1 # XMark
 wget https://addons.mozilla.org/firefox/downloads/latest/7661/addon-7661-latest.xpi > /dev/null 2>&1 # Pocket
 wget http://download.livereload.com/2.0.8/LiveReload-2.0.8.xpi > /dev/null 2>&1 # LiveReload
 wget https://addons.mozilla.org/firefox/downloads/file/276230/ember_inspector-1.5.0-fx.xpi > /dev/null 2>&1 # Ember Inspector
+wget https://addons.mozilla.org/firefox/downloads/latest/10869/addon-10869-latest.xpi > /dev/null 2>&1 # JSON View
 
 # TODO - Load addons without opening Firefox
 open -a Firefox.app *.xpi > /dev/null 2>&1
