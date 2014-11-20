@@ -342,3 +342,33 @@ function o() {
 		open "$@"
 	fi
 }
+
+# GitHub URL for current repo.
+function gurl() {
+	local remotename="${@:-origin}"
+	local remote="$(git remote -v | awk '/^'"$remotename"'.*\(push\)$/ {print $2}')"
+	[[ "$remote" ]] || return
+	local user_repo="$(echo "$remote" | perl -pe 's/.*://;s/\.git$//')"
+	echo "https://github.com/$user_repo"
+}
+
+# open all changed files (that still actually exist) in the editor
+# credit: @cowboy
+function ged() {
+	local files=()
+	for f in $(git diff --name-only "$@"); do
+		[[ -e "$f" ]] && files=("${files[@]}" "$f")
+	done
+	local n=${#files[@]}
+	echo "Opening $n $([[ "$@" ]] || echo "modified ")file$([[ $n != 1 ]] && \
+		echo s)${@:+ modified in }$@"
+	$EDITOR "${files[@]}"
+}
+
+# open last commit in GitHub, in the browser.
+# credit: @cowboy
+function gfu() {
+	local n="${@:-1}"
+	n=$((n-1))
+	open $(git log -n 1 --skip=$n --pretty=oneline | awk "{printf \"$(gurl)/commit/%s\", substr(\$1,1,7)}")
+}
