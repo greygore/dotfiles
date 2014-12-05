@@ -31,6 +31,7 @@ brew_formula 'pv'
 brew_formula 'hr'
 brew_formula 'figlet'
 brew_formula 'spark'
+brew_formula 'gifify'
 
 # Miscellaneous
 brew_formula 'todo-txt' # http://todotxt.com/
