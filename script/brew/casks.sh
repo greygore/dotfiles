@@ -13,6 +13,9 @@ if [ -z "$alfred_installed" ]; then
 	open -a "Alfred 2"
 fi
 
+# Fonts
+brew_cask 'caskroom/fonts/font-source-code-pro'
+
 # Basic tools
 brew_cask 'onepassword'
 brew_cask 'iterm2'
