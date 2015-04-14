@@ -41,3 +41,4 @@ brew_formula 'boot2docker'
 brew_formula 'todo-txt' # http://todotxt.com/
 brew_formula 'go' '--cross-compile-common' # golang
 brew_formula 'node' # node.js and npm
+brew_formula 'dark-mode' # Toggle OSX dark mode
