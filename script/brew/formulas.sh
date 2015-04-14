@@ -32,6 +32,7 @@ brew_formula 'hr'
 brew_formula 'figlet'
 brew_formula 'spark'
 brew_formula 'gifify'
+brew_formula 'prettyping'
 
 # Docker
 brew_formula 'docker'
