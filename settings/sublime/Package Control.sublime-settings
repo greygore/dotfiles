@@ -2,6 +2,7 @@
 	"installed_packages":
 	[
 		"ASCII Decorator",
+		"Babel",
 		"Base64 Fold",
 		"cdnjs",
 		"Color Highlighter",
