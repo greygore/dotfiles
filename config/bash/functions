@@ -372,3 +372,7 @@ function gfu() {
 	n=$((n-1))
 	open $(git log -n 1 --skip=$n --pretty=oneline | awk "{printf \"$(gurl)/commit/%s\", substr(\$1,1,7)}")
 }
+
+docker-ip() {
+	boot2docker ip 2> /dev/null
+}

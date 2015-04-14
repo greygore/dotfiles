@@ -33,6 +33,10 @@ brew_formula 'figlet'
 brew_formula 'spark'
 brew_formula 'gifify'
 
+# Docker
+brew_formula 'docker'
+brew_formula 'boot2docker'
+
 # Miscellaneous
 brew_formula 'todo-txt' # http://todotxt.com/
 brew_formula 'go' '--cross-compile-common' # golang

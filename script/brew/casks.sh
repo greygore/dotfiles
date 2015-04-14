@@ -50,6 +50,7 @@ brew_cask 'pgadmin3'
 brew_cask 'dash' # API Docs
 brew_cask 'imageoptim'
 brew_cask 'cyberduck' # Remote files
+brew_cask 'kitematic' # Docker
 
 # Communication
 brew_cask 'skype'
