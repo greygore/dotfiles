@@ -161,6 +161,9 @@ function pman {
    man -t "${1}" | open -f -a /Applications/Preview.app
 }
 
+# Nuke npm
+alias nombom='npm cache clear && bower cache clean && rm -rf node_modules bower_components && npm install && bower install'
+
 # Stuff I never really use but cannot delete either because of http://xkcd.com/530/
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 7'"
