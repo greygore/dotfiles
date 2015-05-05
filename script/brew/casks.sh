@@ -60,3 +60,4 @@ brew_cask 'komanda' # IRC
 brew_cask 'libreoffice'
 brew_cask 'ynab'
 brew_cask 'gimp'
+brew_cask 'vlc'
