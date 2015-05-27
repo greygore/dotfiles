@@ -8,6 +8,7 @@ brew_formula 'tree' # ls
 brew_formula 'trash' # rm
 brew_formula 'rename' # mv
 brew_formula 'tag'
+brew_formula 'ccat' # cat
 
 # Cool new tools
 brew_formula 'wget' '--with-iri'
@@ -18,6 +19,7 @@ brew_formula 'terminal-notifier' # cli notifications
 brew_formula 'watchman' # file watcher
 brew_formula 'known_hosts' # known_hosts manager
 brew_formula 'jq' # json processor
+brew_formula 'fpp' # Facebook path picker
 
 # Conversion tools
 brew_formula 'ffmpeg' '--with-tools --with-x265' # movies/audio
