@@ -50,11 +50,6 @@ if confirm 'Install quicklook plugins?' "$DOTFILES_DO_BREW_QUICKLOOK"; then
 	source "$DOTFILES_ROOT/script/brew/quicklook.sh"
 fi
 
-# Add casks to Alfred's path
-brew cask alfred link >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-&& success 'Added caskroom to Alfred scope.' \
-|| error 'Unable to add caskroom to Alfred scope'
-
 # Clean up brew working files
 brew cleanup >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && brew cask cleanup >> "$DOTFILES_ROOT/brew.log" 2>&1 \
