@@ -39,7 +39,7 @@ brew_formula 'prettyping'
 
 # Docker
 brew_formula 'docker'
-brew_formula 'boot2docker'
+brew_formula 'docker-compose'
 
 # Miscellaneous
 brew_formula 'todo-txt' # http://todotxt.com/
