@@ -17,7 +17,7 @@ fi
 brew_cask 'caskroom/fonts/font-source-code-pro'
 
 # Basic tools
-brew_cask 'onepassword'
+brew_cask '1password'
 brew_cask 'iterm2'
 brew_cask 'caskroom/homebrew-versions/sublime-text3'
 
