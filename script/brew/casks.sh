@@ -30,7 +30,6 @@ brew_cask 'daisydisk'
 
 # Menu
 brew_cask 'battery-time-remaining'
-brew_cask 'istat-menus'
 
 # Browser
 brew_cask 'firefox'
