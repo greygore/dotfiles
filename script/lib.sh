@@ -161,3 +161,16 @@ is_osx () {
 	fi
 	return 1
 }
+
+start_sudo() {
+    sudo -v
+    ( while true; do sudo -v; sleep 60; done; ) &
+    SUDO_PID="$!"
+    trap stopsudo SIGINT SIGTERM
+}
+
+stop_sudo() {
+    kill "$SUDO_PID"
+    trap - SIGINT SIGTERM
+    sudo -k
+}
