@@ -3,13 +3,10 @@
 source "$DOTFILES_ROOT/script/lib.sh"
 source "$DOTFILES_ROOT/script/brew/lib.sh"
 
-# Ask for sudo up front and keep alive for entire script
-sudo -v; while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
 # Install Homebrew
 if test ! $(which brew); then
 	info "Installing homebrew..."
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | sed 's/^.*sudo.*\-k/#&/g')" < /dev/null >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 	&& success 'Homebrew installed.' \
 	|| fail 'Unable to install Homebrew'
 fi
@@ -19,11 +16,6 @@ brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && brew upgrade >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Homebrew and formulas upgraded.' \
 || fail 'Unable to upgrade homebrew and formulas'
-
-# Patch homebrew to stop sudo timestamp invalidation
-if grep '^[^#].*sudo.*\-k' "$(brew --prefix)/Library/Homebrew/build.rb" > /dev/null 2>&1; then
-	sed -i '.backup' 's/^.*sudo.*\-k/#&/g' "$(brew --prefix)/Library/Homebrew/build.rb" > /dev/null 2>&1
-fi
 
 info 'Installing homebrew cask...'
 brew install caskroom/cask/brew-cask >> "$DOTFILES_ROOT/brew.log" 2>&1 \
@@ -55,8 +47,3 @@ brew cleanup >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && brew cask cleanup >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Cleaned up brew and cask.' \
 || error 'Unable to clean up brew and cask'
-
-# Remove sudo timestamp invalidation patch
-if [ -f "$(brew --prefix)/Library/Homebrew/build.rb.backup" ]; then
-	mv "$(brew --prefix)/Library/Homebrew/build.rb.backup" "$(brew --prefix)/Library/Homebrew/build.rb"
-fi
