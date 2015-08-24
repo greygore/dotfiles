@@ -23,6 +23,13 @@ elif confirm 'Do full install?' $DOTFILES_DO_FULL_INSTALL; then
 	DOTFILES_DO_NPM='y'
 fi
 
+# Set work/home variables to flag brew formulas
+if confirm 'Is this a work install?'; then
+	DOTFILES_INSTALL_CONTEXT='work'
+else
+	DOTFILES_INSTALL_CONTEXT='home'
+fi
+
 # Create basic config file if it doesn't already exist
 if [ ! -f "$HOME/.dotrc" ]; then
 	echo "DOTFILES_ROOT=$DOTFILES_ROOT" > "$HOME/.dotrc"

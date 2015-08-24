@@ -36,7 +36,7 @@ brew_cask 'firefox'
 brew_cask 'google-chrome'
 
 # Services
-brew_cask 'crashplan'
+brew_cask 'crashplan' 'home'
 brew_cask 'dropbox'
 brew_cask 'evernote'
 brew_cask 'github'
@@ -50,13 +50,15 @@ brew_cask 'dash' # API Docs
 brew_cask 'imageoptim'
 brew_cask 'cyberduck' # Remote files
 brew_cask 'kitematic' # Docker
+brew_cask 'phpstorm' 'work'
 
 # Communication
 brew_cask 'skype'
 brew_cask 'komanda' # IRC
 
 # Apps
-brew_cask 'libreoffice'
-brew_cask 'ynab'
-brew_cask 'gimp'
+brew_cask 'libreoffice' 'home'
+brew_cask 'ynab' 'home'
+brew_cask 'gimp' 'home'
 brew_cask 'vlc'
+brew_cask 'hipchat' 'work'
