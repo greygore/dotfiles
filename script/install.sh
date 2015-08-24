@@ -67,6 +67,15 @@ if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
 	fi
 	open https://www.github.com/settings/ssh
 	pause 'Enter your public key to your Github account, then press any key to continue.'
+elif confirm 'Would you like to enter your public key on Github?'
+	if is_osx; then
+		pbcopy < "$HOME/.ssh/id_rsa.pub"
+		info 'Your public key has been copied to your clipboard.'
+	else
+		info "Your public key is: $(cat $HOME/.ssh/id_rsa.pub)"
+	fi
+	open https://www.github.com/settings/ssh
+	pause 'Enter your public key to your Github account, then press any key to continue.'
 fi
 
 # Set up git config
