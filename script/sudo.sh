@@ -1,6 +1,4 @@
 #/usr/bin/env bash
-DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-echo "$DIR"
 
 # Register a funciton that can be trapped
 function cleanup_sudo() {
@@ -42,6 +40,7 @@ function validate_sudo() {
 	echo "$sudo_password" | command sudo -S -v &> /dev/null
 }
 
+# Perform sudo operation atomically
 function atomic_sudo() {
 	init_sudo
 	sudo "$@"
