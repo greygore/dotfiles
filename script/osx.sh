@@ -2,9 +2,8 @@
 [ -z "$DOTFILES_ROOT" ] && ( echo "ERROR: DOTFILES_ROOT needs to be set"; exit 1 )
 source "$DOTFILES_ROOT/script/lib.sh"
 
-# Ask for sudo up front and keep alive for entire script
-sudo -v; while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
+# Initialize sudo password save
+init_sudo
 
 ###############################################################################
 # User Specific                                                               #

@@ -2,8 +2,8 @@
 [ -z "$DOTFILES_ROOT" ] && ( echo "ERROR: DOTFILES_ROOT needs to be set"; exit 1 )
 source "$DOTFILES_ROOT/script/lib.sh"
 
-# Ask for sudo up front and keep alive for entire script
-start_sudo
+# Initialize sudo password save
+init_sudo
 
 if [ -f "$HOME/.dotrc" ]; then
 	source "$HOME/.dotrc"
@@ -137,6 +137,9 @@ if confirm 'Would you like to symlink your dotfiles?' $DOTFILES_DO_SYMLINK; then
 
 	# Start new bash environment
 	source ~/.bash_profile
+
+	# Make sure our sudo alias isn't overwritten
+	init_sudo
 fi
 
 info 'Installing user binaries and scripts...'
@@ -174,7 +177,6 @@ if test $(which npm) && confirm 'Would you like to install NPM packages?' "$DOTF
 	source "$DOTFILES_ROOT/script/npm.sh" && success 'NPM packages installed.'
 fi
 
-stop_sudo
 success 'Done! Some changes may require restarting your computer to take effect.'
 pause 'Press any key to close the terminal window so that the profile can be initialized on restart.'
 killall Terminal > /dev/null 2>&1

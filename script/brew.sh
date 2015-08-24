@@ -3,6 +3,9 @@
 source "$DOTFILES_ROOT/script/lib.sh"
 source "$DOTFILES_ROOT/script/brew/lib.sh"
 
+# Initialize sudo password save
+init_sudo; destroy_sudo
+
 # Install Homebrew
 if test ! $(which brew); then
 	info "Installing homebrew..."
@@ -39,7 +42,9 @@ if confirm 'Install brew casks?' "$DOTFILES_DO_BREW_CASK"; then
 fi
 
 if confirm 'Install quicklook plugins?' "$DOTFILES_DO_BREW_QUICKLOOK"; then
+	init sudo
 	source "$DOTFILES_ROOT/script/brew/quicklook.sh"
+	destroy sudo
 fi
 
 # Clean up brew working files

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$DIR/sudo.sh"
 
 # Library of useful bash functions
 
@@ -160,17 +162,4 @@ is_osx () {
 		return 0
 	fi
 	return 1
-}
-
-start_sudo() {
-    sudo -v
-    ( while true; do sudo -v; sleep 60; done; ) &
-    SUDO_PID="$!"
-    trap stopsudo SIGINT SIGTERM
-}
-
-stop_sudo() {
-    kill "$SUDO_PID"
-    trap - SIGINT SIGTERM
-    sudo -k
 }
