@@ -10,6 +10,7 @@ if [ "$(uname -s)" == "Darwin" ]; then
 	osascript -e 'tell application "Terminal"' -e 'tell selected tab of front window' -e 'set normal text color to {65535,65535,65535}' -e 'set background color to {0,0,0}' -e 'end tell' -e 'end tell'
 fi
 
+# Read dotrc config file to check for DOTFILES_ROOT
 if [ -f "$HOME/.dotrc" ]; then
 	source "$HOME/.dotrc"
 else
