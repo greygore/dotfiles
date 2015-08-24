@@ -105,7 +105,7 @@ defaults write com.apple.CrashReporter DialogType none
 ###############################################################################
 
 # Menu bar: Icons (Displays, Time Machine, Bluetooth, Volume)
-for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
+for domain in "$HOME/Library/Preferences/ByHost/com.apple.systemuiserver.*"; do
 	defaults write "${domain}" dontAutoLoad -array \
 		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
 		"/System/Library/CoreServices/Menu Extras/Volume.menu" \
@@ -146,24 +146,24 @@ defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Show item info below icons on the desktop and in other icon views
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" "$HOME/Library/Preferences/com.apple.finder.plist"
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" "$HOME/Library/Preferences/com.apple.finder.plist"
 
 # Enable snap-to-grid for icons on the desktop and in other icon views
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" "$HOME/Library/Preferences/com.apple.finder.plist"
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" "$HOME/Library/Preferences/com.apple.finder.plist"
 
 # Increase grid spacing for icons on the desktop and in other icon views
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" "$HOME/Library/Preferences/com.apple.finder.plist"
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" "$HOME/Library/Preferences/com.apple.finder.plist"
 
 # Increase the size of icons on the desktop and in other icon views
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" "$HOME/Library/Preferences/com.apple.finder.plist"
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" "$HOME/Library/Preferences/com.apple.finder.plist"
 
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
 # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
-#rm -rf ~/Library/Application Support/Dock/desktoppicture.db
+#rm -rf "$HOME/Library/Application Support/Dock/desktoppicture.db"
 #sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
 #sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
 
@@ -216,7 +216,7 @@ defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 # Fix for the ancient UTF-8 bug in QuickLook (s)
 # Commented out, as this is known to cause problems in various Adobe apps :(
 # See https://github.com/mathiasbynens/dotfiles/issues/237
-#echo "0x08000100:0" > ~/.CFUserTextEncoding
+#echo "0x08000100:0" > "$HOME/.CFUserTextEncoding"
 
 # Alert sound
 defaults write com.apple.systemsound 'com.apple.sound.beep.sound' -string '/System/Library/Sounds/Pop.aiff'
@@ -225,7 +225,7 @@ defaults write com.apple.systemsound 'com.apple.sound.beep.sound' -string '/Syst
 defaults write com.apple.systemsound 'com.apple.sound.uiaudio.enabled' -bool true
 
 # Remove "About Downloads.pdf" from ~/Downloads
-rm -rf ~/Downloads/About\ Downloads.lpdf
+rm -rf "$HOME/Downloads/About\ Downloads.lpdf"
 
 ###############################################################################
 # Keyboard                                                                    #
@@ -411,7 +411,7 @@ defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder AppleShowAllFiles -bool false
 
 # Show the ~/Library folder
-chflags nohidden ~/Library
+chflags nohidden "$HOME/Library"
 
 # Show filename extensions (false)
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true

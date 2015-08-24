@@ -48,22 +48,22 @@ if is_osx; then
 fi
 
 # Set up public key
-if [ ! -f ~/.ssh/id_rsa.pub ]; then
+if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
 	info 'Generating new ssh key...'
 	question ' (SSH) What is your email?' "$DOTFILES_SSH_EMAIL" " (SSH) Using supplied email: $DOTFILES_SSH_EMAIL"
 	ssh_email=$answer
 	password ' (SSH) Enter a passphrase:' "$DOTFILES_SSH_PASSPHRASE" " (SSH) Using supplied passphrase"
 	ssh_passphrase=$answer
-	ssh-keygen -q -t rsa -C "$ssh_email" -f ~/.ssh/id_rsa -N "$ssh_passphrase" > /dev/null \
+	ssh-keygen -q -t rsa -C "$ssh_email" -f "$HOME/.ssh/id_rsa" -N "$ssh_passphrase" > /dev/null \
 	|| fail 'Unable to generate a new key'
 	eval "$(ssh-agent -s)" > /dev/null || fail 'Unable to start ssh agent'
-	ssh-add -A ~/.ssh/id_rsa > /dev/null 2>&1 || fail 'Unable to add new key to ssh'
-	ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts 2> /dev/null
+	ssh-add -A "$HOME/.ssh/id_rsa" > /dev/null 2>&1 || fail 'Unable to add new key to ssh'
+	ssh-keyscan -t rsa github.com >> "$HOME/.ssh/known_hosts" 2> /dev/null
 	if is_osx; then
-		pbcopy < ~/.ssh/id_rsa.pub
+		pbcopy < "$HOME/.ssh/id_rsa.pub"
 		info 'Your public key has been copied to your clipboard.'
 	else
-		info "Your public key is: $(cat ~/.ssh/id_rsa.pub)"
+		info "Your public key is: $(cat $HOME/.ssh/id_rsa.pub)"
 	fi
 	open https://www.github.com/settings/ssh
 	pause 'Enter your public key to your Github account, then press any key to continue.'
@@ -86,7 +86,7 @@ if confirm 'Would you like to configure git?' $DOTFILES_DO_GIT_CONFIG 'Configuri
 	git config --global user.name "$git_authorname"
 	git config --global user.email "$git_authoremail"
 	git config --global credential.helper $git_credential
-	git config --global core.excludesfile ~/.gitignore.global
+	git config --global core.excludesfile "$HOME/.gitignore.global"
 	success 'Created .gitconfig.'
 fi
 
@@ -136,7 +136,7 @@ if confirm 'Would you like to symlink your dotfiles?' $DOTFILES_DO_SYMLINK; then
 	done
 
 	# Start new bash environment
-	source ~/.bash_profile
+	source "$HOME/.bash_profile"
 
 	# Make sure our sudo alias isn't overwritten
 	init_sudo
