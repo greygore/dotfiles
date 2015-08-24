@@ -19,7 +19,7 @@ fi
 # If missing, download and extract the dotfiles repository
 if [[ ! -d $DOTFILES_ROOT ]]; then
 	printf "$(tput bold; tput setaf 7)       Downloading dotfiles...$(tput sgr0)\n"
-	mkdir $DOTFILES_ROOT
+	mkdir -p $DOTFILES_ROOT
 
 	# Download and extract project tarball
 	curl -fsSLo $HOME/dotfiles.tar.gz $DOTFILES_TARBALL_PATH
