@@ -49,5 +49,4 @@ brew_formula 'dark-mode' # Toggle OSX dark mode
 
 # iTerm 1Password integration
 brew tap ravenac95/sudolikeaboss
-brew formula 'sudolikeaboss'
-brew_formula ''
+brew_formula 'sudolikeaboss'
