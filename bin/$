@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Ever pasted "$ somecommand" into the terminal and gotten this error?
+# -bash: $: command not found
+
+# Idea copied from https://github.com/cowboy/dotfiles/blob/master/bin/%24
+
+echo 'You know better than to copy & paste random code from the internet.'
+sleep 3
+"$@"
