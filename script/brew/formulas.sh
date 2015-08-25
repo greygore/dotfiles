@@ -54,6 +54,7 @@ brew_formula 'todo-txt' # http://todotxt.com/
 brew_formula 'go' '--cross-compile-common' # golang
 brew_formula 'node' # node.js and npm
 brew_formula 'dark-mode' # Toggle OSX dark mode
+brew_formula 'brightness' # Set brightness from CLI
 
 # iTerm 1Password integration
 brew tap ravenac95/sudolikeaboss
