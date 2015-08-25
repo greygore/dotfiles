@@ -28,6 +28,10 @@ brew_cask 'flux'
 brew_cask 'key-codes'
 brew_cask 'daisydisk'
 
+# Window Management
+brew_cask 'stay' # Pin windows in place, multi-monitor
+brew_cask 'spectacle' # Move and resize windows
+
 # Menu
 brew_cask 'battery-time-remaining'
 
