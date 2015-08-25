@@ -170,3 +170,4 @@ Suggestions/improvements
  * [Mathias Bynens](http://mathiasbynens.be/) for [his widely forked dotfiles](https://github.com/mathiasbynens/dotfiles)
  * [Nicolas Gallagher](http://nicolasgallagher.com/) whose [dotfiles I shamelessly stole from](https://github.com/necolas/dotfiles)
  * [Newton](http://www.chrisopedia.com/) whose [dotfiles provided a few ideas from a different perspective](https://github.com/chrisopedia/dotfiles)
+ * [Ben Alman](http://benalman.com/) whose [dotfiles contained more things I could learn from](https://github.com/cowboy/dotfiles)
