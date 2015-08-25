@@ -156,6 +156,7 @@ Further details are in the `.bash_prompt` file.
 ## Further Research
 
  * http://osxnotes.net/
+ * [Braumeister](http://braumeister.org/)
  * [Other OSX settings](https://github.com/mgee/dotfiles/blob/master/osx-setup)
 
 ## Feedback
