@@ -28,6 +28,13 @@ brew_formula 'imagemagick' '--with-libtiff --with-webp' # images
 brew_formula 'html2text'
 brew_formula 'webkit2png'
 
+# Font tools (https://github.com/bramstein/homebrew-webfonttools)
+brew tap bramstein/webfonttools
+brew_formula 'woff2' # For WOFF2
+brew_formula 'sfnt2woff-zopfli' # For WOFF static files
+brew_formula 'sfnt2woff' # For dynamically generating WOFF
+brew_formula 'sfntly' # Use sfnttool to  generate compressed EOT
+
 # Graphical command line utilities
 brew_formula 'grc'
 brew_formula 'pv'
