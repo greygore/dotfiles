@@ -465,7 +465,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # This is only really useful when setting up a new Mac, or if you don’t use
 # the Dock to launch apps.
 if confirm ' (OSX) Would you like to remove all icons from the Dock?' "$DOTFILES_OSX_DOCK_CLEAR" "Clearing icons from the Dock..."; then
-	defaults write com.apple.dock persistent-apps -array ""
+	defaults write com.apple.dock persistent-apps -array
 fi
 
 # Autohide Dock (false)
