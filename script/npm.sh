@@ -18,3 +18,24 @@ fi
 if ! which gifify > /dev/null; then
 	npm install -g gifify >> "$DOTFILES_ROOT/npm.log" 2>&1
 fi
+
+if ! which cowsay > /dev/null; then
+	npm install -g cowsay >> "$DOTFILES_ROOT/npm.log" 2>&1
+fi
+
+if ! which empty-trash > /dev/null; then
+	npm install -g empty-trash >> "$DOTFILES_ROOT/npm.log" 2>&1
+fi
+
+if ! which is-online > /dev/null; then
+	npm install -g is-online >> "$DOTFILES_ROOT/npm.log" 2>&1
+fi
+
+if ! which webpagetest > /dev/null; then
+	npm install -g webpagetest >> "$DOTFILES_ROOT/npm.log" 2>&1
+fi
+
+if ! which psi > /dev/null; then
+	npm install -g psi >> "$DOTFILES_ROOT/npm.log" 2>&1
+fi
+
