@@ -154,13 +154,16 @@ Further details are in the `.bash_prompt` file.
  * Investigate using a multi select menu in general case ([example](https://github.com/cowboy/dotfiles/blob/master/bin/dotfiles#L65-L128))
  * Add [.d/ support](http://blog.sanctum.geek.nz/shell-config-subfiles/)
  * [Ellipse-ize long paths](http://pempek.net/articles/2013/10/27/pretty-elided-shell-prompt/) in prompt
+ * [PATH management](https://github.com/tejr/dotfiles/blob/master/bash/bashrc.d/path.bash)
+ * Wrap rm to ensure we have an absolute path (starting with `~` or `/`) when `-f`
 
 ## Further Research
 
  * http://osxnotes.net/
  * [Braumeister](http://braumeister.org/)
  * [Liquid Prompt](https://github.com/nojhan/liquidprompt)
- * [Other OSX settings](https://github.com/mgee/dotfiles/blob/master/osx-setup)
+ * Other OSX Settings ([1](https://github.com/mgee/dotfiles/blob/master/osx-setup)) ([2](https://github.com/alrra/dotfiles))
+ * [whatis](http://blog.sanctum.geek.nz/learning-bin-and-usr-bin/)
 
 ## Feedback
 
