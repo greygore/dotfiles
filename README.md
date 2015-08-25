@@ -149,7 +149,7 @@ Further details are in the `.bash_prompt` file.
  * Create restore script to restore dotfile backups and revert OS X customizations
  * Research [duti](https://github.com/moretension/duti) for setting default applications for file types and URIs. [More](https://github.com/mathiasbynens/dotfiles/issues/54).
  * Add to `cheat` and `tldr`
- * Create/enforce coding standards
+ * Create/enforce coding standards ([example](https://github.com/chrisopedia/dotfiles/commit/c9fa19d8224446d3020d610a753d086fd6199096))
  * Add tests for library functions ([assert](https://github.com/cowboy/dotfiles/blob/master/bin/dotfiles#L32-L39))
  * Investigate using a multi select menu in general case ([example](https://github.com/cowboy/dotfiles/blob/master/bin/dotfiles#L65-L128))
 
