@@ -22,6 +22,7 @@ brew_formula 'jq' # json processor
 brew_formula 'fpp' # Facebook path picker
 brew_formula 'envchain' # Store ENV variables in keychain
 brew_formula 'speedtest-cli' # Perform a speed test
+brew_formula 'ssh-copy-id' # Copy SSH key to remote system
 
 # Conversion tools
 brew_formula 'ffmpeg' '--with-tools --with-x265' # movies/audio
