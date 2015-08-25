@@ -50,6 +50,7 @@ brew_cask 'virtualbox'
 brew_cask 'vagrant'
 brew_cask 'sourcetree'
 brew_cask 'pgadmin3'
+brew_cask 'sequel-pro' # MySQL GUI
 brew_cask 'dash' # API Docs
 brew_cask 'imageoptim'
 brew_cask 'cyberduck' # Remote files
