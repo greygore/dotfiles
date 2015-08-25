@@ -44,6 +44,7 @@ brew_formula 'hr'
 brew_formula 'figlet'
 brew_formula 'spark'
 brew_formula 'prettyping'
+brew_formula 'archey' # Show system info
 
 # Docker
 brew_formula 'docker'
