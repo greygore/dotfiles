@@ -16,7 +16,7 @@ fi
 
 info 'Upgrading homebrew and existing formulas'
 brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-&& brew upgrade >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+&& brew upgrade --all >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 && success 'Homebrew and formulas upgraded.' \
 || fail 'Unable to upgrade homebrew and formulas'
 
