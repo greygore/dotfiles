@@ -153,6 +153,11 @@ Further details are in the `.bash_prompt` file.
  * Add tests for library functions ([assert](https://github.com/cowboy/dotfiles/blob/master/bin/dotfiles#L32-L39))
  * Investigate using a multi select menu in general case ([example](https://github.com/cowboy/dotfiles/blob/master/bin/dotfiles#L65-L128))
 
+## Further Research
+
+ * http://osxnotes.net/
+ * [Other OSX settings](https://github.com/mgee/dotfiles/blob/master/osx-setup)
+
 ## Feedback
 
 Suggestions/improvements
