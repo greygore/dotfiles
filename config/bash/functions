@@ -287,15 +287,25 @@ EOF
 # Get OS X Software Updates, and update Homebrew, npm, Ruby gems and Python packages
 function update() {
 	# Get OS X Software Updates
-	sudo softwareupdate -i -a
+	if which softwareupdate > /dev/null; then
+		sudo softwareupdate -i -a
+	fi
 	# Homebrew
-	brew update; brew upgrade; brew cleanup
+	if which brew > /dev/null; then
+		brew update; brew upgrade; brew cleanup
+	fi
 	# Node modules
-	npm install npm -g; npm update -g
+	if which npm > /dev/null; then
+		npm install npm -g; npm update -g
+	fi
 	# Ruby gems (todo check for rvm...)
-	gem update --system; gem update
+	if which gem > /dev/null; then
+		gem update --system; gem update
+	fi
 	# Python packages
-	pip freeze | sed -e 's/==.*//' | sed -e '/git-remote-helpers/ d' | xargs pip install -U
+	if which pip > /dev/null; then
+		pip freeze | sed -e 's/==.*//' | sed -e '/git-remote-helpers/ d' | xargs pip install -U
+	fi
 }
 
 # Easy file extraction
