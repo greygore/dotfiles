@@ -108,6 +108,7 @@ fi
 
 # Clean up git repo
 if [ -e "$DOTFILES_ROOT/.git" ]; then
+	cd "$DOTFILES_ROOT"
 	if [ -n "$(git status --porcelain)" ]; then
 		if confirm 'You have uncommited changes. Are you sure you want to continue?' $DOTFILES_IGNORE_UNCOMMITED; then
 			warning 'Remember to commit your changes later then.'
