@@ -121,16 +121,6 @@ function gz() {
 	printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
 }
 
-# Syntax-highlight JSON strings or files
-# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
-function json() {
-	if [ -t 0 ]; then # argument
-		python -mjson.tool <<< "$*" | pygmentize -l javascript;
-	else # pipe
-		python -mjson.tool | pygmentize -l javascript;
-	fi;
-}
-
 # All the dig info
 function digga() {
 	dig +nocmd "$1" any +multiline +noall +answer;
@@ -292,7 +282,7 @@ function update() {
 	fi
 	# Homebrew
 	if which brew > /dev/null; then
-		brew update; brew upgrade; brew cleanup
+		brew update; brew upgrade --all; brew cleanup
 	fi
 	# Node modules
 	if which npm > /dev/null; then

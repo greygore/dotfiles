@@ -10,3 +10,7 @@ tldr --update > /dev/null 2>&1
 if ! which ember > /dev/null; then
 	npm install -g ember-cli >> "$DOTFILES_ROOT/npm.log" 2>&1
 fi
+
+if ! which json > /dev/null; then
+	npm install -g json >> "$DOTFILES_ROOT/npm.log" 2>&1
+fi
