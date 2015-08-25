@@ -14,3 +14,7 @@ fi
 if ! which json > /dev/null; then
 	npm install -g json >> "$DOTFILES_ROOT/npm.log" 2>&1
 fi
+
+if ! which gifify > /dev/null; then
+	npm install -g gifify >> "$DOTFILES_ROOT/npm.log" 2>&1
+fi
