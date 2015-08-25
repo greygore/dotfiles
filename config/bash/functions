@@ -373,6 +373,30 @@ function gfu() {
 	open $(git log -n 1 --skip=$n --pretty=oneline | awk "{printf \"$(gurl)/commit/%s\", substr(\$1,1,7)}")
 }
 
+# Incorporating ideas from http://osxnotes.net/defaults.html
+function find_prefs() {
+	[ -z "$1" ] && echo 'Please include a search term' && return 1
+	echo "Searching strings of unix executables"
+	echo
+	mdfind kMDItemContentType=public.unix-executable -onlyin /System|xargs strings 2>/dev/null|grep -E '^[a-zA-Z0-9.-]{10,80}$'|awk '!a[$0]++'|grep -i "$1"
+	echo
+	echo "Searching strings of applications"
+	echo
+	sleep 1
+	for f in /Applications/*.app/Contents/MacOS/*;do strings "$f" 2> /dev/null|awk '!a[$0]++'|grep -i "$1"|sed "s/^/${f##*/} /g"|grep -v '^TextWrangler';done
+	echo
+	echo "Searching FinderKit for strings"
+	echo
+	sleep 1
+	strings /System/Library/PrivateFrameworks/FinderKit.framework/Versions/A/FinderKit|grep -E '^[[:alnum:]_.:-]{10,80}$'|awk '!a[$0]++'|grep -i "$1"
+	echo
+	echo "Don't forget:"
+	echo "defaults read > defaults.before"
+	echo "<make changes>"
+	echo "defaults read > defaults.after"
+	echo "diff defaults.before defaults.after"
+}
+
 function docker_machine_name() {
 	if [ $# -eq 1 ]; then
 		DOCKER_MACHINE_NAME=$1
