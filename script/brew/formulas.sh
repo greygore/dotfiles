@@ -21,6 +21,7 @@ brew_formula 'known_hosts' # known_hosts manager
 brew_formula 'jq' # json processor
 brew_formula 'fpp' # Facebook path picker
 brew_formula 'envchain' # Store ENV variables in keychain
+brew_formula 'speedtest-cli' # Perform a speed test
 
 # Conversion tools
 brew_formula 'ffmpeg' '--with-tools --with-x265' # movies/audio
