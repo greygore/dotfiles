@@ -149,6 +149,8 @@ Further details are in the `.bash_prompt` file.
  * Create restore script to restore dotfile backups and revert OS X customizations
  * Research [duti](https://github.com/moretension/duti) for setting default applications for file types and URIs. [More](https://github.com/mathiasbynens/dotfiles/issues/54).
  * Add to `cheat` and `tldr`
+ * Create/enforce coding standards
+ * Add tests for library functions
 
 ## Feedback
 
