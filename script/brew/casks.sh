@@ -43,7 +43,7 @@ brew_cask 'google-chrome'
 brew_cask 'crashplan' 'home'
 brew_cask 'dropbox'
 brew_cask 'evernote'
-brew_cask 'github'
+brew_cask 'github-desktop'
 
 # Dev tools
 brew_cask 'virtualbox'
