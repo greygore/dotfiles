@@ -117,6 +117,12 @@ defaults write com.apple.systemuiserver menuExtras -array \
 	"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
 	"/System/Library/CoreServices/Menu Extras/Clock.menu"
 
+# Menu bar: Transparency
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
+ 
+# Additional Transparency
+defaults write com.apple.universalaccess reduceTransparency -bool false
+
 # Disable Notification Center and remove the menu bar icon
 #launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
