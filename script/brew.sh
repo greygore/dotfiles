@@ -42,9 +42,9 @@ if confirm 'Install brew casks?' "$DOTFILES_DO_BREW_CASK"; then
 fi
 
 if confirm 'Install quicklook plugins?' "$DOTFILES_DO_BREW_QUICKLOOK"; then
-	init sudo
+	init_sudo
 	source "$DOTFILES_ROOT/script/brew/quicklook.sh"
-	destroy sudo
+	destroy_sudo
 fi
 
 # Clean up brew working files
