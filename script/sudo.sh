@@ -42,7 +42,7 @@ function destroy_sudo() {
 
 # Create function to validate sudo access
 function validate_sudo() {
-	sudo -k
+	command sudo -k
 	echo "$sudo_password" | command sudo -S -v > /dev/null 2>&1
 }
 
