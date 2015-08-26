@@ -146,8 +146,7 @@ backupAll=false
 skipAll=false
 if confirm 'Would you like to symlink your dotfiles?' "$DOTFILES_DO_SYMLINK"; then
 	# Grab all config files that start with "." and don't end in .master
-	for src in $(cd "$DOTFILES_ROOT" && find config -maxdepth 3 -type f -iregex '^config/[a-z0-9]*/\.[a-z0-9._-]*' | grep -v .master$); do
-		[ -d $src ] && src="$src/"
+	for src in $(cd "$DOTFILES_ROOT" && find config -maxdepth 3 -iregex '^config/[a-z0-9]*/\.[a-z0-9._-]*' | grep -v .master$); do
 		dst="$HOME/$(basename "${src}")"
 		link_file "$DOTFILES_ROOT/$src" "$dst"
 	done
