@@ -16,9 +16,9 @@ wget -O ember-inspector.xpi https://addons.mozilla.org/firefox/downloads/file/27
 wget -O json-view.xpi https://addons.mozilla.org/firefox/downloads/latest/10869/addon-10869-latest.xpi > /dev/null 2>&1 # JSON View
 
 # TODO - Load addons without opening Firefox
-open -a Firefox.app *.xpi > /dev/null 2>&1
+open -W -a Firefox.app *.xpi > /dev/null 2>&1
 
-pause "Press any key to remove Firefox addon installation files..."
+# Remove extension files
 rm *.xpi \
 && success 'Removed Firefox addon installation files.' \
 || error 'Unable to remove Firefox addon installation files'
