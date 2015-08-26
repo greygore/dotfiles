@@ -14,5 +14,4 @@ asudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1 \
 || error 'Unable to update shell to brewed version of bash'
 
 # Bash completion
-brew tap homebrew/versions
-brew_formula 'bash-completion2'
+brew_formula 'homebrew/versions/bash-completion2'
