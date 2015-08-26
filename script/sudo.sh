@@ -1,5 +1,8 @@
 #/usr/bin/env bash
 
+export sudo_password=''
+export sudo_password_previous=''
+
 # Register a funciton that can be trapped
 function cleanup_sudo() {
 	sudo -k
@@ -31,7 +34,7 @@ function init_sudo() {
 function destroy_sudo() {
 	sudo -k
 	sudo_password_previous="$sudo_password"
-	unset sudo_password
+	sudo_password=''
 	alias sudo='sudo '
 }
 
