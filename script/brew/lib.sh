@@ -32,6 +32,6 @@ function brew_quicklook() {
 		info "Installing $quicklook QuickLook plugin..."
 		sudo brew cask install --qlplugindir="/Library/QuickLook" $quicklook >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 		&& success "Installed $quicklook QuickLook plugin." \
-		|| fail "Unable to install $quicklook QuickLook plugin"
+		|| error "Unable to install $quicklook QuickLook plugin"
 	fi
 }
