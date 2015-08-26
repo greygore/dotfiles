@@ -1,10 +1,12 @@
 #/usr/bin/env bash
 
-export sudo_password=''
-export sudo_password_previous=''
+export sudo_password
+export sudo_password_previous
 
 # Register a funciton that can be trapped
 function cleanup_sudo() {
+	unset sudo_password
+	unset sudo_password_previous
 	sudo -k
 }
 
@@ -19,7 +21,7 @@ function init_sudo() {
 
 	# Check for previously used sudo_password
 	if [ -n "$sudo_password_previous" ]; then
-		sudo_password=$sudo_password_previous
+		sudo_password="$sudo_password_previous"
 	fi
 
 	# Read password from prompt
@@ -49,3 +51,6 @@ function atomic_sudo() {
 	sudo "$@"
 	destroy_sudo
 }
+
+# If trap is not already set, use existing one
+[ -z "$(trap -p EXIT)" ] && trap cleanup_sudo EXIT
