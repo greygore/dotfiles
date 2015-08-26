@@ -7,7 +7,7 @@ init_sudo
 
 if [ -f "$HOME/.dotrc" ]; then
 	source "$HOME/.dotrc"
-elif confirm 'Do full install?' $DOTFILES_DO_FULL_INSTALL; then
+elif confirm 'Do full install?' "$DOTFILES_DO_FULL_INSTALL"; then
 	DOTFILES_DO_GIT_CONFIG='y'
 	DOTFILES_DO_GIT_SYNC='y'
 	DOTFILES_DO_SYMLINK='y'
@@ -86,7 +86,7 @@ elif confirm 'Would you like to enter your public key on Github?'; then
 fi
 
 # Set up git config
-if confirm 'Would you like to configure git?' $DOTFILES_DO_GIT_CONFIG 'Configuring git...'; then
+if confirm 'Would you like to configure git?' "$DOTFILES_DO_GIT_CONFIG" 'Configuring git...'; then
 	cp -f "$DOTFILES_ROOT/config/git/.gitconfig.master" "$HOME/.gitconfig" \
 	|| fail "Unable to copy master .gitconfig file to home directory"
 
@@ -110,19 +110,19 @@ fi
 if [ -e "$DOTFILES_ROOT/.git" ]; then
 	cd "$DOTFILES_ROOT"
 	if [ -n "$(git status --porcelain)" ]; then
-		if confirm 'You have uncommited changes. Are you sure you want to continue?' $DOTFILES_IGNORE_UNCOMMITED; then
+		if confirm 'You have uncommited changes. Are you sure you want to continue?' "$DOTFILES_IGNORE_UNCOMMITED"; then
 			warning 'Remember to commit your changes later then.'
 		else
 			exit 1
 		fi
 	elif [ -n "$(git log origin/master..HEAD)" ]; then
-		if confirm 'You have local unpushed commits. Do you want to push them to master?' $DOTFILES_PUSH_COMMITS; then
+		if confirm 'You have local unpushed commits. Do you want to push them to master?' "$DOTFILES_PUSH_COMMITS"; then
 			git push origin master
 			success "Local changes pushed to remote."
 		fi
 	fi
 # If there is no repo, create one and sync it from origin
-elif confirm 'Would you like to create a git repository and sync it with the remote?' $DOTFILES_DO_GIT_SYNC; then
+elif confirm 'Would you like to create a git repository and sync it with the remote?' "$DOTFILES_DO_GIT_SYNC"; then
 	info 'Creating new git repository and syncing with remote...'
 	if [ -z "$DOTFILES_USER" ]; then
 		question 'What is the github user for this dotfiles repository?'
@@ -144,7 +144,7 @@ fi
 overwriteAll=false
 backupAll=false
 skipAll=false
-if confirm 'Would you like to symlink your dotfiles?' $DOTFILES_DO_SYMLINK; then
+if confirm 'Would you like to symlink your dotfiles?' "$DOTFILES_DO_SYMLINK"; then
 	# Grab all config files that start with "." and don't end in .master
 	for src in $(cd "$DOTFILES_ROOT" && find config -maxdepth 3 -type f -iregex '^config/[a-z0-9]*/\.[a-z0-9._-]*' | grep -v .master$); do
 		[ -d $src ] && src="$src/"
@@ -162,13 +162,13 @@ fi
 info 'Installing user binaries and scripts...'
 link_file "$DOTFILES_ROOT/bin" "$HOME/bin"
 
-if confirm 'Would you like to install a third party hosts file?' $DOTFILES_DO_HOSTS; then
+if confirm 'Would you like to install a third party hosts file?' "$DOTFILES_DO_HOSTS"; then
 	curl -fsLo "$HOME/hosts" http://someonewhocares.org/hosts/ipv6/hosts
 	sudo mv "$HOME/hosts" /etc/hosts
 fi
 
 # OSX Settings
-if is_osx && confirm 'Would you like to customize your OS X environment?' $DOTFILES_DO_OSX; then
+if is_osx && confirm 'Would you like to customize your OS X environment?' "$DOTFILES_DO_OSX"; then
 	source "$DOTFILES_ROOT/script/osx.sh" && success 'OS X environment customized.'
 	source "$DOTFILES_ROOT/script/apps/terminal.sh" && success 'Terminal configured and themed.'
 	source "$DOTFILES_ROOT/script/apps/mail.sh" && success 'Mail.app configured.'
@@ -176,12 +176,12 @@ if is_osx && confirm 'Would you like to customize your OS X environment?' $DOTFI
 fi
 
 # Mac App Store
-if is_osx && confirm 'Would you like to install apps from the Mac App Store?' $DOTFILES_DO_APP_STORE; then
+if is_osx && confirm 'Would you like to install apps from the Mac App Store?' "$DOTFILES_DO_APP_STORE"; then
 	source "$DOTFILES_ROOT/script/app_store.sh"
 fi
 
 # Homebrew installation and configuration
-if is_osx && confirm 'Would you like to install and configure Homebrew formula/casks?' $DOTFILES_DO_BREW; then
+if is_osx && confirm 'Would you like to install and configure Homebrew formula/casks?' "$DOTFILES_DO_BREW"; then
 	source "$DOTFILES_ROOT/script/brew.sh" && success 'Homebrew formulas and casks installed.'
 	source "$DOTFILES_ROOT/script/apps/iterm2.sh" && success 'iTerm2 configured and themed.'
 	source "$DOTFILES_ROOT/script/apps/sublime.sh" && success 'Sublime Text 3 configured and themed.'
