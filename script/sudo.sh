@@ -40,7 +40,7 @@ function destroy_sudo() {
 
 # Create function to validate sudo access
 function validate_sudo() {
-	echo "$sudo_password" | command sudo -S -v &> /dev/null
+	echo "$sudo_password" | command sudo -S -v > /dev/null 2>&1
 }
 
 # Perform sudo operation atomically
