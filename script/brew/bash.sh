@@ -12,7 +12,7 @@ brew_formula 'bash'
 # Put into shell list and set as user shell
 init_sudo
 grep '/usr/local/bin/bash' /etc/shells > /dev/null 2>&1 \
-|| echo '/usr/local/bin/bash' | sudo tee -a /etc/shells > /dev/null 2>&1
+|| sudo sh -c "echo '/usr/local/bin/bash' >> /etc/shells"
 sudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1 \
 && success 'Updated shell to brew version of bash.' \
 || error 'Unable to update shell to brewed version of bash'
