@@ -8,11 +8,15 @@ init_sudo; destroy_sudo
 
 # Modern bash
 brew_formula 'bash'
+
+# Put into shell list and set as user shell
+init_sudo
 grep '/usr/local/bin/bash' /etc/shells > /dev/null 2>&1 \
 || echo '/usr/local/bin/bash' | sudo tee -a /etc/shells > /dev/null 2>&1
-asudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1 \
+sudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1 \
 && success 'Updated shell to brew version of bash.' \
 || error 'Unable to update shell to brewed version of bash'
+destroy_sudo
 
 # Bash completion
 brew_formula 'homebrew/versions/bash-completion2'
