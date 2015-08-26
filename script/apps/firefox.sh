@@ -3,8 +3,7 @@
 source "$DOTFILES_ROOT/script/lib.sh"
 
 # Set default browser
-open -a Firefox --args -setDefaultBrowser
-pause 'Setting Firefox to your default browser. Press any key to continue installing addons.'
+open -W -a Firefox --args -setDefaultBrowser
 
 # Install addons
 wget -O 1password.xpi http://cdn.agilebits.com/dist/1P/ext/1Password-4.2.5.xpi > /dev/null 2>&1 # 1Password
