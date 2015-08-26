@@ -8,7 +8,8 @@ init_sudo; destroy_sudo
 
 # Modern bash
 brew_formula 'bash'
-echo '/usr/local/bin/bash' | sudo tee -a /etc/shells > /dev/null
+grep '/usr/local/bin/bash' /etc/shells > /dev/null 2>&1 \
+|| echo '/usr/local/bin/bash' | sudo tee -a /etc/shells > /dev/null 2>&1
 asudo chsh -s /usr/local/bin/bash "$USER" > /dev/null 2>&1 \
 && success 'Updated shell to brew version of bash.' \
 || error 'Unable to update shell to brewed version of bash'
