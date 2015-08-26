@@ -3,9 +3,11 @@
 source "$DOTFILES_ROOT/script/lib.sh"
 
 # Set default browser
+info 'Setting Firefox to the default browser. Close Firefox to continue'
 open -W -a Firefox --args -setDefaultBrowser
 
 # Install addons
+info 'Downloading Firefox extensions'
 wget -O 1password.xpi http://cdn.agilebits.com/dist/1P/ext/1Password-4.2.5.xpi > /dev/null 2>&1 # 1Password
 wget -O adblock-plus.xpi https://update.adblockplus.org/latest/adblockplusfirefox.xpi > /dev/null 2>&1 # AdBlock Plus
 wget -O xmarks.xpi http://download.xmarks.com/download/binary/firefox > /dev/null 2>&1 # XMarks
@@ -15,6 +17,7 @@ wget -O ember-inspector.xpi https://addons.mozilla.org/firefox/downloads/file/27
 wget -O json-view.xpi https://addons.mozilla.org/firefox/downloads/latest/10869/addon-10869-latest.xpi > /dev/null 2>&1 # JSON View
 
 # TODO - Load addons without opening Firefox
+info 'Loading Firefox extensions. Close Firefox to continue'
 open -W -a Firefox.app *.xpi > /dev/null 2>&1
 
 # Remove extension files
