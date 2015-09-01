@@ -149,13 +149,14 @@ Further details are in the `.bash_prompt` file.
  * Create restore script to restore dotfile backups and revert OS X customizations
  * Research [duti](https://github.com/moretension/duti) for setting default applications for file types and URIs. [More](https://github.com/mathiasbynens/dotfiles/issues/54).
  * Add to `cheat` and `tldr`
- * Create/enforce coding standards ([example](https://github.com/chrisopedia/dotfiles/commit/c9fa19d8224446d3020d610a753d086fd6199096), [test exit values](http://blog.sanctum.geek.nz/testing-exit-values-bash/))
+ * Create/enforce coding standards ([example](https://github.com/chrisopedia/dotfiles/commit/c9fa19d8224446d3020d610a753d086fd6199096), [test exit values](http://blog.sanctum.geek.nz/testing-exit-values-bash/), [Robust BASH](http://www.davidpashley.com/articles/writing-robust-shell-scripts/))
  * Add tests for library functions ([assert](https://github.com/cowboy/dotfiles/blob/master/bin/dotfiles#L32-L39))
  * Investigate using a multi select menu in general case ([example](https://github.com/cowboy/dotfiles/blob/master/bin/dotfiles#L65-L128))
  * Add [.d/ support](http://blog.sanctum.geek.nz/shell-config-subfiles/)
  * [Ellipse-ize long paths](http://pempek.net/articles/2013/10/27/pretty-elided-shell-prompt/) in prompt
  * [PATH management](https://github.com/tejr/dotfiles/blob/master/bash/bashrc.d/path.bash)
  * Wrap rm to ensure we have an absolute path (starting with `~` or `/`) when `-f`
+ * [Script Terminal/iTerm](https://gitlab.com/gnachman/iterm2/wikis/Applescript)
 
 ## Further Research
 
