@@ -36,9 +36,8 @@ settings/sublime/GoSublime/osx-x64/*/bin/
 settings/sublime/GoSublime/osx-x64/log.txt
 settings/sublime/GoSublime-aux.sublime-settings
 
-# Ignore Color Hightlighter binaries
+# Color Highlighter
 settings/sublime/Color Highlighter/ColorPicker_osx_x64
 settings/sublime/Color Highlighter/ColorPicker/ColorPicker_osx_x64
-
-# Color Highlighter themes
 settings/sublime/Color Highlighter/themes/
+settings/sublime/Color Highlighter/icons/
