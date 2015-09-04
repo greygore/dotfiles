@@ -23,6 +23,7 @@
 *.gz
 *.lzma
 *.rar
+*.tgz
 *.xz
 *.zip
 
@@ -42,6 +43,7 @@
 ######################
 *.log
 *.sqlite
+cachegrind.out.*
 
 # OS generated files #
 ######################
