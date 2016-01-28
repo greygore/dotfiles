@@ -509,3 +509,56 @@ function dock() {
 			&& cd -
 	fi
 }
+
+function setenv-osx() {
+	if [ "$(uname -s)" == "Darwin" ]; then
+		local key
+		local val
+
+		if [ $# -lt 1 ] || [ -z "$1" ]; then
+			echo "ERROR: No key specified."
+			return 1
+		fi
+		key=$1
+
+		if [ $# -lt 2 ] || [ -z "$2" ]; then
+			eval val=\$$1
+			if [ -z "$val" ]; then
+				echo "ERROR: No value specified or found in current env."
+				return 1
+			fi
+		else
+			val=$2
+		fi
+
+		local file="$HOME/Library/LaunchAgents/setenv.$key.plist"
+
+		launchctl unload $file > /dev/null 2>&1
+
+		cat <<- EOF | tee $file > /dev/null 2>&1
+			<?xml version="1.0" encoding="UTF-8"?>
+			<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+			  <plist version="1.0">
+			  <dict>
+			  <key>Label</key>
+			  <string>setenv.$key</string>
+			  <key>ProgramArguments</key>
+			  <array>
+			    <string>/bin/launchctl</string>
+			    <string>setenv</string>
+			    <string>$key</string>
+			    <string>$val</string>
+			  </array>
+			  <key>RunAtLoad</key>
+			  <true/>
+			</dict>
+			</plist>
+		EOF
+
+		launchctl load $file
+
+		eval val=\$$key
+		sleep 1 # Necessary to make sure the getenv succeeds
+		echo "$key=$(launchctl getenv $key)"
+	fi
+}
