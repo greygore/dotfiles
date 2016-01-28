@@ -161,6 +161,10 @@
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
 
+[push]
+	# Default value to squelch warning message
+	default = simple
+
 # URL shorthands
 [url "git@github.com:"]
 	insteadOf = "gh:"
