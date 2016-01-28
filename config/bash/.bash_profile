@@ -29,3 +29,8 @@ unset files
 if which brew > /dev/null && [ -f "$(brew --prefix)/etc/grc.bashrc" ]; then
 	source "$(brew --prefix)/etc/grc.bashrc"
 fi
+
+# Integrate jump into the shell
+if which jump > /dev/null; then
+	eval "$(jump shell bash)"
+fi

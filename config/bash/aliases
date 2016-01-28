@@ -17,9 +17,12 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias g="git"
 alias h="history"
-alias j="jobs"
 alias s="subl ."
 alias p="open -a phpstorm"
+
+# Easier to remember
+alias xtop='dshb'
+alias dashboard='dshb'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -185,6 +188,7 @@ alias weather='ansiweather'
 alias forecast='ansiweather -F'
 alias matrix='cmatrix -b'
 alias woah='cmatrix -b'
+alias nyan='nyancat'
 
 # Work stuff
 alias cl="cd ~/cbdr/luceo/"

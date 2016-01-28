@@ -15,7 +15,7 @@ brew_formula 'wget' '--with-iri'
 brew_formula 'ack' # grep
 brew_formula 'nmap' # network mapper
 brew_formula 'cheat' # cheatsheets
-brew_formula 'terminal-notifier' # cli notifications
+brew_formula 'noti' # cli notifications
 brew_formula 'watchman' # file watcher
 brew_formula 'known_hosts' # known_hosts manager
 brew_formula 'jq' # json processor
@@ -23,6 +23,9 @@ brew_formula 'fpp' # Facebook path picker
 brew_formula 'envchain' # Store ENV variables in keychain
 brew_formula 'speedtest-cli' # Perform a speed test
 brew_formula 'ssh-copy-id' # Copy SSH key to remote system
+brew_formula 'httpie' # Better than CURL
+brew_formula 'dshb' # OS X system monitor in Swift
+brew_formula 'jump' # Fuzzy directory jumper
 
 # Conversion tools
 brew_formula 'ffmpeg' '--with-tools --with-x265' # movies/audio
@@ -57,7 +60,11 @@ brew_formula 'node' # node.js and npm
 brew_formula 'dark-mode' # Toggle OSX dark mode
 brew_formula 'brightness' # Set brightness from CLI
 brew_formula 'ansiweather'
+
+# Fun
 brew_formula 'cmatrix' # Matrix green character rain
+brew_formula 'nyancat'
+brew_formula 'rig' # Random Identity Generator
 
 # iTerm 1Password integration
 brew tap ravenac95/sudolikeaboss >> "$DOTFILES_ROOT/brew.log" 2>&1
