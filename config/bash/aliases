@@ -16,11 +16,11 @@ alias ll="cd ~/luceo/luceo/"
 alias d="cd ~/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias p="cd ~/Dropbox/Projects"
 alias g="git"
 alias h="history"
 alias j="jobs"
 alias s="subl ."
+alias p="open -a phpstorm"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
