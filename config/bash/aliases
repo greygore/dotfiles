@@ -181,6 +181,8 @@ alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key ready to p
 # Fun stuff
 alias starwars='telnet towel.blinkenlights.nl'
 alias whisper='say -v whisper'
+alias weather='ansiweather'
+alias forecast='ansiweather -F'
 
 # Work stuff
 alias cl="cd ~/cbdr/luceo/"
