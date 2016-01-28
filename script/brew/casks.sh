@@ -22,7 +22,7 @@ brew_cask 'iterm2'
 brew_cask 'atom'
 
 # Utilities
-brew_cask 'caffeine'
+brew_cask 'keepingyouawake'
 brew_cask 'the-unarchiver'
 brew_cask 'flux'
 brew_cask 'key-codes'
