@@ -7,19 +7,19 @@
 if [ ! -z "$DOTFILES_ROOT" ]; then
 	if [ ! -d $DOTFILES_ROOT ]; then
 		echo "No dotfiles directory found at $DOTFILES_ROOT"
-		exit 1
+		return 1
 	fi
 else
 	if [ -d "$HOME/.dotfiles" ]; then
 		export DOTFILES_ROOT="$HOME/.dotfiles"
 	else
 		echo 'ERROR: Can not find dotfiles directory'
-		exit 1
+		return 1
 	fi
 fi
 
 # Load bash dotfiles modules
-files=( options path exports functions aliases prompt completions )
+files=( options exports path functions aliases prompt completions )
 for file in ${files[@]}; do
 	[ -r "$DOTFILES_ROOT/config/bash/$file" ] && source "$DOTFILES_ROOT/config/bash/$file"
 done
