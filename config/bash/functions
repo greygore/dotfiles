@@ -30,7 +30,7 @@ function cdf() { # short for `cdfinder`
 function targz() {
 	local tmpFile="${@%/}.tar";
 	tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1;
-	
+
 	size=$(
 		stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
 		stat -c"%s" "${tmpFile}" 2> /dev/null # GNU `stat`
@@ -278,23 +278,27 @@ EOF
 function update() {
 	# Get OS X Software Updates
 	if which softwareupdate > /dev/null; then
-		sudo softwareupdate -i -a
+		sudo softwareupdate -i -a | tee -a ~/update.log
 	fi
 	# Homebrew
 	if which brew > /dev/null; then
-		brew update; brew upgrade --all; brew cleanup
+		brew update | tee -a ~/update.log
+		brew upgrade --all | tee -a ~/update.log
+		brew cleanup | tee -a ~/update.log
 	fi
 	# Node modules
 	if which npm > /dev/null; then
-		npm install npm -g; npm update -g
+		npm install npm -g | tee -a ~/update.log
+		npm update -g | tee -a ~/update.log
 	fi
 	# Ruby gems (todo check for rvm...)
 	if which gem > /dev/null; then
-		gem update --system; gem update
+		gem update --system | tee -a ~/update.log
+		gem update | tee -a ~/update.log
 	fi
 	# Python packages
 	if which pip > /dev/null; then
-		pip freeze | sed -e 's/==.*//' | sed -e '/git-remote-helpers/ d' | xargs pip install -U
+		pip freeze | sed -e 's/==.*//' | sed -e '/git-remote-helpers/ d' | xargs pip install -U | tee -a ~/update.log
 	fi
 }
 
@@ -475,7 +479,7 @@ function dock() {
 	fi
 
 	docker_env
-	
+
 	if [ $# -eq 1 ] && [ $1 == 'env' ]; then
 		return 0
 	elif [ $# -eq 1 ] && [[ $1 =~ ^ls$ ]]; then
