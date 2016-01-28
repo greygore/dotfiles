@@ -53,6 +53,15 @@ brew_formula 'archey' # Show system info
 brew_formula 'docker'
 brew_formula 'docker-compose'
 
+# Shell completion
+brew_formula 'homebrew/completions/apm-bash-completion'
+brew_formula 'homebrew/completions/boot2docker-completion'
+brew_formula 'homebrew/completions/brew-cask-completion'
+brew_formula 'homebrew/completions/docker-completion'
+brew_formula 'homebrew/completions/docker-machine-completion'
+brew_formula 'homebrew/completions/open-completion'
+brew_formula 'homebrew/completions/vagrant-completion'
+
 # Miscellaneous
 brew_formula 'todo-txt' # http://todotxt.com/
 brew_formula 'go' '--cross-compile-common' # golang
