@@ -183,6 +183,8 @@ alias starwars='telnet towel.blinkenlights.nl'
 alias whisper='say -v whisper'
 alias weather='ansiweather'
 alias forecast='ansiweather -F'
+alias matrix='cmatrix -b'
+alias woah='cmatrix -b'
 
 # Work stuff
 alias cl="cd ~/cbdr/luceo/"

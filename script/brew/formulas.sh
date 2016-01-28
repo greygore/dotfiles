@@ -57,6 +57,7 @@ brew_formula 'node' # node.js and npm
 brew_formula 'dark-mode' # Toggle OSX dark mode
 brew_formula 'brightness' # Set brightness from CLI
 brew_formula 'ansiweather'
+brew_formula 'cmatrix' # Matrix green character rain
 
 # iTerm 1Password integration
 brew tap ravenac95/sudolikeaboss >> "$DOTFILES_ROOT/brew.log" 2>&1
