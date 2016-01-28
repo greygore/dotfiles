@@ -30,8 +30,7 @@ brew_cask 'daisydisk'
 
 # Window Management
 brew_cask 'displaylink' 'work' # USB video drivers
-brew_cask 'stay' # Pin windows in place, multi-monitor
-brew_cask 'spectacle' # Move and resize windows
+brew_cask 'moom' # Move and resize windows
 
 # Menu
 brew_cask 'battery-time-remaining'

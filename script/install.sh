@@ -21,6 +21,7 @@ elif confirm 'Do full install?' "$DOTFILES_DO_FULL_INSTALL"; then
 	DOTFILES_DO_BREW_CASK='y'
 	DOTFILES_DO_BREW_QUICKLOOK='y'
 	DOTFILES_DO_NPM='y'
+	DOTFILES_DO_PREFERENCES='y'
 fi
 
 # Set work/home variables to flag brew formulas
@@ -209,6 +210,18 @@ fi
 # Node/NPM packages
 if test $(which npm) && confirm 'Would you like to install NPM packages?' "$DOTFILES_DO_NPM" 'Installing NPM packages...'; then
 	source "$DOTFILES_ROOT/script/npm.sh" && success 'NPM packages installed.'
+fi
+
+# Preferences
+overwriteAll=false
+backupAll=false
+skipAll=false
+if is_osx && confirm 'Would you like to link your preference files?' "$DOTFILES_DO_PREFERENCES" 'Linking preference files'; then
+	for src in $(cd "$DOTFILES_ROOT" && find init -maxdepth 3 -iregex '^init/Preferences/[a-zA-Z0-9.]+\.plist$'); do
+		dst="$HOME/Library/Preferences/$(basename "${src}")"
+		link_file "$DOTFILES_ROOT/$src" "$dst"
+		defaults read "$dst" > /dev/null 2>&1
+	done
 fi
 
 success 'Done! Some changes may require restarting your computer to take effect.'
