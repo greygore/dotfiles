@@ -19,25 +19,3 @@ Thumbs.db
 
 # Git config is personalized
 config/.gitconfig
-
-# Ignore Sublime Text Package Control frequently changed files
-settings/sublime/Package Control.last-run
-settings/sublime/Package Control.ca-list
-settings/sublime/Package Control.ca-bundle
-settings/sublime/Package Control.system-ca-bundle
-settings/sublime/Package Control.merged-ca-bundle
-settings/sublime/Package Control.user-ca-bundle
-settings/sublime/Package Control.cache/
-settings/sublime/Package Control.ca-certs/
-
-# Ignore GoSublime binaries, logs & transient settings
-settings/sublime/GoSublime/osx-x64/bin/
-settings/sublime/GoSublime/osx-x64/*/bin/
-settings/sublime/GoSublime/osx-x64/log.txt
-settings/sublime/GoSublime-aux.sublime-settings
-
-# Color Highlighter
-settings/sublime/Color Highlighter/ColorPicker_osx_x64
-settings/sublime/Color Highlighter/ColorPicker/ColorPicker_osx_x64
-settings/sublime/Color Highlighter/themes/
-settings/sublime/Color Highlighter/icons/
