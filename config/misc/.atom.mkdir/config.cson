@@ -1,0 +1,36 @@
+"*":
+  "activate-power-mode":
+    particles:
+      size: {}
+      spawnCount: {}
+      totalCount: {}
+    screenShake: {}
+  "autoclose-html": {}
+  core:
+    themes: [
+      "one-dark-ui"
+      "solarized-dark-syntax"
+    ]
+  editor:
+    invisibles: {}
+    showIndentGuide: true
+    showInvisibles: true
+    tabLength: 4
+  "exception-reporting":
+    userId: "d6fd9dc2-1081-88d5-0e10-90857b041b7a"
+  "less-than-slash": {}
+  minimap:
+    plugins:
+      "highlight-selected": true
+  "one-dark-ui": {}
+  "save-session":
+    dataSaveFolder: "/Users/gwood/.atom/packages/save-session/projects"
+  "todo-show": {}
+  welcome:
+    showOnStartup: false
+".git-commit.text":
+  editor:
+    showIndentGuide: true
+".html.mustache.text":
+  editor:
+    showIndentGuide: true

@@ -5,9 +5,10 @@ export LANG="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 
 # Set the default editor
-if which subl > /dev/null 2>&1 && [ -f "$HOME/bin/sublw" ]; then
-	export EDITOR="$HOME/bin/sublw";
-	export GIT_EDITOR='subl -n -w';
+if which atom > /dev/null 2>&1; then
+	export EDITOR="atom";
+elif which subl > /dev/null 2>&1; then
+	export EDITOR="subl";
 else
 	export EDITOR="vim";
 fi;

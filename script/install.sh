@@ -145,10 +145,28 @@ overwriteAll=false
 backupAll=false
 skipAll=false
 if confirm 'Would you like to symlink your dotfiles?' "$DOTFILES_DO_SYMLINK"; then
-	# Grab all config files that start with "." and don't end in .master
-	for src in $(cd "$DOTFILES_ROOT" && find config -maxdepth 3 -iregex '^config/[a-z0-9]*/\.[a-z0-9._-]*' | grep -v .master$); do
+	# Grab config dirs/files start with "." and don't end in .master or .mkdir
+	for src in $(cd "$DOTFILES_ROOT" && find config -maxdepth 3 -iregex '^config/[a-z0-9]*/\.[a-z0-9._-]*' | grep -v .master$ | grep -v .mkdir$); do
 		dst="$HOME/$(basename "${src}")"
 		link_file "$DOTFILES_ROOT/$src" "$dst"
+	done
+
+	# Grab config dirs ending in .mkdir
+	for full in $(cd "$DOTFILES_ROOT" && find config -maxdepth 2 -iregex '^config/[a-z0-9]*/\.[a-z0-9._-]*\.mkdir$'); do
+		dir=$(basename ${full%.mkdir})
+
+		# Create directory
+		if [ ! -d "$HOME/$dir" ]; then
+			mkdir -p "$HOME/$dir" > /dev/null 2>&1
+			&& success "created $HOME/$dir"
+			|| warning "failed to create $HOME/$dir"
+		fi
+
+		# Link files in directory
+		for src in $(cd "$DOTFILES_ROOT" && find config -maxdepth 3 -iregex "^$full/[a-z0-9._-]+"); do
+			dst="$HOME/$dir/$(basename "${src}")"
+			link_file "$DOTFILES_ROOT/$src" "$dst"
+		done
 	done
 
 	# Start new bash environment
@@ -183,7 +201,7 @@ fi
 if is_osx && confirm 'Would you like to install and configure Homebrew formula/casks?' "$DOTFILES_DO_BREW"; then
 	source "$DOTFILES_ROOT/script/brew.sh" && success 'Homebrew formulas and casks installed.'
 	source "$DOTFILES_ROOT/script/apps/iterm2.sh" && success 'iTerm2 configured and themed.'
-	source "$DOTFILES_ROOT/script/apps/sublime.sh" && success 'Sublime Text 3 configured and themed.'
+	source "$DOTFILES_ROOT/script/apps/atom.sh" && success 'Atom and packages installed.'
 	source "$DOTFILES_ROOT/script/apps/firefox.sh" && success 'Firefox configured and addons installed.'
 	source "$DOTFILES_ROOT/script/apps/chrome.sh" && success 'Chrome configured.'
 fi

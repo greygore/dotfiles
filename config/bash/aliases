@@ -17,7 +17,6 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias g="git"
 alias h="history"
-alias s="subl ."
 alias p="open -a phpstorm"
 
 # Easier to remember

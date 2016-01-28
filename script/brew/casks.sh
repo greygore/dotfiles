@@ -19,7 +19,7 @@ brew_cask 'caskroom/fonts/font-source-code-pro'
 # Basic tools
 brew_cask '1password'
 brew_cask 'iterm2'
-brew_cask 'caskroom/homebrew-versions/sublime-text3'
+brew_cask 'atom'
 
 # Utilities
 brew_cask 'caffeine'
