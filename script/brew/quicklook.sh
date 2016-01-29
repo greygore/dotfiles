@@ -11,5 +11,5 @@ brew_quicklook 'quicklook-json'
 brew_quicklook 'qlprettypatch' # Diff
 brew_quicklook 'quicklook-csv'
 brew_quicklook 'betterzipql' # Archives
-brew_quicklook 'webp-quicklook'
+brew_quicklook 'webpquicklook'
 brew_quicklook 'suspicious-package' # OSX Installer Packages
