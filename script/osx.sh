@@ -728,11 +728,14 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true
 
+# Photos: Prevent from opening automatically when devices are plugged in
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Activity Monitor" "Address Book" "Calendar" "cfprefsd" "Contacts" "Dock" "Finder" "Mail" \
-	"Safari" "SystemUIServer"; do
+for app in "Activity Monitor" "Address Book" "Calendar" "cfprefsd" "Contacts" \
+	"Dock" "Finder" "Mail" "Photos" "Safari" "SystemUIServer"; do
 	killall "$app" > /dev/null 2>&1
 done
