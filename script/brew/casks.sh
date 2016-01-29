@@ -32,9 +32,6 @@ brew_cask 'daisydisk'
 brew_cask 'displaylink' 'work' # USB video drivers
 brew_cask 'moom' # Move and resize windows
 
-# Menu
-brew_cask 'battery-time-remaining'
-
 # Browser
 brew_cask 'firefox'
 brew_cask 'google-chrome'
