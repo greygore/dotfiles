@@ -58,8 +58,6 @@ brew_formula 'docker-compose'
 brew_formula 'homebrew/completions/apm-bash-completion'
 brew_formula 'homebrew/completions/boot2docker-completion'
 brew_formula 'homebrew/completions/brew-cask-completion'
-brew_formula 'homebrew/completions/docker-completion'
-brew_formula 'homebrew/completions/docker-machine-completion'
 brew_formula 'homebrew/completions/open-completion'
 brew_formula 'homebrew/completions/vagrant-completion'
 
