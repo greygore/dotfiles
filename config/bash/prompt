@@ -86,6 +86,15 @@ prompt_battery () {
 	fi
 }
 
+prompt_return () {
+	local code="$1"
+	if [ $code -eq 0 ]; then
+		echo " ${green}✔${reset}"
+	else
+		echo " ${red}✘${reset}"
+	fi
+}
+
 prompt_top () {
 	local top
 
@@ -126,7 +135,7 @@ prompt_left () {
 	# user@host: ~/dir/
 	left="${userStyle}\u${base01}@${hostStyle}\h${base01}: ${green}\w"
 	# - mybranch [?]
-	left+="\$(command -v prompt_git > /dev/null 2>&1 && prompt_git)"
+	left+=$(command -v prompt_git > /dev/null 2>&1 && prompt_git)
 	left+="${reset}";
 	echo -e $left
 }
@@ -144,7 +153,8 @@ prompt_bottom () {
 }
 
 set_prompt () {
-	PS1=$(printf "%s%*s\r%s%s" "$(prompt_top)" "$(($(tput cols)+54))" "$(prompt_right)" "$(prompt_left)" "$(prompt_bottom)")
+	local RETURN=$?
+	PS1=$(printf "%s%*s\r%s%s%s" "$(prompt_top)" "$(($(tput cols)+54))" "$(prompt_right)" "$(prompt_left)" "$(prompt_return $RETURN)" "$(prompt_bottom)")
 }
 
 PROMPT_COMMAND=set_prompt

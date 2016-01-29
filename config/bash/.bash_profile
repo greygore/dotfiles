@@ -32,5 +32,13 @@ fi
 
 # Integrate jump into the shell
 if which jump > /dev/null; then
+	# Because $(jump shell bash) clobbers $?, we have to hack around it
+	original_prompt_command=$PROMPT_COMMAND
 	eval "$(jump shell bash)"
+	if command -v __jump_prompt_command > /dev/null 2>&1; then
+		PROMPT_COMMAND="$original_prompt_command;__jump_prompt_command"
+	else
+		PROMPT_COMMAND=$original_prompt_command
+	fi
+	unset original_prompt_command
 fi
