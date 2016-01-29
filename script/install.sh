@@ -158,8 +158,8 @@ if confirm 'Would you like to symlink your dotfiles?' "$DOTFILES_DO_SYMLINK"; th
 
 		# Create directory
 		if [ ! -d "$HOME/$dir" ]; then
-			mkdir -p "$HOME/$dir" > /dev/null 2>&1
-			&& success "created $HOME/$dir"
+			mkdir -p "$HOME/$dir" > /dev/null 2>&1 \
+			&& success "created $HOME/$dir" \
 			|| warning "failed to create $HOME/$dir"
 		fi
 
