@@ -444,9 +444,6 @@ defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 # Allow quitting via ⌘ + Q; doing so will also hide desktop icons (false)
 defaults write com.apple.finder QuitMenuItem -bool true
 
-# Allow text selection in Quick Look
-defaults write com.apple.finder QLEnableTextSelection -bool true #?
-
 # Quick look window opening and closing animation duration
 #defaults write -g QLPanelAnimationDuration -float 0
 
