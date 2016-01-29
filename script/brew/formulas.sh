@@ -19,13 +19,14 @@ brew_formula 'noti' # cli notifications
 brew_formula 'watchman' # file watcher
 brew_formula 'known_hosts' # known_hosts manager
 brew_formula 'jq' # json processor
-brew_formula 'fpp' # Facebook path picker
+brew_formula 'path-extractor' # Path picker from stdin
 brew_formula 'envchain' # Store ENV variables in keychain
 brew_formula 'speedtest-cli' # Perform a speed test
 brew_formula 'ssh-copy-id' # Copy SSH key to remote system
 brew_formula 'httpie' # Better than CURL
 brew_formula 'dshb' # OS X system monitor in Swift
 brew_formula 'jump' # Fuzzy directory jumper
+brew_formula 'peco' # Interactive filtering
 
 # Conversion tools
 brew_formula 'ffmpeg' '--with-tools --with-x265' # movies/audio
