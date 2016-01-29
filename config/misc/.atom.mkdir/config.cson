@@ -5,7 +5,6 @@
       spawnCount: {}
       totalCount: {}
     screenShake: {}
-  "autoclose-html": {}
   core:
     themes: [
       "one-dark-ui"
@@ -23,8 +22,6 @@
     plugins:
       "highlight-selected": true
   "one-dark-ui": {}
-  "save-session":
-    dataSaveFolder: "/Users/gwood/.atom/packages/save-session/projects"
   "todo-show": {}
   welcome:
     showOnStartup: false
