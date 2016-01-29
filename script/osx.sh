@@ -119,7 +119,7 @@ defaults write com.apple.systemuiserver menuExtras -array \
 
 # Menu bar: Transparency
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
- 
+
 # Additional Transparency
 defaults write com.apple.universalaccess reduceTransparency -bool false
 
@@ -510,9 +510,6 @@ defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
 
 # Warn before emptying trash (true)
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
-
-# Empty Trash securely (false)
-defaults write com.apple.finder EmptyTrashSecurely -bool false
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true #?
