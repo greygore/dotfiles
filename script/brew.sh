@@ -9,7 +9,7 @@ init_sudo; destroy_sudo
 # Install Homebrew
 if test ! $(which brew); then
 	info "Installing homebrew..."
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+	echo 'headless' | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" >> "$DOTFILES_ROOT/brew.log" 2>&1 \
 	&& success 'Homebrew installed.' \
 	|| fail 'Unable to install Homebrew'
 fi
