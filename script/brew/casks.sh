@@ -13,6 +13,7 @@ fi
 brew_cask 'alfred'
 # If not previously installed, open to allow linking later
 if [ -z "$alfred_installed" ]; then
+	sleep 5
 	open -a "Alfred 2"
 fi
 
