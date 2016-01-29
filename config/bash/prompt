@@ -70,7 +70,7 @@ prompt_git() {
 
 		[ -n "${s}" ] && s=" [${s}]";
 
-		echo "${violet} - ${1}${branchName}${blue}${s}${reset}";
+		echo "${violet} ${1}${branchName}${blue}${s}${reset}";
 	else
 		return;
 	fi;
