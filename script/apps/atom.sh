@@ -40,7 +40,7 @@ apm install foldingtext-for-atom >> "$DOTFILES_ROOT/apm.log" 2>&1
 apm install less-than-slash >> "$DOTFILES_ROOT/apm.log" 2>&1
 apm install pigments >> "$DOTFILES_ROOT/apm.log" 2>&1
 apm install linter-htmlhint >> "$DOTFILES_ROOT/apm.log" 2>&1
-apm install linter-csshint >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install linter-csslint >> "$DOTFILES_ROOT/apm.log" 2>&1
 apm install linter-jshint >> "$DOTFILES_ROOT/apm.log" 2>&1
 
 # Fun
