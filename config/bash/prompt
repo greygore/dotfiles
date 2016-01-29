@@ -3,6 +3,29 @@
 # Heavily inspired by @necolas’s prompt: https://github.com/necolas/dotfiles
 # iTerm → Profiles → Text → use 13pt Monaco with 1.1 vertical spacing.
 
+tput sgr0 # reset colors
+bold=$(tput bold)
+reset=$(tput sgr0)
+black=$(tput setaf 0)
+white=$(tput setaf 15)
+# Solarized colors, taken from http://git.io/solarized-colors
+base03=$(tput setaf 234)
+base02=$(tput setaf 235)
+base01=$(tput setaf 240)
+base00=$(tput setaf 241)
+base0=$(tput setaf 244)
+base1=$(tput setaf 245)
+base2=$(tput setaf 254)
+base3=$(tput setaf 230)
+yellow=$(tput setaf 136)
+orange=$(tput setaf 166)
+red=$(tput setaf 160)
+magenta=$(tput setaf 125)
+violet=$(tput setaf 61)
+blue=$(tput setaf 33)
+cyan=$(tput setaf 37)
+green=$(tput setaf 64)
+
 prompt_git() {
 	local s='';
 	local branchName='';
@@ -47,7 +70,7 @@ prompt_git() {
 
 		[ -n "${s}" ] && s=" [${s}]";
 
-		echo "${1}${branchName}${blue}${s}";
+		echo "${violet} - ${1}${branchName}${blue}${s}${reset}";
 	else
 		return;
 	fi;
@@ -55,66 +78,76 @@ prompt_git() {
 
 prompt_battery () {
 	if [ "$(uname -s)" == "Darwin" ]; then
-		local battery=$(ioreg -n AppleSmartBattery -r | awk '$1~/Capacity/{c[$1]=$3} END{OFMT="%.2f%%"; max=c["\"MaxCapacity\""]; print (max>0? 100*c["\"CurrentCapacity\""]/max: "?")}')
-		local charging=$(ioreg -n AppleSmartBattery -r | awk '$1~/ExternalConnected/{gsub("Yes", "+");gsub("No", " "); print substr($0, length, 2)}')
-		# ⚡🔋
-		echo "$charging $base2$battery"
+		local battery=$(ioreg -n AppleSmartBattery -r | awk '$1~/Capacity/{c[$1]=$3} END{OFMT="%.1f%%"; max=c["\"MaxCapacity\""]; print (max>0? 100*c["\"CurrentCapacity\""]/max: "?")}')
+		local charging=$(ioreg -n AppleSmartBattery -r | awk '$1~/ExternalConnected/{gsub("Yes", "+");gsub("No", "-"); print substr($0, length, 1)}' | [ $(cat) == "+" ] && echo '⚡' || echo '🔋')
+		echo "${base2}${battery} ${charging}${reset}"
+	else
+		return
 	fi
-	return
 }
 
-tput sgr0 # reset colors
-bold=$(tput bold)
-reset=$(tput sgr0)
-black=$(tput setaf 0)
-white=$(tput setaf 15)
-# Solarized colors, taken from http://git.io/solarized-colors
-base03=$(tput setaf 234)
-base02=$(tput setaf 235)
-base01=$(tput setaf 240)
-base00=$(tput setaf 241)
-base0=$(tput setaf 244)
-base1=$(tput setaf 245)
-base2=$(tput setaf 254)
-base3=$(tput setaf 230)
-yellow=$(tput setaf 136)
-orange=$(tput setaf 166)
-red=$(tput setaf 160)
-magenta=$(tput setaf 125)
-violet=$(tput setaf 61)
-blue=$(tput setaf 33)
-cyan=$(tput setaf 37)
-green=$(tput setaf 64)
+prompt_top () {
+	local top
 
-# Highlight the user name when logged in as root.
-if [[ "${USER}" == "root" ]]; then
-	userStyle="\[${bold}${red}\]";
-else
-	userStyle="\[${orange}\]";
-fi;
+	case $TERM in
+		xterm*)
+			# Set window/tab title
+			# \033 = ESC
+			# \007 = BEL
+			top="\n\[\033]0;\w\007\]"
+			;;
+		*)
+			top="\n"
+			;;
+	esac
 
-# Highlight the hostname when connected via SSH.
-if [[ "${SSH_TTY}" ]]; then
-	hostStyle="\[${bold}${red}\]";
-else
-	hostStyle="\[${yellow}\]";
-fi;
+	echo -e $top
+}
 
-# Set the terminal title to the current working directory.
-PS1="\[\033]0;\w\007\]";
-PS1+="\[${bold}\]\n"; # newline
-PS1+="\[${userStyle}\]\u"; # username
-PS1+="\[${base01}\]@";
-PS1+="\[${hostStyle}\]\h"; # host
-PS1+="\[${base01}\]: ";
-PS1+="\[${green}\]\w"; # working directory
-PS1+="\$(prompt_git \"${violet} - \")"; # Git repository details
-#PS1+="\[${base01}\] ";
-#PS1+="\$(prompt_battery)"; # Battery
-PS1+="\n";
-PS1+="\[${base01}\][\T] " # time
-PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
-export PS1;
+prompt_left () {
+	local left
+	local userStyle
+	local hostStyle
+
+	# Highlight the user name when logged in as root
+	if [ "${USER}" == "root" ]; then
+		userStyle="${bold}${red}";
+	else
+		userStyle="${orange}";
+	fi;
+
+	# Highlight the hostname when connected via SSH.
+	if [ "${SSH_TTY}" ]; then
+		hostStyle="${bold}${red}";
+	else
+		hostStyle="${yellow}";
+	fi;
+
+	# user@host: ~/dir/
+	left="${userStyle}\u${base01}@${hostStyle}\h${base01}: ${green}\w"
+	# - mybranch [?]
+	left+="\$(command -v prompt_git > /dev/null 2>&1 && prompt_git)"
+	left+="${reset}";
+	echo -e $left
+}
+
+prompt_right () {
+	local right;
+	right="\$(command -v prompt_battery > /dev/null 2>&1 && prompt_battery)"
+	echo -e $right
+}
+
+prompt_bottom () {
+	local bottom
+	bottom="\n\[${base01}\][\T]\[${white}\] \$ \[${reset}\]" # [hh:mi:ss] $
+	echo -e $bottom
+}
+
+set_prompt () {
+	PS1=$(printf "%s%*s\r%s%s" "$(prompt_top)" "$(($(tput cols)+54))" "$(prompt_right)" "$(prompt_left)" "$(prompt_bottom)")
+}
+
+PROMPT_COMMAND=set_prompt
 
 PS2="\[${yellow}\]→ \[${reset}\]";
 export PS2;
