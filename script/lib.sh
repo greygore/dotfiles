@@ -77,12 +77,12 @@ pause () {
 
 success () {
 	timestamp
-	printf "$(tput bold; tput setaf 64) [ ✓ ] %s$(tput sgr0)\n" "$@"
+	printf "$(tput bold; tput setaf 64) [ ✔ ] %s$(tput sgr0)\n" "$@"
 }
 
 error () {
 	timestamp
-	printf "$(tput bold; tput setaf 1) [ x ] %s$(tput sgr0)\n" "$@"
+	printf "$(tput bold; tput setaf 1) [ ✘ ] %s$(tput sgr0)\n" "$@"
 }
 
 warning () {
