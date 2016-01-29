@@ -6,15 +6,15 @@ source "$DOTFILES_ROOT/script/lib.sh"
 git config --global core.editor "atom --wait"
 
 # Basic functionality
-apm install Sublime-Style-Column-Selection
-apm install minimap
-apm install highlight-selected
-apm install minimap-highlight-selected
-apm install clipboard-plus
-apm install editorconfig
+apm install Sublime-Style-Column-Selection >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install minimap >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install highlight-selected >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install minimap-highlight-selected >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install clipboard-plus >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install editorconfig >> "$DOTFILES_ROOT/apm.log" 2>&1
 
 # Go
-apm install go-plus
+apm install go-plus >> "$DOTFILES_ROOT/apm.log" 2>&1
 if is_osx; then
     if [ -z "$GOPATH" ]; then
         export GOPATH="$(brew --prefix)/lib/go"
@@ -26,23 +26,23 @@ if is_osx; then
         info 'If you install the setenv-osx function you can: setenv-osx GOPATH'
     fi
 fi
-apm install gorename
+apm install gorename >> "$DOTFILES_ROOT/apm.log" 2>&1
 
 # Git
-apm install git-time-machine
+apm install git-time-machine >> "$DOTFILES_ROOT/apm.log" 2>&1
 
 # Misc
-apm install linter
-apm install todo-show
-apm install foldingtext-for-atom
+apm install linter >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install todo-show >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install foldingtext-for-atom >> "$DOTFILES_ROOT/apm.log" 2>&1
 
 # HTML/CSS/JS
-apm install less-than-slash
-apm install pigments
-apm install linter-htmlhint
-apm install linter-csshint
-apm install linter-jshint
+apm install less-than-slash >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install pigments >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install linter-htmlhint >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install linter-csshint >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install linter-jshint >> "$DOTFILES_ROOT/apm.log" 2>&1
 
 # Fun
-apm install activate-power-mode
-#apm install asteroids
+apm install activate-power-mode >> "$DOTFILES_ROOT/apm.log" 2>&1
+#apm install asteroids >> "$DOTFILES_ROOT/apm.log" 2>&1
