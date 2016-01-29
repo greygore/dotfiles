@@ -17,7 +17,8 @@ apm install editorconfig
 apm install go-plus
 if is_osx; then
     if [ -z "$GOPATH" ]; then
-        warning 'Unable to locate $GOPATH for atom-go-plus'
+        export GOPATH="$(brew --prefix)/lib/go"
+        setenv-osx GOPATH
     elif [ command -v setenv-osx > /dev/null ]; then
         setenv-osx GOPATH
     else
