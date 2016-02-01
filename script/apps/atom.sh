@@ -6,6 +6,8 @@ source "$DOTFILES_ROOT/script/lib.sh"
 git config --global core.editor "atom --wait"
 
 # Basic functionality
+apm install solarized-light-ui >> "$DOTFILES_ROOT/apm.log" 2>&1
+apm install solarized-dark-ui >> "$DOTFILES_ROOT/apm.log" 2>&1
 apm install Sublime-Style-Column-Selection >> "$DOTFILES_ROOT/apm.log" 2>&1
 apm install minimap >> "$DOTFILES_ROOT/apm.log" 2>&1
 apm install highlight-selected >> "$DOTFILES_ROOT/apm.log" 2>&1
