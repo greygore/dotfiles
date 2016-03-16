@@ -63,6 +63,7 @@ brew_cask 'skype'
 brew_cask 'komanda' # IRC
 
 # Apps
+brew_cask 'spotify'
 brew_cask 'libreoffice' 'home'
 brew_cask 'ynab' 'home'
 brew_cask 'gimp' 'home'
