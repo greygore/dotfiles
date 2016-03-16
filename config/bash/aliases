@@ -191,9 +191,3 @@ alias forecast='ansiweather -F'
 alias matrix='cmatrix -b'
 alias woah='cmatrix -b'
 alias nyan='nyancat'
-
-# Work stuff
-alias cl="cd ~/cbdr/luceo/"
-alias tunnel-local2pike="ssh -N -L 3306:pike.cbsitedb.net:3306 aws-gateway-dev"
-alias tunnel-dev2local="ssh -N -R 8080:localhost:8080 aws-dev-http"
-alias repeater-api="cd $GOPATH/src/github.com/cbdr/luceo-repeater-api && go build && ./luceo-repeater-api"

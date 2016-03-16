@@ -42,3 +42,8 @@ if which jump > /dev/null; then
 	fi
 	unset original_prompt_command
 fi
+
+# Load any custom system stuffs
+if [ -r "$HOME/.bash_custom" ]; then
+	source "$HOME/.bash_custom"
+fi
