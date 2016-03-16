@@ -44,7 +44,7 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true;
 export GIT_PS1_SHOWSTASHSTATE=true;
 
 # Don't use the /etc/hosts for bash completion
-COMP_KNOWN_HOSTS_WITH_HOSTFILE=""
+export COMP_KNOWN_HOSTS_WITH_HOSTFILE=""
 
 # OSX only
 if [ "$(uname -s)" == "Darwin" ]; then
