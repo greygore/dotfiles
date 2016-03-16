@@ -162,8 +162,8 @@
 	log = true
 
 [push]
-	# Default value to squelch warning message
-	default = simple
+	# Only push to the current branch
+	default = current
 
 # URL shorthands
 [url "git@github.com:"]
