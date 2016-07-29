@@ -21,7 +21,7 @@ if is_osx; then
     if [ -z "$GOPATH" ]; then
         export GOPATH="$(brew --prefix)/lib/go"
         setenv-osx GOPATH
-    elif [ command -v setenv-osx > /dev/null ]; then
+    elif command -v setenv-osx > /dev/null; then
         setenv-osx GOPATH
     else
         info 'Remember to set the GOPATH environmental variable with launchd'
