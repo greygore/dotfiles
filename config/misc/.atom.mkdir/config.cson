@@ -7,6 +7,7 @@
     screenShake: {}
   "autocomplete-plus": {}
   core:
+    projectHome: "/Users/gwood/github.com"
     themes: [
       "solarized-dark-ui"
       "solarized-dark-syntax"
@@ -19,11 +20,16 @@
   "exception-reporting":
     userId: "d6fd9dc2-1081-88d5-0e10-90857b041b7a"
   "go-plus": {}
+  "gometalinter-linter": {}
   "less-than-slash": {}
+  linter: {}
+  "linter-jshint": {}
   minimap:
     plugins:
       "git-diff": true
+      "git-diffDecorationsZIndex": 0
       "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
   "one-dark-ui": {}
   "todo-show": {}
   welcome:
@@ -33,4 +39,8 @@
     showIndentGuide: true
 ".html.mustache.text":
   editor:
+    showIndentGuide: true
+".shell.source":
+  editor:
+    autoIndent: true
     showIndentGuide: true
