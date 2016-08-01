@@ -4,6 +4,7 @@ source "$DOTFILES_ROOT/script/lib.sh"
 source "$DOTFILES_ROOT/script/brew/lib.sh"
 
 # Cooler versions of existing commands
+brew_formula 'm-cli' # OSX specific helpers
 brew_formula 'tree' # ls
 brew_formula 'trash' # rm
 brew_formula 'rename' # mv
