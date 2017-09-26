@@ -12,3 +12,8 @@ export PATH="$GOPATH/bin:$PATH"
 
 # Ensure ~/bin is at the front of the path
 export PATH="$HOME/bin:$PATH"
+
+# Add Rust binaries to path
+if [ -d "$HOME/.cargo/bin" ]; then
+  export PATH="$PATH:$HOME/.cargo/bin"
+fi
