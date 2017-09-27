@@ -40,7 +40,7 @@ brew tap bramstein/webfonttools >> "$DOTFILES_ROOT/brew.log" 2>&1
 brew_formula 'woff2' # For WOFF2
 brew_formula 'sfnt2woff-zopfli' # For WOFF static files
 brew_formula 'sfnt2woff' # For dynamically generating WOFF
-brew_formula 'sfntly' # Use sfnttool to  generate compressed EOT
+#brew_formula 'sfntly' # Use sfnttool to generate compressed EOT
 
 # Graphical command line utilities
 brew_formula 'grc'
