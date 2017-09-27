@@ -7,14 +7,14 @@ source "$DOTFILES_ROOT/script/brew/lib.sh"
 brew_cask 'java'
 
 # Alfred
-if [ -d "/Applications/Alfred 2.app" ]; then
+if [ -d "/Applications/Alfred 3.app" ]; then
 	alfred_installed="Installed"
 fi
 brew_cask 'alfred'
 # If not previously installed, open to allow linking later
 if [ -z "$alfred_installed" ]; then
 	sleep 5
-	open -a "Alfred 2"
+	open -a "Alfred 3"
 fi
 
 # Fonts
