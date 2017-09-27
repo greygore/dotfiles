@@ -33,7 +33,6 @@ brew_cask 'key-codes'
 brew_cask 'daisydisk'
 
 # Window Management
-brew_cask 'displaylink' 'work' # USB video drivers
 brew_cask 'moom' # Move and resize windows
 
 # Browser
@@ -41,7 +40,6 @@ brew_cask 'firefox'
 brew_cask 'google-chrome'
 
 # Services
-brew_cask 'crashplan' 'home'
 brew_cask 'dropbox'
 brew_cask 'evernote'
 brew_cask 'github-desktop'
@@ -56,7 +54,6 @@ brew_cask 'dash' # API Docs
 brew_cask 'imageoptim'
 brew_cask 'cyberduck' # Remote files
 brew_cask 'kitematic' # Docker
-brew_cask 'phpstorm' 'work'
 
 # Communication
 brew_cask 'skype'
@@ -64,11 +61,7 @@ brew_cask 'komanda' # IRC
 
 # Apps
 brew_cask 'spotify'
-brew_cask 'libreoffice' 'home'
-brew_cask 'ynab' 'home'
-brew_cask 'gimp' 'home'
 brew_cask 'vlc'
-brew_cask 'hipchat' 'work'
 
 # QuickLook plugins
 brew_cask 'qlcolorcode' # Code syntax
@@ -80,3 +73,8 @@ brew_cask 'quicklook-csv'
 brew_cask 'betterzipql' # Archives
 brew_cask 'webpquicklook'
 brew_cask 'suspicious-package' # OSX Installer Packages
+
+# Context specific casks
+if [ -z "$DOTFILES_INSTALL_CONTEXT" && -d "$DOTFILES_ROOT/script/brew/$DOTFILES_INSTALL_CONTEXT/" ]; then
+  source "$DOTFILES_ROOT/script/brew/$DOTFILES_INSTALL_CONTEXT/casks.sh"
+fi
