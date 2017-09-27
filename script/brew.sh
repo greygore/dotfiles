@@ -9,21 +9,18 @@ init_sudo; destroy_sudo
 # Install Homebrew
 if test ! $(which brew); then
 	info "Installing homebrew..."
+  init_sudo
 	echo 'headless' | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-	&& success 'Homebrew installed.' \
+    && success 'Homebrew installed.' \
 	|| fail 'Unable to install Homebrew'
+  destroy_sudo
 fi
 
 info 'Upgrading homebrew and existing formulas'
 brew update >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-&& brew upgrade --all >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-&& success 'Homebrew and formulas upgraded.' \
+  && brew upgrade --all >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+  && success 'Homebrew and formulas upgraded.' \
 || fail 'Unable to upgrade homebrew and formulas'
-
-info 'Installing homebrew cask...'
-brew install caskroom/cask/brew-cask >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-&& success 'Installed homebrew cask' \
-|| fail 'Unable to install homebrew cask'
 
 if confirm 'Install brewed version of bash?' "$DOTFILES_DO_BREW_BASH" 'Installing brewed bash...'; then
 	source "$DOTFILES_ROOT/script/brew/bash.sh"
@@ -49,6 +46,6 @@ fi
 
 # Clean up brew working files
 brew cleanup >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-&& brew cask cleanup >> "$DOTFILES_ROOT/brew.log" 2>&1 \
-&& success 'Cleaned up brew and cask.' \
+  && brew cask cleanup >> "$DOTFILES_ROOT/brew.log" 2>&1 \
+  && success 'Cleaned up brew and cask.' \
 || error 'Unable to clean up brew and cask'

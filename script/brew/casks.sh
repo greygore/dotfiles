@@ -3,9 +3,6 @@
 source "$DOTFILES_ROOT/script/lib.sh"
 source "$DOTFILES_ROOT/script/brew/lib.sh"
 
-# Java
-brew_cask 'java'
-
 # Alfred
 if [ -d "/Applications/Alfred 3.app" ]; then
 	alfred_installed="Installed"
