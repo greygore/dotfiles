@@ -74,7 +74,3 @@ brew_formula 'ansiweather'
 brew_formula 'cmatrix' # Matrix green character rain
 brew_formula 'nyancat'
 brew_formula 'rig' # Random Identity Generator
-
-# iTerm 1Password integration
-brew tap ravenac95/sudolikeaboss >> "$DOTFILES_ROOT/brew.log" 2>&1
-brew_formula 'sudolikeaboss'
