@@ -69,3 +69,14 @@ brew_cask 'ynab' 'home'
 brew_cask 'gimp' 'home'
 brew_cask 'vlc'
 brew_cask 'hipchat' 'work'
+
+# QuickLook plugins
+brew_cask 'qlcolorcode' # Code syntax
+brew_cask 'qlstephen' # Extensionless text files
+brew_cask 'qlmarkdown'
+brew_cask 'quicklook-json'
+brew_cask 'qlprettypatch' # Diff
+brew_cask 'quicklook-csv'
+brew_cask 'betterzipql' # Archives
+brew_cask 'webpquicklook'
+brew_cask 'suspicious-package' # OSX Installer Packages
