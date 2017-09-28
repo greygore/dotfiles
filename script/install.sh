@@ -202,7 +202,6 @@ fi
 if is_osx && confirm 'Would you like to install and configure Homebrew formula/casks?' "$DOTFILES_DO_BREW"; then
 	source "$DOTFILES_ROOT/script/brew.sh" && success 'Homebrew formulas and casks installed.'
 	source "$DOTFILES_ROOT/script/apps/iterm2.sh" && success 'iTerm2 configured and themed.'
-	source "$DOTFILES_ROOT/script/apps/atom.sh" && success 'Atom and packages installed.'
 	source "$DOTFILES_ROOT/script/apps/firefox.sh" && success 'Firefox configured and addons installed.'
 	source "$DOTFILES_ROOT/script/apps/chrome.sh" && success 'Chrome configured.'
 fi

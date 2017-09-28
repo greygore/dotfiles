@@ -3,11 +3,8 @@
 source "$DOTFILES_ROOT/script/lib.sh"
 source "$DOTFILES_ROOT/script/brew/lib.sh"
 
-# Window Management
-brew_cask 'displaylink' # USB video drivers
-
 # Dev tools
-brew_cask 'phpstorm'
+brew_cask 'sequel-pro' # MySQL GUI
 
 # Apps
 brew_cask 'hipchat'
