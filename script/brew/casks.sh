@@ -7,7 +7,9 @@ source "$DOTFILES_ROOT/script/brew/lib.sh"
 if [ -d "/Applications/Alfred 3.app" ]; then
 	alfred_installed="Installed"
 fi
+init_sudo
 brew_cask 'alfred'
+destroy_sudo
 # If not previously installed, open to allow linking later
 if [ -z "$alfred_installed" ]; then
 	sleep 5
@@ -42,7 +44,9 @@ brew_cask 'evernote'
 brew_cask 'github-desktop'
 
 # Dev tools
+init_sudo
 brew_cask 'virtualbox'
+destroy_sudo
 brew_cask 'vagrant'
 brew_cask 'sourcetree'
 brew_cask 'pgadmin4'

@@ -4,7 +4,9 @@ source "$DOTFILES_ROOT/script/lib.sh"
 source "$DOTFILES_ROOT/script/brew/lib.sh"
 
 # Java is sometimes a dependency, regretably
+init_sudo
 brew_cask 'java'
+destroy_sudo
 
 # Cooler versions of existing commands
 brew_formula 'm-cli' # OSX specific helpers
