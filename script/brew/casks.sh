@@ -31,7 +31,9 @@ brew_cask 'key-codes'
 brew_cask 'daisydisk'
 
 # Window Management
+init_sudo
 brew_cask 'spectacle' # Move and resize windows
+destroy_sudo
 
 # Browser
 brew_cask 'firefox'
@@ -41,7 +43,6 @@ brew_cask 'google-chrome'
 init_sudo
 brew_cask 'virtualbox'
 destroy_sudo
-brew_cask 'sequel-pro' # MySQL GUI
 brew_cask 'dash' # API Docs
 brew_cask 'imageoptim'
 
