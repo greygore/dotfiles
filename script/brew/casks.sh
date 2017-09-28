@@ -76,6 +76,6 @@ brew_cask 'webpquicklook'
 brew_cask 'suspicious-package' # OSX Installer Packages
 
 # Context specific casks
-if [ -z "$DOTFILES_INSTALL_CONTEXT" && -d "$DOTFILES_ROOT/script/brew/$DOTFILES_INSTALL_CONTEXT/" ]; then
+if [ -z "$DOTFILES_INSTALL_CONTEXT" ] && [ -d "$DOTFILES_ROOT/script/brew/$DOTFILES_INSTALL_CONTEXT/" ]; then
   source "$DOTFILES_ROOT/script/brew/$DOTFILES_INSTALL_CONTEXT/casks.sh"
 fi
