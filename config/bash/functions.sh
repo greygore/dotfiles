@@ -326,7 +326,6 @@ function x () {
 	fi
 }
 
-# Shout
 function shout() {
 	if which figlet > /dev/null; then
 		figlet "$1"
@@ -340,11 +339,13 @@ function shout() {
 	fi
 }
 
-function o() {
-	if [ $# -eq 0 ]; then
-		open .
-	else
-		open "$@"
+function whisper() {
+	if [ "$(uname -s)" == "Darwin" ]; then
+		local volume
+		volume=$(/usr/bin/osascript -e 'output volume of (get volume settings)')
+		/usr/bin/osascript -e 'set volume output volume 15'
+		say "$1"
+		/usr/bin/osascript -e "set volume output volume $volume"
 	fi
 }
 
