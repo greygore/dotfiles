@@ -112,8 +112,8 @@
 	# Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
 	whitespace = space-before-tab,trailing-space
 
-	# Use Atom for commit messages
-	editor = atom --wait
+	# Use VS Code for commit messages
+	editor = code --wait
 
 	# Make `git rebase` safer on OS X
 	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
