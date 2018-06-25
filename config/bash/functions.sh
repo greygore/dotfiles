@@ -32,7 +32,7 @@ function targz() {
 	tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1;
 
 	size=$(
-		stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
+		stat -f"%z" "${tmpFile}" 2> /dev/null; # macOS `stat`
 		stat -c"%s" "${tmpFile}" 2> /dev/null # GNU `stat`
 	);
 
@@ -236,7 +236,7 @@ function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
-# Add note to Notes.app (OS X 10.8)
+# Add note to Notes.app (macOS 10.8)
 # Usage: `note 'foo'` or `echo 'foo' | note`
 function note() {
 	local text;
@@ -257,7 +257,7 @@ end tell
 EOF
 }
 
-# Add reminder to Reminders.app (OS X 10.8)
+# Add reminder to Reminders.app (macOS 10.8)
 # Usage: `remind 'foo'` or `echo 'foo' | remind`
 function remind() {
 	local text;
@@ -275,9 +275,9 @@ end tell
 EOF
 }
 
-# Get OS X Software Updates, and update Homebrew, npm, Ruby gems and Python packages
+# Get macOS Software Updates, and update Homebrew, npm, Ruby gems and Python packages
 function update() {
-	# Get OS X Software Updates
+	# Get macOS Software Updates
 	if which softwareupdate > /dev/null; then
 		sudo softwareupdate -i -a | tee -a ~/update.log
 	fi
@@ -403,7 +403,7 @@ function find_prefs() {
 	echo "diff defaults.before defaults.after"
 }
 
-function setenv-osx() {
+function setenv-macos() {
 	if [ "$(uname -s)" == "Darwin" ]; then
 		local key
 		local val

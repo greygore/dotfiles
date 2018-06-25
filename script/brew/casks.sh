@@ -58,7 +58,7 @@ brew_cask 'qlprettypatch' # Diff
 brew_cask 'quicklook-csv'
 brew_cask 'betterzipql' # Archives
 brew_cask 'webpquicklook'
-brew_cask 'suspicious-package' # OSX Installer Packages
+brew_cask 'suspicious-package' # MacOS Installer Packages
 
 # Context specific casks
 if [ -z "$DOTFILES_INSTALL_CONTEXT" ] && [ -d "$DOTFILES_ROOT/script/brew/$DOTFILES_INSTALL_CONTEXT/" ]; then

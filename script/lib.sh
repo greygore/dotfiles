@@ -157,7 +157,7 @@ link_file () {
 	fi
 }
 
-is_osx () {
+is_macos () {
 	if [ "$(uname -s)" == "Darwin" ]; then
 		return 0
 	fi

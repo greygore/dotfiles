@@ -3,7 +3,7 @@
 source "$DOTFILES_ROOT/script/lib.sh"
 source "$DOTFILES_ROOT/script/brew/lib.sh"
 
-# Updated OSX binaries
+# Updated macOS binaries
 brew_formula 'coreutils'
 brew_formula 'findutils' '--with-default-names' # find, locate, updatedb, xargs
 brew_formula 'gnu-sed' '--with-default-names' # sed

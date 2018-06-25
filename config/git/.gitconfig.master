@@ -115,7 +115,7 @@
 	# Use VS Code for commit messages
 	editor = code --wait
 
-	# Make `git rebase` safer on OS X
+	# Make `git rebase` safer on macOS
 	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
 	trustctime = false
 

@@ -12,7 +12,7 @@ elif confirm 'Do full install?' "$DOTFILES_DO_FULL_INSTALL"; then
 	DOTFILES_DO_GIT_SYNC='y'
 	DOTFILES_DO_SYMLINK='y'
 	DOTFILES_DO_HOSTS='y'
-	DOTFILES_DO_OSX='y'
+	DOTFILES_DO_MACOS='y'
 	DOTFILES_DO_APP_STORE='y'
 	DOTFILES_DO_BREW='y'
 	DOTFILES_DO_BREW_BASH='y'
@@ -37,7 +37,7 @@ if [ ! -f "$HOME/.dotrc" ]; then
 fi
 
 # Install command line tools
-if is_osx; then
+if is_macos; then
 	xcode-select -p > /dev/null 2>&1
 	if [ $? -eq 2 ]; then
 		info 'Installing command line tools...'
@@ -67,7 +67,7 @@ if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
 	eval "$(ssh-agent -s)" > /dev/null || fail 'Unable to start ssh agent'
 	ssh-add -A "$HOME/.ssh/id_rsa" > /dev/null 2>&1 || fail 'Unable to add new key to ssh'
 	ssh-keyscan -t rsa github.com >> "$HOME/.ssh/known_hosts" 2> /dev/null
-	if is_osx; then
+	if is_macos; then
 		pbcopy < "$HOME/.ssh/id_rsa.pub"
 		info 'Your public key has been copied to your clipboard.'
 	else
@@ -76,7 +76,7 @@ if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
 	open https://www.github.com/settings/ssh
 	pause 'Enter your public key to your Github account, then press any key to continue.'
 elif confirm 'Would you like to enter your public key on Github?'; then
-	if is_osx; then
+	if is_macos; then
 		pbcopy < "$HOME/.ssh/id_rsa.pub"
 		info 'Your public key has been copied to your clipboard.'
 	else
@@ -95,7 +95,7 @@ if confirm 'Would you like to configure git?' "$DOTFILES_DO_GIT_CONFIG" 'Configu
 	git_authorname=$answer
 	question ' (Git) What is your email?' "$DOTFILES_GIT_EMAIL" " (Git) Using supplied email: $DOTFILES_GIT_EMAIL"
 	git_authoremail=$answer
-	if is_osx; then
+	if is_macos; then
 		git_credential='osxkeychain'
 	else
 		git_credential='cache'
@@ -185,21 +185,21 @@ if confirm 'Would you like to install a third party hosts file?' "$DOTFILES_DO_H
 	sudo mv "$HOME/hosts" /etc/hosts
 fi
 
-# OSX Settings
-if is_osx && confirm 'Would you like to customize your OS X environment?' "$DOTFILES_DO_OSX"; then
-	source "$DOTFILES_ROOT/script/osx.sh" && success 'OS X environment customized.'
+# MacOS Settings
+if is_macos && confirm 'Would you like to customize your MacOS environment?' "$DOTFILES_DO_MACOS"; then
+	source "$DOTFILES_ROOT/script/macos.sh" && success 'MacOS environment customized.'
 	source "$DOTFILES_ROOT/script/apps/terminal.sh" && success 'Terminal configured and themed.'
 	source "$DOTFILES_ROOT/script/apps/mail.sh" && success 'Mail.app configured.'
 	source "$DOTFILES_ROOT/script/apps/safari.sh" && success 'Safari configured.'
 fi
 
 # Mac App Store
-if is_osx && confirm 'Would you like to install apps from the Mac App Store?' "$DOTFILES_DO_APP_STORE"; then
+if is_macos && confirm 'Would you like to install apps from the Mac App Store?' "$DOTFILES_DO_APP_STORE"; then
 	source "$DOTFILES_ROOT/script/app_store.sh"
 fi
 
 # Homebrew installation and configuration
-if is_osx && confirm 'Would you like to install and configure Homebrew formula/casks?' "$DOTFILES_DO_BREW"; then
+if is_macos && confirm 'Would you like to install and configure Homebrew formula/casks?' "$DOTFILES_DO_BREW"; then
 	source "$DOTFILES_ROOT/script/brew.sh" && success 'Homebrew formulas and casks installed.'
 	source "$DOTFILES_ROOT/script/apps/iterm2.sh" && success 'iTerm2 configured and themed.'
 	source "$DOTFILES_ROOT/script/apps/firefox.sh" && success 'Firefox configured and addons installed.'
@@ -215,7 +215,7 @@ fi
 overwriteAll=false
 backupAll=false
 skipAll=false
-if is_osx && confirm 'Would you like to link your preference files?' "$DOTFILES_DO_PREFERENCES" 'Linking preference files'; then
+if is_macos && confirm 'Would you like to link your preference files?' "$DOTFILES_DO_PREFERENCES" 'Linking preference files'; then
 	for src in $(cd "$DOTFILES_ROOT" && find init -maxdepth 3 -iregex '^init/Preferences/[a-zA-Z0-9.]+\.plist$'); do
 		dst="$HOME/Library/Preferences/$(basename "${src}")"
 		link_file "$DOTFILES_ROOT/$src" "$dst"

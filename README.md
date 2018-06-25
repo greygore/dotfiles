@@ -1,6 +1,6 @@
 # GreyGore’s dotfiles
 
-This is my personal setup of a clean OS X Yosemite Mac. Eventually I'd like to use this to personalize my Linux shell(s) as well.
+This is my personal setup of a clean macOS Yosemite. Eventually I'd like to use this to personalize my Linux shell(s) as well.
 
 Originally this was forked from [Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles), but it's since been added to and rewritten extensively.
 
@@ -13,7 +13,7 @@ Originally this was forked from [Mathias Bynens' dotfiles](https://github.com/ma
  * [curl](http://curl.haxx.se/)
  * [git](http://git-scm.com/)
 
-A base installation of OS X Yosemite will include `curl`, while `git` will be installed automatically as part of the command line tools.
+A base installation of macOS Yosemite will include `curl`, while `git` will be installed automatically as part of the command line tools.
 
 ### One Line Install
 
@@ -35,7 +35,7 @@ export DOTFILES_USER="greygore"; export DOTFILES_DIRECTORY="$HOME/dotfiles" bash
 
 Although you should consider forking this repository and customizing it to your own needs, the installation script will attempt to prompt you for user specific information, rather than using hard-coded values.
 
-Currently, the exception to this is the OS X locale information. *Don't worry:* if you are not in the US (and the Eastern timezone), you'll be able to opt out of this. In the future I'll consider adding additional locale and timezone choices; if you want this, please [file an issue](https://github.com/greygore/dotfiles/issues).
+Currently, the exception to this is the macOS locale information. *Don't worry:* if you are not in the US (and the Eastern timezone), you'll be able to opt out of this. In the future I'll consider adding additional locale and timezone choices; if you want this, please [file an issue](https://github.com/greygore/dotfiles/issues).
 
 ## Reset to defaults
 
@@ -43,9 +43,9 @@ Currently, the exception to this is the OS X locale information. *Don't worry:* 
 
 Removing the symbolic links from your home directory will remove any dotfile customizations. Restore any backups that you surely made before running the install script to return to your original settings.
 
-### OS X
+### macOS
 
-The OS X default settings are heavily commented, with some available options commented out entirely. Additional options for each setting are documented where available, as is the default value if available. For settings using `defaults`, change `write` to `delete` to reset to the default system value. For example:
+The macOS default settings are heavily commented, with some available options commented out entirely. Additional options for each setting are documented where available, as is the default value if available. For settings using `defaults`, change `write` to `delete` to reset to the default system value. For example:
 
 ```bash
 # Set scroll direction
@@ -57,11 +57,11 @@ defaults delete NSGlobalDomain com.apple.swipescrolldirection
 
 ### Permanent changes
 
-#### OS X
+#### macOS
 
 The command line tools are not easily removed, nor should it be necessary to remove them. Seriously, don't worry about it.
 
-Some OS X customizations not using `defaults` require additional commands to undo. Eventually there will be a `osx_reset.sh` script to undo all these settings, but until then you'll have to [Google](http://google.com/) the command to look for solutions.
+Some macOS customizations not using `defaults` require additional commands to undo. Eventually there will be a `macos_reset.sh` script to undo all these settings, but until then you'll have to [Google](http://google.com/) the command to look for solutions.
  
 #### Homebrew & Cask installs
 
@@ -111,7 +111,7 @@ All config files are symlinked into the home directory:
     * `.hushlogin` - Stub file to skip copyright notice
     * `.inputrc` - Keybindings and readline behavior
 
-### OSX
+### MAC OS
 
  * Installs command line tools
  * Configures default OS settings
@@ -146,7 +146,7 @@ Further details are in the `.bash_prompt` file.
 
  * Remove hard-coded locale and/or allow selection of alternatives.
  * Add [zsh](http://www.zsh.org/) shell with [oh-my-zsh](http://ohmyz.sh/)/[Prezto](https://github.com/sorin-ionescu/prezto)
- * Create restore script to restore dotfile backups and revert OS X customizations
+ * Create restore script to restore dotfile backups and revert macOS customizations
  * Research [duti](https://github.com/moretension/duti) for setting default applications for file types and URIs. [More](https://github.com/mathiasbynens/dotfiles/issues/54).
  * Add to `cheat` and `tldr`
  * Create/enforce coding standards ([example](https://github.com/chrisopedia/dotfiles/commit/c9fa19d8224446d3020d610a753d086fd6199096), [test exit values](http://blog.sanctum.geek.nz/testing-exit-values-bash/), [Robust BASH](http://www.davidpashley.com/articles/writing-robust-shell-scripts/))
@@ -163,7 +163,7 @@ Further details are in the `.bash_prompt` file.
  * http://osxnotes.net/
  * [Braumeister](http://braumeister.org/)
  * [Liquid Prompt](https://github.com/nojhan/liquidprompt)
- * Other OSX Settings ([1](https://github.com/mgee/dotfiles/blob/master/osx-setup)) ([2](https://github.com/alrra/dotfiles))
+ * Other MacOS Settings ([1](https://github.com/mgee/dotfiles/blob/master/osx-setup)) ([2](https://github.com/alrra/dotfiles))
  * [whatis](http://blog.sanctum.geek.nz/learning-bin-and-usr-bin/)
 
 ## Feedback

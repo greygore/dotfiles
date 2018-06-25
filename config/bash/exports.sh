@@ -48,7 +48,7 @@ export GIT_PS1_SHOWSTASHSTATE=true;
 # Don't use the /etc/hosts for bash completion
 export COMP_KNOWN_HOSTS_WITH_HOSTFILE=""
 
-# OSX only
+# macOS only
 if [ "$(uname -s)" == "Darwin" ]; then
 	# Link Homebrew casks in `/Applications` rather than `~/Applications`
 	export HOMEBREW_CASK_OPTS="--appdir=/Applications";

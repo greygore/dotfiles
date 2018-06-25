@@ -5,7 +5,7 @@ DOTFILES_DEFAULT_DIRECTORY="$HOME/.dotfiles"
 DOTFILES_ROOT=${DOTFILES_ROOT:-$DOTFILES_DEFAULT_DIRECTORY}
 DOTFILES_TARBALL_PATH="https://github.com/$DOTFILES_USER/dotfiles/tarball/master"
 
-# Set the terminal background color on OSX
+# Set the terminal background color on macOS
 if [ "$(uname -s)" == "Darwin" ]; then
 	osascript -e 'tell application "Terminal"' -e 'tell selected tab of front window' -e 'set normal text color to {65535,65535,65535}' -e 'set background color to {0,0,0}' -e 'end tell' -e 'end tell'
 fi

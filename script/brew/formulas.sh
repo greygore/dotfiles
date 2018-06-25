@@ -9,7 +9,7 @@ brew_cask 'java'
 destroy_sudo
 
 # Cooler versions of existing commands
-brew_formula 'm-cli' # OSX specific helpers
+brew_formula 'm-cli' # macOS specific helpers
 brew_formula 'tree' # ls
 brew_formula 'trash' # rm
 brew_formula 'rename' # mv
@@ -30,7 +30,7 @@ brew_formula 'envchain' # Store ENV variables in keychain
 brew_formula 'speedtest-cli' # Perform a speed test
 brew_formula 'ssh-copy-id' # Copy SSH key to remote system
 brew_formula 'httpie' # Better than CURL
-brew_formula 'dshb' # OS X system monitor in Swift
+brew_formula 'dshb' # macOS system monitor in Swift
 brew_formula 'jump' # Fuzzy directory jumper
 brew_formula 'peco' # Interactive filtering
 
@@ -71,7 +71,7 @@ brew_formula 'homebrew/completions/vagrant-completion'
 brew_formula 'todo-txt' # http://todotxt.com/
 brew_formula 'go' '--cross-compile-common' # golang
 brew_formula 'node' # node.js and npm
-brew_formula 'dark-mode' # Toggle OSX dark mode
+brew_formula 'dark-mode' # Toggle macOS dark mode
 brew_formula 'brightness' # Set brightness from CLI
 brew_formula 'ansiweather'
 
