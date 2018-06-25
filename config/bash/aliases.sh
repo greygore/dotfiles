@@ -12,16 +12,8 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # Shortcuts
-alias d="cd ~/Dropbox"
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
 alias g="git"
 alias h="history"
-alias p="open -a phpstorm"
-
-# Easier to remember
-alias xtop='dshb'
-alias dashboard='dshb'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -161,9 +153,6 @@ function pman {
    man -t "${1}" | open -f -a /Applications/Preview.app
 }
 
-# Nuke npm
-alias nombom='npm cache clear && bower cache clean && rm -rf node_modules bower_components && npm install && bower install'
-
 # Stuff I never really use but cannot delete either because of http://xkcd.com/530/
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 7'"
@@ -179,8 +168,6 @@ alias reload="exec $SHELL -l"
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key ready to paste.\n'"
 
 # Fun stuff
-alias starwars='telnet towel.blinkenlights.nl'
-alias whisper='say -v whisper'
 alias weather='ansiweather'
 alias forecast='ansiweather -F'
 alias matrix='cmatrix -b'

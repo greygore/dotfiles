@@ -103,15 +103,6 @@ function server() {
 	python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
 }
 
-# Start a PHP server from a directory, optionally specifying the port
-# (Requires PHP 5.4.0+.)
-function phpserver() {
-	local port="${1:-4000}";
-	local ip=$(ipconfig getifaddr en1);
-	sleep 1 && open "http://${ip}:${port}/" &
-	php -S "${ip}:${port}";
-}
-
 # Compare original and gzipped file size
 function gz() {
 	local origsize=$(wc -c < "$1");
@@ -399,115 +390,6 @@ function find_prefs() {
 	echo "<make changes>"
 	echo "defaults read > defaults.after"
 	echo "diff defaults.before defaults.after"
-}
-
-function docker_machine_name() {
-	if [ $# -eq 1 ]; then
-		DOCKER_MACHINE_NAME=$1
-	elif [ -z "$DOCKER_MACHINE_NAME" ]; then
-		DOCKER_MACHINE_NAME='cb1-luceo.dev'
-		eval "export DOCKER_MACHINE_NAME=$DOCKER_MACHINE_NAME"
-		>&2 echo "Please set the DOCKER_MACHINE_NAME env variable. Assuming $DOCKER_MACHINE_NAME"
-		>&2 echo
-	fi
-
-	echo "$DOCKER_MACHINE_NAME"
-}
-
-function docker_repo() {
-	if [ $# -eq 1 ]; then
-		DOCKER_REPO=$1
-	elif [ -z "$DOCKER_REPO" ]; then
-		DOCKER_REPO="$HOME/luceo/luceo"
-		eval "export DOCKER_REPO=$DOCKER_REPO"
-		>&2 echo "Please set the DOCKER_REPO env variable. Assuming $DOCKER_REPO"
-		>&2 echo
-	fi
-
-	echo "$DOCKER_REPO"
-}
-
-function docker_env() {
-	if [ $(docker_is_running) -eq 1 ]; then
-		eval "$(docker-machine env $(docker_machine_name))"
-	else
-		eval "export DOCKER_MACHINE_NAME='$(docker_machine_name)'"
-	fi
-	eval "export DOCKER_REPO='$(docker_repo)'"
-}
-
-function docker_is_running() {
-	if [ $(docker-machine status $(docker_machine_name 2> /dev/null)) == "Running" ]; then
-		echo 1
-	else
-		echo 0
-	fi
-}
-
-function docker_start_if_stopped() {
-	if [ $(docker_is_running) -eq 0 ]; then
-		docker-machine start $(docker_machine_name 2> /dev/null)
-		docker_env
-		cd "$(docker_repo)" \
-			&& docker-compose up -d \
-			&& cd -
-	else
-		docker_env
-  	fi
-}
-
-function dock() {
-	if [ $# -eq 0 ]; then
-		echo "Alias for various docker/docker-machine/docker-compose commands"
-		echo
-		echo "Valid commands:"
-		echo "    env        Sets the docker environmental variables"
-		echo "    ls         Lists the docker machines"
-		echo "    ps         Lists the docker containers"
-		echo "    start      Starts the docker machine and containers"
-		echo "    restart    Restarts the docker machine and containers"
-		echo "    stop       Stops the docker machine"
-		echo "    sh         Opens a shell on the container"
-		echo "    sh <cmd>   Runs the command in a container shell"
-		echo "    logs       Opens all the logs on the container"
-		echo "    logs luceo Opens only the luceo logs"
-		echo
-		echo "Environmental variables:"
-		echo "    DOCKER_MACHINE_NAME   The docker machine name"
-		echo "    DOCKER_REPO           The directory where the docker-compose.yml is located"
-		return 0
-	fi
-
-	docker_env
-
-	if [ $# -eq 1 ] && [ $1 == 'env' ]; then
-		return 0
-	elif [ $# -eq 1 ] && [[ $1 =~ ^ls$ ]]; then
-		docker-machine ls
-	elif [ $# -eq 1 ] && [[ $1 == 'stop' ]]; then
-		docker-machine stop $(docker_machine_name)
-	elif [ $# -eq 1 ] && [[ $1 =~ ^(re)?start$ ]]; then
-		docker-machine $1 $(docker_machine_name) \
-		&& docker_env \
-		&& docker-compose up -d
-	elif [ $# -eq 1 ] && [[ $1 =~ ^(cmd|ssh|(ba)?sh)$ ]]; then
-		docker_start_if_stopped
-		cd "$(docker_repo)" \
-			&& docker_env \
-			&& docker-compose run --rm luceo bash \
-			&& cd -
-	elif [ $# -gt 1 ] && [[ $1 =~ ^(cmd|ssh|(ba)?sh)$ ]]; then
-		shift
-		docker_start_if_stopped
-		cd "$(docker_repo)" \
-			&& docker-compose run --rm luceo $@ \
-			&& cd -
-	else
-		docker_start_if_stopped
-		cd "$(docker_repo)" \
-			&& docker-compose $@ \
-			&& cd -
-	fi
 }
 
 function setenv-osx() {
