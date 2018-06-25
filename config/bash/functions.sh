@@ -198,6 +198,16 @@ function a() {
 	fi;
 }
 
+# `c` with no arguments opens the current directory in VS Code Editor, otherwise
+# opens the given location
+function c() {
+	if [ $# -eq 0 ]; then
+		code .;
+	else
+		code "$@";
+	fi;
+}
+
 # `v` with no arguments opens the current directory in Vim, otherwise opens the
 # given location
 function v() {

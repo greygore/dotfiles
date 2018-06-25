@@ -5,7 +5,9 @@ export LANG="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 
 # Set the default editor
-if which atom > /dev/null 2>&1; then
+if which code > /dev/null 2>&1; then
+	export EDITOR="code";
+elif which atom > /dev/null 2>&1; then
 	export EDITOR="atom";
 elif which subl > /dev/null 2>&1; then
 	export EDITOR="subl";
