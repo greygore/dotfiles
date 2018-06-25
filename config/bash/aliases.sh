@@ -52,11 +52,6 @@ alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 
-# Color curl output
-if alias colourify > /dev/null 2>&1; then
-	alias curl="colourify curl"
-fi
-
 # Echo path
 alias path='echo -e ${PATH//:/\\n}'
 

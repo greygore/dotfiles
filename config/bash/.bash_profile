@@ -18,17 +18,17 @@ else
 	fi
 fi
 
+# Add color to shell commands
+if which brew > /dev/null && [ -f "$(brew --prefix)/etc/grc.bashrc" ]; then
+	source "$(brew --prefix)/etc/grc.bashrc"
+fi
+
 # Load bash dotfiles modules
 files=( options exports path functions aliases prompt completions )
 for file in ${files[@]}; do
 	[ -r "$DOTFILES_ROOT/config/bash/$file.sh" ] && source "$DOTFILES_ROOT/config/bash/$file.sh"
 done
 unset files
-
-# Add color to shell commands
-if which brew > /dev/null && [ -f "$(brew --prefix)/etc/grc.bashrc" ]; then
-	source "$(brew --prefix)/etc/grc.bashrc"
-fi
 
 # Integrate jump into the shell
 if which jump > /dev/null; then
