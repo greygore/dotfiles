@@ -8,7 +8,9 @@ if [ -e "/usr/local/opt/coreutils/libexec/gnubin" ]; then
 fi
 
 # Add Go binaries to path
-export PATH="$GOPATH/bin:$PATH"
+if [ -d "$GOPATH/bin" ]; then
+	export PATH="$GOPATH/bin:$PATH"
+fi
 
 # Ensure ~/bin is at the front of the path
 export PATH="$HOME/bin:$PATH"
